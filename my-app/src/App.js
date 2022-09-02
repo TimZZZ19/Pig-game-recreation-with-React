@@ -5,8 +5,6 @@ import Player from "./components/game/Player";
 import Dice from "./components/game/Dice";
 
 function App() {
-  console.log("This is SpreadFunctionality");
-
   // Basic game data
   const playerAName = "Player 1";
   const playerBName = "Player 2";
