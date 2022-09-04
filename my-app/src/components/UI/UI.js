@@ -19,12 +19,14 @@ const UI = (props) => {
       />
       <Button
         className="btn--roll"
-        buttonContent="🎲 Roll dice"
+        buttonContent={"🎲 Roll"}
+        width={{ width: "15rem" }}
         onClick={rollClickHandler}
       />
       <Button
         className="btn--hold"
-        buttonContent="📥 Hold"
+        buttonContent={"📥 Hold"}
+        width={{ width: "15rem" }}
         onClick={props.holdOnClick}
       />
     </div>
