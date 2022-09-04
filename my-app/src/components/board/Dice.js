@@ -1,6 +1,6 @@
-import "./Dice.css";
+import styles from "./Dice.module.css";
 
-const Dice = (props) => {
+const Dice = ({ diceNumber, hideDice }) => {
   const imgURL = [
     require("../../img/dice-1.png"),
     require("../../img/dice-2.png"),
@@ -10,13 +10,13 @@ const Dice = (props) => {
     require("../../img/dice-6.png"),
   ];
 
-  const arrayIndex = props.diceNumber - 1;
+  const arrayIndex = diceNumber - 1;
 
   return (
     <img
       src={imgURL[arrayIndex].default}
       alt="Playing dice"
-      className={`${"dice"} ${props.hideDice && "hidden"}`}
+      className={`${styles["dice"]} ${hideDice && styles["hidden"]}`}
     />
   );
 };
