@@ -1,16 +1,12 @@
+import { useState } from "react";
 import Button from "../reusables/Button";
 import Dice from "./Dice";
 
-const Game = ({
-  ACTIONS,
-  playerAState,
-  playerADispatch,
-  playerBDispatch,
-  diceNumber,
-  diceHidden,
-  setDiceNumber,
-  setDiceHidden,
-}) => {
+const Game = ({ ACTIONS, playerAState, playerADispatch, playerBDispatch }) => {
+  // States
+  const [diceNumber, setDiceNumber] = useState(1);
+  const [diceHidden, setDiceHidden] = useState(true);
+
   // Helper functions
   const ResetAAndSwitchToB = () => {
     playerADispatch({ type: ACTIONS.RESET_CURRENT_SCORE });

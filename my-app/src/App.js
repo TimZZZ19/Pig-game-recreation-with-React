@@ -1,4 +1,4 @@
-import { useState, useReducer } from "react";
+import { useReducer } from "react";
 import Board from "./components/board/Board";
 import Player from "./components/board/Player";
 import Game from "./components/board/Game";
@@ -102,9 +102,6 @@ function App() {
     playerBInitialConfigs
   );
 
-  const [diceNumber, setDiceNumber] = useState(1);
-  const [diceHidden, setDiceHidden] = useState(true);
-
   return (
     <div>
       <Board>
@@ -125,10 +122,6 @@ function App() {
           playerAState={playerAState}
           playerADispatch={playerADispatch}
           playerBDispatch={playerBDispatch}
-          diceNumber={diceNumber}
-          diceHidden={diceHidden}
-          setDiceNumber={setDiceNumber}
-          setDiceHidden={setDiceHidden}
         />
       </Board>
     </div>
