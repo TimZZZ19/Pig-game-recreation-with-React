@@ -1,12 +1,16 @@
-import { useState } from "react";
 import Button from "../reusables/Button";
 import Dice from "./Dice";
 
-const Game = ({ ACTIONS, playerAState, playerADispatch, playerBDispatch }) => {
-  // States
-  const [diceNumber, setDiceNumber] = useState(1);
-  const [diceHidden, setDiceHidden] = useState(true);
-
+const Game = ({
+  ACTIONS,
+  playerAState,
+  playerADispatch,
+  playerBDispatch,
+  diceNumber,
+  setDiceNumber,
+  diceHidden,
+  setDiceHidden,
+}) => {
   // Helper functions
   const ResetAAndSwitchToB = () => {
     playerADispatch({ type: ACTIONS.RESET_CURRENT_SCORE });
@@ -51,18 +55,6 @@ const Game = ({ ACTIONS, playerAState, playerADispatch, playerBDispatch }) => {
     }
   };
 
-  // When New Game is clicked on,
-  const resetGame = () => {
-    playerADispatch({ type: ACTIONS.START_PLAYING });
-    playerBDispatch({ type: ACTIONS.STOP_PLAYING });
-    playerADispatch({ type: ACTIONS.RESET_ACCUMULATIVE_SCORE });
-    playerBDispatch({ type: ACTIONS.RESET_ACCUMULATIVE_SCORE });
-    playerADispatch({ type: ACTIONS.RESET_CURRENT_SCORE });
-    playerBDispatch({ type: ACTIONS.RESET_CURRENT_SCORE });
-    setDiceNumber(1);
-    setDiceHidden(true);
-  };
-
   // When Roll is clicked on,
   const rollClickHandler = () => {
     const rollDice = (min, max) =>
@@ -88,11 +80,6 @@ const Game = ({ ACTIONS, playerAState, playerADispatch, playerBDispatch }) => {
 
   return (
     <>
-      <Button
-        buttonContent="🔄 New game"
-        extraStyles={{ width: "auto", top: "4rem" }}
-        onClick={resetGame}
-      />
       <Dice diceNumber={diceNumber} hideDice={diceHidden} />
       <Button
         buttonContent={"🎲 Roll"}

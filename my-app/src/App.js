@@ -1,7 +1,9 @@
-import { useReducer } from "react";
+import { useState, useReducer } from "react";
 import Board from "./components/board/Board";
+import GameControl from "./components/game_control/GameControl";
 import Player from "./components/board/Player";
 import Game from "./components/board/Game";
+import styles from "./App.module.css";
 
 const ACTIONS = {
   START_PLAYING: "start palying",
@@ -89,9 +91,10 @@ const playerBInitialConfigs = {
 };
 
 function App() {
-  // ******************************* //
-  // COMMENT GLOBAL VARIALBES
-  // ******************************* //
+  // States
+  const [diceNumber, setDiceNumber] = useState(1);
+  const [diceHidden, setDiceHidden] = useState(true);
+
   const [playerAState, playerADispatch] = useReducer(
     playerAReducer,
     playerAInitialConfigs
@@ -103,7 +106,7 @@ function App() {
   );
 
   return (
-    <div>
+    <div className={styles.app}>
       <Board>
         <Player
           player={playerAState.name}
@@ -122,8 +125,19 @@ function App() {
           playerAState={playerAState}
           playerADispatch={playerADispatch}
           playerBDispatch={playerBDispatch}
+          diceNumber={diceNumber}
+          setDiceNumber={setDiceNumber}
+          diceHidden={diceHidden}
+          setDiceHidden={setDiceHidden}
         />
       </Board>
+      <GameControl
+        ACTIONS={ACTIONS}
+        playerADispatch={playerADispatch}
+        playerBDispatch={playerBDispatch}
+        setDiceNumber={setDiceNumber}
+        setDiceHidden={setDiceHidden}
+      />
     </div>
   );
 }
