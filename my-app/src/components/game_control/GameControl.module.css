@@ -1,5 +1,8 @@
 .game-control {
   position: absolute;
-  top: 1rem;
-  right: 10rem;
+  top: 0;
+  right: 0;
+  width: 20rem;
+  height: 100%;
+  overflow: hidden;
 }

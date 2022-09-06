@@ -1,4 +1,6 @@
+import { useState } from "react";
 import styles from "./GameControl.module.css";
+import ControlPanel from "./ControlPanel";
 import Button from "../reusables/Button";
 
 const GameControl = ({
@@ -8,6 +10,8 @@ const GameControl = ({
   setDiceNumber,
   setDiceHidden,
 }) => {
+  const [controlPanelShown, setControlPanelShown] = useState(false);
+
   // When New Game is clicked on,
   const resetGame = () => {
     playerADispatch({ type: ACTIONS.START_PLAYING });
@@ -20,13 +24,22 @@ const GameControl = ({
     setDiceHidden(true);
   };
 
+  const handleExpandButton = () => {
+    setControlPanelShown((curr) => !curr);
+  };
+
   return (
     <div className={styles["game-control"]}>
       <Button
-        buttonContent="🔄 New game"
-        extraStyles={{ width: "auto", top: "4rem" }}
-        onClick={resetGame}
+        buttonContent="◀️"
+        extraStyles={{ width: "4.2rem", top: "2rem", left: "80%" }}
+        onClick={handleExpandButton}
       />
+      <ControlPanel
+        controlPanelShown={controlPanelShown}
+        handleExpandButton={handleExpandButton}
+        resetGame={resetGame}
+      ></ControlPanel>
     </div>
   );
 };

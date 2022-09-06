@@ -83,12 +83,12 @@ const Game = ({
       <Dice diceNumber={diceNumber} hideDice={diceHidden} />
       <Button
         buttonContent={"🎲 Roll"}
-        extraStyles={{ width: "15rem", top: "39.3rem" }}
+        extraStyles={{ width: "11rem", top: "39.3rem" }}
         onClick={rollClickHandler}
       />
       <Button
         buttonContent={"📥 Hold"}
-        extraStyles={{ width: "15rem", top: "46.1rem" }}
+        extraStyles={{ width: "11rem", top: "46.1rem" }}
         onClick={holdClickHandler}
       />
     </>
