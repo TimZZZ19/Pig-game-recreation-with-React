@@ -8,6 +8,7 @@ import Timer from "./components/board/game_mode/Timer";
 import FinishLine from "./components/board/game_mode/FinishLine";
 import ACTIONS from "./mappings/ACTIONS";
 import MODE from "./mappings/MODE";
+import GameMode from "./components/board/game_mode/GameMode";
 
 const playerAReducer = (state, action) => {
   switch (action.type) {
@@ -101,28 +102,16 @@ function App() {
     playerBInitialConfigs
   );
 
-  let gameModeContent;
-  switch (gameMode) {
-    case MODE.TIMER:
-      gameModeContent = <Timer />;
-      break;
-    case MODE.FINISH_lINE:
-      gameModeContent = <FinishLine />;
-      break;
-    default:
-      throw new Error();
-  }
-
   return (
     <div className={styles.app}>
       <Board>
+        <GameMode gameMode={gameMode} />
         <Player
           player={playerAState.name}
           playerStatus={playerAState.isPlaying}
           playerScore={playerAState.accumulativeScore}
           currScore={playerAState.currentScore}
         />
-        {gameModeContent}
         <Player
           player={playerBState.name}
           playerStatus={playerBState.isPlaying}
