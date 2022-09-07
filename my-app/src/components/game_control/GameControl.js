@@ -9,6 +9,8 @@ const GameControl = ({
   playerBDispatch,
   setDiceNumber,
   setDiceHidden,
+  gameMode,
+  setGameMode,
 }) => {
   const [controlPanelShown, setControlPanelShown] = useState(false);
 
@@ -39,6 +41,8 @@ const GameControl = ({
         controlPanelShown={controlPanelShown}
         handleExpandButton={handleExpandButton}
         resetGame={resetGame}
+        gameMode={gameMode}
+        setGameMode={setGameMode}
       ></ControlPanel>
     </div>
   );

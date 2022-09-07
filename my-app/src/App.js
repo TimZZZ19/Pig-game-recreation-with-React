@@ -4,6 +4,8 @@ import GameControl from "./components/game_control/GameControl";
 import Player from "./components/board/Player";
 import Play from "./components/board/Play";
 import styles from "./App.module.css";
+import Timer from "./components/board/game_mode/Timer";
+import FinishLine from "./components/board/game_mode/FinishLine";
 
 const ACTIONS = {
   START_PLAYING: "start palying",
@@ -12,6 +14,11 @@ const ACTIONS = {
   RESET_ACCUMULATIVE_SCORE: "reset accumulative score",
   SET_CURRENT_SCORE: "set current score",
   RESET_CURRENT_SCORE: "reset current score",
+};
+
+const MODE = {
+  TIMER: "timer",
+  FINISH_lINE: "finish line",
 };
 
 const playerAReducer = (state, action) => {
@@ -94,6 +101,7 @@ function App() {
   // States
   const [diceNumber, setDiceNumber] = useState(1);
   const [diceHidden, setDiceHidden] = useState(true);
+  const [gameMode, setGameMode] = useState(MODE.TIMER);
 
   const [playerAState, playerADispatch] = useReducer(
     playerAReducer,
@@ -105,6 +113,18 @@ function App() {
     playerBInitialConfigs
   );
 
+  let gameModeContent;
+  switch (gameMode) {
+    case MODE.TIMER:
+      gameModeContent = <Timer />;
+      break;
+    case MODE.FINISH_lINE:
+      gameModeContent = <FinishLine />;
+      break;
+    default:
+      throw new Error();
+  }
+
   return (
     <div className={styles.app}>
       <Board>
@@ -114,6 +134,7 @@ function App() {
           playerScore={playerAState.accumulativeScore}
           currScore={playerAState.currentScore}
         />
+        {gameModeContent}
         <Player
           player={playerBState.name}
           playerStatus={playerBState.isPlaying}
@@ -137,6 +158,8 @@ function App() {
         playerBDispatch={playerBDispatch}
         setDiceNumber={setDiceNumber}
         setDiceHidden={setDiceHidden}
+        gameMode={gameMode}
+        setGameMode={setGameMode}
       />
     </div>
   );
