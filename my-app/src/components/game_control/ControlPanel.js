@@ -14,9 +14,19 @@ const ControlPanel = ({ controlPanelShown, handleExpandButton, resetGame }) => {
         extraStyles={{ width: "4.2rem", top: "2rem", left: "80%" }}
         onClick={handleExpandButton}
       />
+
+      <h1 className={styles["game-mode-text"]}>game mode</h1>
       <Button
-        buttonContent="🔄 restart"
-        extraStyles={{ width: "16rem", top: "8rem" }}
+        buttonContent="⏲ Timer"
+        extraStyles={{ width: "16rem", top: "11rem" }}
+      />
+      <Button
+        buttonContent="🏃‍♂️ Finish line"
+        extraStyles={{ width: "16rem", top: "16rem" }}
+      />
+      <Button
+        buttonContent="🔄 new game"
+        extraStyles={{ width: "16rem", top: "23rem" }}
         onClick={resetGame}
       />
     </div>

@@ -2,7 +2,7 @@ import { useState, useReducer } from "react";
 import Board from "./components/board/Board";
 import GameControl from "./components/game_control/GameControl";
 import Player from "./components/board/Player";
-import Game from "./components/board/Game";
+import Play from "./components/board/Play";
 import styles from "./App.module.css";
 
 const ACTIONS = {
@@ -120,7 +120,7 @@ function App() {
           playerScore={playerBState.accumulativeScore}
           currScore={playerBState.currentScore}
         />
-        <Game
+        <Play
           ACTIONS={ACTIONS}
           playerAState={playerAState}
           playerADispatch={playerADispatch}

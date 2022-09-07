@@ -1,7 +1,7 @@
 import Button from "../reusables/Button";
 import Dice from "./Dice";
 
-const Game = ({
+const Play = ({
   ACTIONS,
   playerAState,
   playerADispatch,
@@ -95,4 +95,4 @@ const Game = ({
   );
 };
 
-export default Game;
+export default Play;
