@@ -1,8 +1,8 @@
 import Button from "../reusables/Button";
 import Dice from "./Dice";
+import ACTIONS from "../../mappings/ACTIONS";
 
 const Play = ({
-  ACTIONS,
   playerAState,
   playerADispatch,
   playerBDispatch,

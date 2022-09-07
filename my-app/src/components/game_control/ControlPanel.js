@@ -1,11 +1,7 @@
 import React from "react";
 import styles from "./ControlPanel.module.css";
 import Button from "../reusables/Button";
-
-const MODE = {
-  TIMER: "timer",
-  FINISH_lINE: "finish line",
-};
+import MODE from "../../mappings/MODE";
 
 const ControlPanel = ({
   controlPanelShown,
@@ -29,11 +25,13 @@ const ControlPanel = ({
       <Button
         buttonContent="⏲ Timer"
         extraStyles={{ width: "16rem", top: "11rem" }}
+        secondaryClass={gameMode === MODE.TIMER && "selected"}
         onClick={() => setGameMode(MODE.TIMER)}
       />
       <Button
         buttonContent="🏃‍♂️ Finish line"
         extraStyles={{ width: "16rem", top: "16rem" }}
+        secondaryClass={gameMode === MODE.FINISH_lINE && "selected"}
         onClick={() => setGameMode(MODE.FINISH_lINE)}
       />
       <Button

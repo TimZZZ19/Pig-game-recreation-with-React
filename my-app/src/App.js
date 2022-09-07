@@ -6,20 +6,8 @@ import Play from "./components/board/Play";
 import styles from "./App.module.css";
 import Timer from "./components/board/game_mode/Timer";
 import FinishLine from "./components/board/game_mode/FinishLine";
-
-const ACTIONS = {
-  START_PLAYING: "start palying",
-  STOP_PLAYING: "stop playing",
-  SET_ACCUMULATIVE_SCORE: "set accumulative score",
-  RESET_ACCUMULATIVE_SCORE: "reset accumulative score",
-  SET_CURRENT_SCORE: "set current score",
-  RESET_CURRENT_SCORE: "reset current score",
-};
-
-const MODE = {
-  TIMER: "timer",
-  FINISH_lINE: "finish line",
-};
+import ACTIONS from "./mappings/ACTIONS";
+import MODE from "./mappings/MODE";
 
 const playerAReducer = (state, action) => {
   switch (action.type) {
@@ -142,7 +130,6 @@ function App() {
           currScore={playerBState.currentScore}
         />
         <Play
-          ACTIONS={ACTIONS}
           playerAState={playerAState}
           playerADispatch={playerADispatch}
           playerBDispatch={playerBDispatch}
@@ -153,7 +140,6 @@ function App() {
         />
       </Board>
       <GameControl
-        ACTIONS={ACTIONS}
         playerADispatch={playerADispatch}
         playerBDispatch={playerBDispatch}
         setDiceNumber={setDiceNumber}

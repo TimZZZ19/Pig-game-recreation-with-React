@@ -2,9 +2,9 @@ import { useState } from "react";
 import styles from "./GameControl.module.css";
 import ControlPanel from "./ControlPanel";
 import Button from "../reusables/Button";
+import ACTIONS from "../../mappings/ACTIONS";
 
 const GameControl = ({
-  ACTIONS,
   playerADispatch,
   playerBDispatch,
   setDiceNumber,
