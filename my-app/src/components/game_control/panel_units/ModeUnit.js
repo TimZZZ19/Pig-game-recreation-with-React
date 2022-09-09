@@ -11,13 +11,13 @@ const ModeUnit = ({ gameMode, setGameMode }) => {
       <Button
         buttonContent="⏲ Timer"
         extraStyles={{ width: "16rem", top: "4rem" }}
-        secondaryClass={gameMode === MODE.TIMER && "selected"}
+        secondaryClass={gameMode === MODE.TIMER && "btn--selected"}
         onClick={() => setGameMode(MODE.TIMER)}
       />
       <Button
         buttonContent="🏃‍♂️ Finish line"
         extraStyles={{ width: "16rem", top: "9rem" }}
-        secondaryClass={gameMode === MODE.FINISH_lINE && "selected"}
+        secondaryClass={gameMode === MODE.FINISH_lINE && "btn--selected"}
         onClick={() => setGameMode(MODE.FINISH_lINE)}
       />
     </div>

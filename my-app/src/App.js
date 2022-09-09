@@ -7,6 +7,7 @@ import styles from "./App.module.css";
 import ACTIONS from "./mappings/ACTIONS";
 import MODE from "./mappings/MODE";
 import GameMode from "./components/board/game_mode/GameMode";
+import STATUS from "./mappings/STATUS";
 
 const playerAReducer = (state, action) => {
   switch (action.type) {
@@ -100,10 +101,12 @@ function App() {
     playerBInitialConfigs
   );
 
+  const [gameStatus, setGameStatus] = useState(STATUS.SETTING);
+
   return (
     <div className={styles.app}>
-      <Board>
-        <GameMode gameMode={gameMode} />
+      <GameMode gameMode={gameMode} />
+      <Board gameStatus={gameStatus}>
         <Player
           player={playerAState.name}
           playerStatus={playerAState.isPlaying}
@@ -133,6 +136,8 @@ function App() {
         setDiceHidden={setDiceHidden}
         gameMode={gameMode}
         setGameMode={setGameMode}
+        gameStatus={gameStatus}
+        setGameStatus={setGameStatus}
       />
     </div>
   );

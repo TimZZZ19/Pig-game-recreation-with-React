@@ -3,6 +3,7 @@ import styles from "./GameControlDiv.module.css";
 import ControlPanel from "./ControlPanel";
 import Button from "../reusables/Button";
 import ACTIONS from "../../mappings/ACTIONS";
+import STATUS from "../../mappings/STATUS";
 
 const GameControlDiv = ({
   playerADispatch,
@@ -11,11 +12,13 @@ const GameControlDiv = ({
   setDiceHidden,
   gameMode,
   setGameMode,
+  gameStatus,
+  setGameStatus,
 }) => {
-  const [controlPanelShown, setControlPanelShown] = useState(false);
+  const [controlPanelShown, setControlPanelShown] = useState(true);
 
   // When New Game is clicked on,
-  const resetGame = () => {
+  const startGame = () => {
     playerADispatch({ type: ACTIONS.START_PLAYING });
     playerBDispatch({ type: ACTIONS.STOP_PLAYING });
     playerADispatch({ type: ACTIONS.RESET_ACCUMULATIVE_SCORE });
@@ -24,6 +27,7 @@ const GameControlDiv = ({
     playerBDispatch({ type: ACTIONS.RESET_CURRENT_SCORE });
     setDiceNumber(1);
     setDiceHidden(true);
+    setGameStatus(STATUS.START);
   };
 
   const handleExpandButton = () => {
@@ -40,9 +44,10 @@ const GameControlDiv = ({
       <ControlPanel
         controlPanelShown={controlPanelShown}
         handleExpandButton={handleExpandButton}
-        resetGame={resetGame}
+        startGame={startGame}
         gameMode={gameMode}
         setGameMode={setGameMode}
+        gameStatus={gameStatus}
       ></ControlPanel>
     </div>
   );

@@ -84,11 +84,13 @@ const Play = ({
       <Button
         buttonContent={"🎲 Roll"}
         extraStyles={{ width: "11rem", top: "39.3rem" }}
+        secondaryClass={"btn--unclickable"}
         onClick={rollClickHandler}
       />
       <Button
         buttonContent={"📥 Hold"}
         extraStyles={{ width: "11rem", top: "46.1rem" }}
+        secondaryClass={"btn--unclickable"}
         onClick={holdClickHandler}
       />
     </>

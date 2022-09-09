@@ -5,6 +5,7 @@
   width: 12rem;
   height: 5rem;
 
+  z-index: 1;
   top: 2rem;
   left: 50%;
   transform: translateX(-50%);
