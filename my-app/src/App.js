@@ -1,11 +1,9 @@
 import { useState, useReducer } from "react";
 import Board from "./components/board/Board";
-import GameControl from "./components/game_control/GameControl";
+import GameControlDiv from "./components/game_control/GameControlDiv";
 import Player from "./components/board/Player";
 import Play from "./components/board/Play";
 import styles from "./App.module.css";
-import Timer from "./components/board/game_mode/Timer";
-import FinishLine from "./components/board/game_mode/FinishLine";
 import ACTIONS from "./mappings/ACTIONS";
 import MODE from "./mappings/MODE";
 import GameMode from "./components/board/game_mode/GameMode";
@@ -128,7 +126,7 @@ function App() {
           setDiceHidden={setDiceHidden}
         />
       </Board>
-      <GameControl
+      <GameControlDiv
         playerADispatch={playerADispatch}
         playerBDispatch={playerBDispatch}
         setDiceNumber={setDiceNumber}

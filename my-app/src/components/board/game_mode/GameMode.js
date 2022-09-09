@@ -5,19 +5,19 @@ import MODE from "../../../mappings/MODE";
 import styles from "./GameMode.module.css";
 
 const GameMode = ({ gameMode }) => {
-  let gameModeContent;
+  let mode;
   switch (gameMode) {
     case MODE.TIMER:
-      gameModeContent = <Timer />;
+      mode = <Timer />;
       break;
     case MODE.FINISH_lINE:
-      gameModeContent = <FinishLine />;
+      mode = <FinishLine />;
       break;
     default:
       throw new Error();
   }
 
-  return <div className={styles["mode-container"]}>GameMode</div>;
+  return <div className={styles["mode-container"]}>{mode}</div>;
 };
 
 export default GameMode;

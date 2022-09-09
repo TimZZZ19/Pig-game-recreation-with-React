@@ -1,10 +1,10 @@
 import { useState } from "react";
-import styles from "./GameControl.module.css";
+import styles from "./GameControlDiv.module.css";
 import ControlPanel from "./ControlPanel";
 import Button from "../reusables/Button";
 import ACTIONS from "../../mappings/ACTIONS";
 
-const GameControl = ({
+const GameControlDiv = ({
   playerADispatch,
   playerBDispatch,
   setDiceNumber,
@@ -33,7 +33,7 @@ const GameControl = ({
   return (
     <div className={styles["game-control"]}>
       <Button
-        buttonContent="◀️"
+        buttonContent="⏪"
         extraStyles={{ width: "4.2rem", top: "2rem", left: "80%" }}
         onClick={handleExpandButton}
       />
@@ -48,4 +48,4 @@ const GameControl = ({
   );
 };
 
-export default GameControl;
+export default GameControlDiv;

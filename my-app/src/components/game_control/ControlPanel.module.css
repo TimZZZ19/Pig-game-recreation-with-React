@@ -4,20 +4,14 @@
   height: 100%;
   transition: all 0.3s;
   transform: translateX(100%);
-  position: relative;
 }
 
 .control-panel--show {
   transform: translateX(0);
 }
 
-.button--disppear {
-  visibility: hidden;
-}
-
-.game-mode-text {
-  text-transform: uppercase;
+.game-status-text {
   position: absolute;
-  top: 7.5rem;
-  left: 2rem;
+  left: 1.6rem;
+  top: 3rem;
 }
