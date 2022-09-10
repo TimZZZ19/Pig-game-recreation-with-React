@@ -14,11 +14,12 @@ const GameControlDiv = ({
   setGameMode,
   gameStatus,
   setGameStatus,
+  setCountDownStarted,
 }) => {
   const [controlPanelShown, setControlPanelShown] = useState(true);
 
-  // When New Game is clicked on,
-  const startGame = () => {
+  const initializeInterface = () => {
+    // Initialize interface and activate the board
     playerADispatch({ type: ACTIONS.START_PLAYING });
     playerBDispatch({ type: ACTIONS.STOP_PLAYING });
     playerADispatch({ type: ACTIONS.RESET_ACCUMULATIVE_SCORE });
@@ -27,7 +28,19 @@ const GameControlDiv = ({
     playerBDispatch({ type: ACTIONS.RESET_CURRENT_SCORE });
     setDiceNumber(1);
     setDiceHidden(true);
+
+    // Activate the board
     setGameStatus(STATUS.START);
+  };
+
+  // When New Game is clicked on,
+  const startGame = () => {
+    // Start counting down
+    setCountDownStarted(true);
+
+    setTimeout(() => {
+      initializeInterface();
+    }, 0);
   };
 
   const handleExpandButton = () => {

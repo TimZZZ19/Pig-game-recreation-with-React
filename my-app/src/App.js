@@ -6,7 +6,8 @@ import Play from "./components/board/Play";
 import styles from "./App.module.css";
 import ACTIONS from "./mappings/ACTIONS";
 import MODE from "./mappings/MODE";
-import GameMode from "./components/board/game_mode/GameMode";
+import GameMode from "./components/game_mode/GameMode";
+import Modal from "./components/modal/Modal";
 import STATUS from "./mappings/STATUS";
 
 const playerAReducer = (state, action) => {
@@ -103,9 +104,13 @@ function App() {
 
   const [gameStatus, setGameStatus] = useState(STATUS.SETTING);
 
+  const [modalOpen, setModalOpen] = useState(false);
+  const [countDownStarted, setCountDownStarted] = useState(false);
+
   return (
     <div className={styles.app}>
       <GameMode gameMode={gameMode} />
+      <Modal modalOpen={modalOpen} countDownStarted={countDownStarted} />
       <Board gameStatus={gameStatus}>
         <Player
           player={playerAState.name}
@@ -127,6 +132,7 @@ function App() {
           setDiceNumber={setDiceNumber}
           diceHidden={diceHidden}
           setDiceHidden={setDiceHidden}
+          gameStatus={gameStatus}
         />
       </Board>
       <GameControlDiv
@@ -138,6 +144,7 @@ function App() {
         setGameMode={setGameMode}
         gameStatus={gameStatus}
         setGameStatus={setGameStatus}
+        setCountDownStarted={setCountDownStarted}
       />
     </div>
   );

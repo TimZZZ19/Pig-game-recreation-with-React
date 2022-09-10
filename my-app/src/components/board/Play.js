@@ -1,6 +1,7 @@
 import Button from "../reusables/Button";
 import Dice from "./Dice";
 import ACTIONS from "../../mappings/ACTIONS";
+import STATUS from "../../mappings/STATUS";
 
 const Play = ({
   playerAState,
@@ -10,6 +11,7 @@ const Play = ({
   setDiceNumber,
   diceHidden,
   setDiceHidden,
+  gameStatus,
 }) => {
   // Helper functions
   const ResetAAndSwitchToB = () => {
@@ -84,13 +86,13 @@ const Play = ({
       <Button
         buttonContent={"🎲 Roll"}
         extraStyles={{ width: "11rem", top: "39.3rem" }}
-        secondaryClass={"btn--unclickable"}
+        secondaryClass={gameStatus !== STATUS.START && "btn--unclickable"}
         onClick={rollClickHandler}
       />
       <Button
         buttonContent={"📥 Hold"}
         extraStyles={{ width: "11rem", top: "46.1rem" }}
-        secondaryClass={"btn--unclickable"}
+        secondaryClass={gameStatus !== STATUS.START && "btn--unclickable"}
         onClick={holdClickHandler}
       />
     </>

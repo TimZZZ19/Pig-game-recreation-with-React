@@ -1,7 +1,7 @@
 import React from "react";
 import Timer from "./Timer";
 import FinishLine from "./FinishLine";
-import MODE from "../../../mappings/MODE";
+import MODE from "../../mappings/MODE";
 import styles from "./GameMode.module.css";
 
 const GameMode = ({ gameMode }) => {
