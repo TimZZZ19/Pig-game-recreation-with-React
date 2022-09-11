@@ -4,7 +4,9 @@ import CountDown from "./CountDown";
 import MODAL_CONTENT from "../../mappings/MODAL_CONTENT";
 import Result from "./Result";
 
-const Modal = ({ modalOpen, modalContent, modalDispatch }) => {
+const Modal = ({ modalState, modalDispatch }) => {
+  const { modalOpen, modalContent } = modalState;
+
   if (!modalOpen) return null;
 
   let content;

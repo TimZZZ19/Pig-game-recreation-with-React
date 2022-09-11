@@ -105,7 +105,7 @@ const modalReducer = (state, action) => {
 };
 const modalInitialConfigs = {
   modalOpen: false,
-  modalContent: null,
+  modalContent: "",
 };
 
 function App() {
@@ -134,11 +134,7 @@ function App() {
   return (
     <div className={styles.app}>
       <GameMode gameMode={gameMode} />
-      <Modal
-        modalOpen={modalState.modalOpen}
-        modalContent={modalState.modalContent}
-        modalDispatch={modalDispatch}
-      />
+      <Modal modalState={modalState} modalDispatch={modalDispatch} />
       <Board gameStatus={gameStatus}>
         <Player
           player={playerAState.name}
