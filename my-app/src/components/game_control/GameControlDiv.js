@@ -42,7 +42,7 @@ const GameControlDiv = ({
 
     setTimeout(() => {
       initializeInterface();
-    }, 4000);
+    }, 6000);
   };
 
   const handleExpandButton = () => {
