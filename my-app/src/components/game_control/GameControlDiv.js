@@ -4,6 +4,7 @@ import ControlPanel from "./ControlPanel";
 import Button from "../reusables/Button";
 import ACTIONS from "../../mappings/ACTIONS";
 import STATUS from "../../mappings/STATUS";
+import MODAL_ACTIONS from "../../mappings/MODAL_ACTIONS";
 
 const GameControlDiv = ({
   playerADispatch,
@@ -14,7 +15,7 @@ const GameControlDiv = ({
   setGameMode,
   gameStatus,
   setGameStatus,
-  setCountDownStarted,
+  modalDispatch,
 }) => {
   const [controlPanelShown, setControlPanelShown] = useState(true);
 
@@ -36,11 +37,12 @@ const GameControlDiv = ({
   // When New Game is clicked on,
   const startGame = () => {
     // Start counting down
-    setCountDownStarted(true);
+    modalDispatch({ type: MODAL_ACTIONS.OPEN_MODAL });
+    modalDispatch({ type: MODAL_ACTIONS.CHANGE_TO_COUNTDOWN });
 
     setTimeout(() => {
       initializeInterface();
-    }, 0);
+    }, 4000);
   };
 
   const handleExpandButton = () => {

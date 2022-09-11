@@ -9,6 +9,8 @@ import MODE from "./mappings/MODE";
 import GameMode from "./components/game_mode/GameMode";
 import Modal from "./components/modal/Modal";
 import STATUS from "./mappings/STATUS";
+import MODAL_ACTIONS from "./mappings/MODAL_ACTIONS";
+import MODAL_CONTENT from "./mappings/MODAL_CONTENT";
 
 const playerAReducer = (state, action) => {
   switch (action.type) {
@@ -40,7 +42,6 @@ const playerAReducer = (state, action) => {
       throw new Error();
   }
 };
-
 const playerAInitialConfigs = {
   name: "Player 1",
   isPlaying: true,
@@ -78,12 +79,33 @@ const playerBReducer = (state, action) => {
       throw new Error();
   }
 };
-
 const playerBInitialConfigs = {
   name: "Player 2",
   isPlaying: false,
   accumulativeScore: 0,
   currentScore: 0,
+};
+
+const modalReducer = (state, action) => {
+  switch (action.type) {
+    case MODAL_ACTIONS.OPEN_MODAL:
+      return { ...state, modalOpen: true };
+
+    case MODAL_ACTIONS.CLOSE_MODAL:
+      return { ...state, modalOpen: false };
+    case MODAL_ACTIONS.CHANGE_TO_COUNTDOWN:
+      return { ...state, modalContent: MODAL_CONTENT.COUNT_DOWN };
+    case MODAL_ACTIONS.CHANGE_TO_RESULT:
+      return { ...state, modalContent: MODAL_CONTENT.RESULT };
+    case MODAL_ACTIONS.CHANGE_TO_NULL:
+      return { ...state, modalContent: MODAL_CONTENT.NULL };
+    default:
+      throw new Error();
+  }
+};
+const modalInitialConfigs = {
+  modalOpen: false,
+  modalContent: null,
 };
 
 function App() {
@@ -104,13 +126,19 @@ function App() {
 
   const [gameStatus, setGameStatus] = useState(STATUS.SETTING);
 
-  const [modalOpen, setModalOpen] = useState(false);
-  const [countDownStarted, setCountDownStarted] = useState(false);
+  const [modalState, modalDispatch] = useReducer(
+    modalReducer,
+    modalInitialConfigs
+  );
 
   return (
     <div className={styles.app}>
       <GameMode gameMode={gameMode} />
-      <Modal modalOpen={modalOpen} countDownStarted={countDownStarted} />
+      <Modal
+        modalOpen={modalState.modalOpen}
+        modalContent={modalState.modalContent}
+        modalDispatch={modalDispatch}
+      />
       <Board gameStatus={gameStatus}>
         <Player
           player={playerAState.name}
@@ -144,7 +172,7 @@ function App() {
         setGameMode={setGameMode}
         gameStatus={gameStatus}
         setGameStatus={setGameStatus}
-        setCountDownStarted={setCountDownStarted}
+        modalDispatch={modalDispatch}
       />
     </div>
   );
