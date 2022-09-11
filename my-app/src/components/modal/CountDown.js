@@ -9,13 +9,14 @@ const CountDown = ({ modalDispatch }) => {
   };
 
   useEffect(() => {
-    id.current = setInterval(function () {
+    id.current = setInterval(() => {
       setCounter((curr) => --curr);
     }, 1000);
   }, []);
 
   useEffect(() => {
     if (counter === 0) {
+      setCounter("Go!");
       clear();
     }
   }, [counter]);
@@ -24,6 +25,7 @@ const CountDown = ({ modalDispatch }) => {
     modalDispatch({ type: MODAL_ACTIONS.CLOSE_MODAL });
     modalDispatch({ type: MODAL_ACTIONS.CHANGE_TO_NULL });
   }, 4000);
+
   return <div>{counter}</div>;
 };
 
