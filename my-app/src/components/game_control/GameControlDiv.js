@@ -45,6 +45,9 @@ const GameControlDiv = ({
     }, 6000);
   };
 
+  // When Pause is clicked on,
+  const pauseGame = () => {};
+
   const handleExpandButton = () => {
     setControlPanelShown((curr) => !curr);
   };
