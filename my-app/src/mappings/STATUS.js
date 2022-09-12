@@ -1,6 +1,6 @@
 const STATUS = {
-  START: "start",
-  PAUSE: "pause",
+  PLAYING: "playing",
+  PAUSED: "paused",
   SETTING: "setting",
 };
 

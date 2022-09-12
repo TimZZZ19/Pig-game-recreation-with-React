@@ -5,7 +5,7 @@ const Board = ({ children, gameStatus }) => {
   return (
     <div
       className={`${styles.board} ${
-        gameStatus !== STATUS.START && styles["board-inactive"]
+        gameStatus !== STATUS.PLAYING && styles["board-inactive"]
       }`}
     >
       {children}

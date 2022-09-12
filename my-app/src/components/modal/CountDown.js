@@ -21,6 +21,7 @@ const CountDown = ({ modalDispatch }) => {
     }
   }, [counter]);
 
+  // Close the modal and reset its content back to null
   setTimeout(() => {
     modalDispatch({ type: MODAL_ACTIONS.CLOSE_MODAL });
     modalDispatch({ type: MODAL_ACTIONS.CHANGE_TO_NULL });

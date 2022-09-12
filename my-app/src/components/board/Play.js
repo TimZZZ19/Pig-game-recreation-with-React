@@ -86,13 +86,13 @@ const Play = ({
       <Button
         buttonContent={"🎲 Roll"}
         extraStyles={{ width: "11rem", top: "39.3rem" }}
-        secondaryClass={gameStatus !== STATUS.START && "btn--unclickable"}
+        secondaryClass={gameStatus !== STATUS.PLAYING && "btn--unclickable"}
         onClick={rollClickHandler}
       />
       <Button
         buttonContent={"📥 Hold"}
         extraStyles={{ width: "11rem", top: "46.1rem" }}
-        secondaryClass={gameStatus !== STATUS.START && "btn--unclickable"}
+        secondaryClass={gameStatus !== STATUS.PLAYING && "btn--unclickable"}
         onClick={holdClickHandler}
       />
     </>

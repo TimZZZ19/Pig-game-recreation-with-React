@@ -31,7 +31,7 @@ const GameControlDiv = ({
     setDiceHidden(true);
 
     // Activate the board
-    setGameStatus(STATUS.START);
+    setGameStatus(STATUS.PLAYING);
   };
 
   // When New Game is clicked on,

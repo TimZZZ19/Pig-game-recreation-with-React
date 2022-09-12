@@ -15,10 +15,10 @@ const ControlPanel = ({
 }) => {
   let gameStatusText;
   switch (gameStatus) {
-    case STATUS.START:
+    case STATUS.PLAYING:
       gameStatusText = "🟢 playing";
       break;
-    case STATUS.PAUSE:
+    case STATUS.PAUSED:
       gameStatusText = "🔴 paused";
       break;
     case STATUS.SETTING:
@@ -40,8 +40,14 @@ const ControlPanel = ({
         extraStyles={{ width: "4.2rem", top: "2rem", left: "80%" }}
         onClick={handleExpandButton}
       />
-      <ModeUnit gameMode={gameMode} setGameMode={setGameMode} />
-      <ControlUnit startGame={startGame} />
+
+      <ModeUnit
+        gameMode={gameMode}
+        setGameMode={setGameMode}
+        gameStatus={gameStatus}
+      />
+
+      <ControlUnit startGame={startGame} gameStatus={gameStatus} />
     </div>
   );
 };

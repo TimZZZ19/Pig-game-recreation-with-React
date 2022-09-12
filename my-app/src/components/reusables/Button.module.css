@@ -45,4 +45,5 @@
 
 .btn--unclickable {
   pointer-events: none;
+  filter: blur(0.2rem);
 }
