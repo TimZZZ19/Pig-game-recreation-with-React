@@ -20,7 +20,7 @@ const GameControlDiv = ({
   const [controlPanelShown, setControlPanelShown] = useState(true)
 
   const initializeInterface = () => {
-    // Initialize interface and activate the board
+    // Initialize the board
     playerADispatch({ type: ACTIONS.START_PLAYING })
     playerBDispatch({ type: ACTIONS.STOP_PLAYING })
     playerADispatch({ type: ACTIONS.RESET_ACCUMULATIVE_SCORE })
@@ -30,7 +30,7 @@ const GameControlDiv = ({
     setDiceNumber(1)
     setDiceHidden(true)
 
-    // Activate the board
+    // Set game status to playing
     setGameStatus(STATUS.PLAYING)
   }
 
