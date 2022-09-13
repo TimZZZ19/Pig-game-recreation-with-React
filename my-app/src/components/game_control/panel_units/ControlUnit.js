@@ -13,6 +13,7 @@ const ControlUnit = ({
 }) => {
   const startBtnText = gameStatus === STATUS.PAUSED ? "▶️ Resume" : "▶️ Start";
   const startResumeFunc = () => {
+    setGameStatus(STATUS.COUNTING);
     openModalandStartCounting();
     if (gameStatus !== STATUS.PAUSED) initializeBoard();
     setTimeout(() => setGameStatus(STATUS.PLAYING), 6000);

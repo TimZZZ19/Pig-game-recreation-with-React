@@ -27,6 +27,9 @@ const ControlPanel = ({
     case STATUS.SETTING:
       gameStatusText = "🟠 setting";
       break;
+    case STATUS.COUNTING:
+      gameStatusText = "🕜 counting";
+      break;
     default:
       throw new Error();
   }
