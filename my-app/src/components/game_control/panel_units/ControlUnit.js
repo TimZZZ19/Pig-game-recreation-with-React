@@ -25,7 +25,10 @@ const ControlUnit = ({
       <Button
         buttonContent={`${startBtnText}`}
         extraStyles={{ width: "16rem", top: "4rem" }}
-        secondaryClass={gameStatus === STATUS.PLAYING && "btn--unclickable"}
+        secondaryClass={
+          (gameStatus === STATUS.PLAYING || gameStatus === STATUS.COUNTING) &&
+          "btn--unclickable"
+        }
         onClick={startResumeFunc}
       />
       <Button
