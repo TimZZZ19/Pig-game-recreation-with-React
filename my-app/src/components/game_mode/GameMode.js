@@ -10,7 +10,7 @@ const GameMode = ({ gameMode }) => {
     case MODE.TIMER:
       mode = <Timer />;
       break;
-    case MODE.FINISH_lINE:
+    case MODE.RACE:
       mode = <FinishLine />;
       break;
     default:
