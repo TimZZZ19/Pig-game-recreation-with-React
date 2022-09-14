@@ -3,6 +3,7 @@ const MODAL_ACTIONS = {
   CLOSE_MODAL: "close modal",
   CHANGE_TO_COUNTDOWN: "change to count down",
   CHANGE_TO_RESULT: "change to result",
+  CHANGE_TO_CONFIRM: "change to the confirmation dialogue",
   CHANGE_TO_NULL: "change back to null",
 };
 

@@ -45,6 +45,11 @@ const GameControlDiv = ({
     setDiceHidden(true);
   };
 
+  const openConfirm = () => {
+    modalDispatch({ type: MODAL_ACTIONS.OPEN_MODAL });
+    modalDispatch({ type: MODAL_ACTIONS.CHANGE_TO_CONFIRM });
+  };
+
   return (
     <div className={styles["game-control"]}>
       <Button
@@ -61,6 +66,7 @@ const GameControlDiv = ({
         setGameMode={setGameMode}
         gameStatus={gameStatus}
         setGameStatus={setGameStatus}
+        openConfirm={openConfirm}
       />
     </div>
   );

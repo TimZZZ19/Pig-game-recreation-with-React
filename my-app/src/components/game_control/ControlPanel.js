@@ -14,6 +14,7 @@ const ControlPanel = ({
   setGameMode,
   gameStatus,
   setGameStatus,
+  openConfirm,
 }) => {
   let gameStatusText;
   switch (gameStatus) {
@@ -26,8 +27,8 @@ const ControlPanel = ({
     case STATUS.SETTING:
       gameStatusText = "🟠 setting";
       break;
-    case STATUS.COUNTING:
-      gameStatusText = "🕜 counting";
+    case STATUS.FROZEN:
+      gameStatusText = "⏹️ frozen";
       break;
     default:
       throw new Error();
@@ -57,6 +58,7 @@ const ControlPanel = ({
         initializeBoard={initializeBoard}
         gameStatus={gameStatus}
         setGameStatus={setGameStatus}
+        openConfirm={openConfirm}
       />
     </div>
   );

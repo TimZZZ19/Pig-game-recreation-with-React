@@ -10,10 +10,11 @@ const ControlUnit = ({
   initializeBoard,
   gameStatus,
   setGameStatus,
+  openConfirm,
 }) => {
   const startBtnText = gameStatus === STATUS.SETTING ? "▶️ Start" : "▶️ Resume";
   const startResumeFunc = () => {
-    setGameStatus(STATUS.COUNTING);
+    setGameStatus(STATUS.FROZEN);
     countDown();
 
     // Initialize the board when first starting the game from the setting status
@@ -24,6 +25,11 @@ const ControlUnit = ({
 
   const pauseFunc = () => setGameStatus(STATUS.PAUSED);
 
+  const restartFunc = () => {
+    setGameStatus(STATUS.FROZEN);
+    openConfirm();
+  };
+
   return (
     <div className={styles["control-unit"]}>
       <UnitTitle title={"game control"} />
@@ -31,7 +37,7 @@ const ControlUnit = ({
         buttonContent={`${startBtnText}`}
         extraStyles={{ width: "16rem", top: "4rem" }}
         secondaryClass={
-          (gameStatus === STATUS.PLAYING || gameStatus === STATUS.COUNTING) &&
+          (gameStatus === STATUS.PLAYING || gameStatus === STATUS.FROZEN) &&
           "btn--unclickable"
         }
         onClick={startResumeFunc}
@@ -46,6 +52,7 @@ const ControlUnit = ({
         buttonContent="🔄 Restart"
         extraStyles={{ width: "16rem", top: "14rem" }}
         secondaryClass={gameStatus !== STATUS.PAUSED && "btn--unclickable"}
+        onClick={restartFunc}
       />
     </div>
   );

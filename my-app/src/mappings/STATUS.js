@@ -2,7 +2,7 @@ const STATUS = {
   PLAYING: "playing",
   PAUSED: "paused",
   SETTING: "setting",
-  COUNTING: "counting",
+  FROZEN: "frozen",
 };
 
 export default STATUS;

@@ -3,6 +3,7 @@ import styles from "./Modal.module.css";
 import CountDown from "./CountDown";
 import MODAL_CONTENT from "../../mappings/MODAL_CONTENT";
 import Result from "./Result";
+import Confirm from "./Confirm";
 
 const Modal = ({ modalState }) => {
   const { modalOpen, modalContent } = modalState;
@@ -16,6 +17,9 @@ const Modal = ({ modalState }) => {
       break;
     case MODAL_CONTENT.RESULT:
       content = <Result />;
+      break;
+    case MODAL_CONTENT.CONFIRM:
+      content = <Confirm />;
       break;
     case MODAL_CONTENT.NULL:
       content = null;
