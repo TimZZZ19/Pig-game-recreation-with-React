@@ -4,7 +4,7 @@ import CountDown from "./CountDown";
 import MODAL_CONTENT from "../../mappings/MODAL_CONTENT";
 import Result from "./Result";
 
-const Modal = ({ modalState, modalDispatch }) => {
+const Modal = ({ modalState }) => {
   const { modalOpen, modalContent } = modalState;
 
   if (!modalOpen) return null;
@@ -12,10 +12,13 @@ const Modal = ({ modalState, modalDispatch }) => {
   let content;
   switch (modalContent) {
     case MODAL_CONTENT.COUNT_DOWN:
-      content = <CountDown modalDispatch={modalDispatch} />;
+      content = <CountDown />;
       break;
     case MODAL_CONTENT.RESULT:
       content = <Result />;
+      break;
+    case MODAL_CONTENT.NULL:
+      content = null;
       break;
     default:
       throw new Error();

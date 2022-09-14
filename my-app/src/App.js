@@ -90,7 +90,6 @@ const modalReducer = (state, action) => {
   switch (action.type) {
     case MODAL_ACTIONS.OPEN_MODAL:
       return { ...state, modalOpen: true };
-
     case MODAL_ACTIONS.CLOSE_MODAL:
       return { ...state, modalOpen: false };
     case MODAL_ACTIONS.CHANGE_TO_COUNTDOWN:
@@ -134,7 +133,7 @@ function App() {
   return (
     <div className={styles.app}>
       <GameMode gameMode={gameMode} />
-      <Modal modalState={modalState} modalDispatch={modalDispatch} />
+      <Modal modalState={modalState} />
       <Board gameStatus={gameStatus}>
         <Player
           player={playerAState.name}

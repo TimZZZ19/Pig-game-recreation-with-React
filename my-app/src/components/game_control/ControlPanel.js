@@ -8,7 +8,7 @@ import STATUS from "../../mappings/STATUS";
 const ControlPanel = ({
   controlPanelShown,
   handleExpandButton,
-  openModalandStartCounting,
+  countDownAndCloseModal,
   initializeBoard,
   pauseGame,
   gameMode,
@@ -54,7 +54,7 @@ const ControlPanel = ({
       />
 
       <ControlUnit
-        openModalandStartCounting={openModalandStartCounting}
+        countDownAndCloseModal={countDownAndCloseModal}
         initializeBoard={initializeBoard}
         gameStatus={gameStatus}
         setGameStatus={setGameStatus}

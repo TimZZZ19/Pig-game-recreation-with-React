@@ -5,7 +5,7 @@ import UnitTitle from "../../reusables/UnitTitle";
 import STATUS from "../../../mappings/STATUS";
 
 const ControlUnit = ({
-  openModalandStartCounting,
+  countDownAndCloseModal,
   initializeBoard,
   gameStatus,
   setGameStatus,
@@ -14,7 +14,7 @@ const ControlUnit = ({
   const startBtnText = gameStatus === STATUS.PAUSED ? "▶️ Resume" : "▶️ Start";
   const startResumeFunc = () => {
     setGameStatus(STATUS.COUNTING);
-    openModalandStartCounting();
+    countDownAndCloseModal();
     if (gameStatus !== STATUS.PAUSED) initializeBoard();
     setTimeout(() => setGameStatus(STATUS.PLAYING), 6000);
   };
