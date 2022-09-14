@@ -17,9 +17,9 @@ const GameControlDiv = ({
   setGameStatus,
   modalDispatch,
 }) => {
-  const handleExpandButton = () => setControlPanelShown((curr) => !curr);
-
   const [controlPanelShown, setControlPanelShown] = useState(true);
+
+  const handleExpandButton = () => setControlPanelShown((curr) => !curr);
 
   const countDown = () => {
     // Open modal and start counting down
@@ -33,7 +33,7 @@ const GameControlDiv = ({
     }, (COUNT_DOWN.TIME + 1) * 1000);
   };
 
-  const initializeBoard = () =>
+  const initializeBoard = () => {
     setTimeout(() => {
       // Initialize the board
       playerADispatch({ type: ACTIONS.START_PLAYING });
@@ -45,6 +45,7 @@ const GameControlDiv = ({
       setDiceNumber(1);
       setDiceHidden(true);
     }, (COUNT_DOWN.TIME + 1) * 1000);
+  };
 
   return (
     <div className={styles["game-control"]}>
