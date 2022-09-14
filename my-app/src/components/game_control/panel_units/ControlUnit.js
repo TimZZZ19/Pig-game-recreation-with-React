@@ -3,7 +3,7 @@ import styles from "./ControlUnit.module.css";
 import Button from "../../reusables/Button";
 import UnitTitle from "../../reusables/UnitTitle";
 import STATUS from "../../../mappings/STATUS";
-import COUNT_DOWN from "../../../mappings/COUNT_DOWN";
+import PushBack from "../../reusables/PushBack";
 
 const ControlUnit = ({
   countDown,
@@ -15,13 +15,11 @@ const ControlUnit = ({
   const startResumeFunc = () => {
     setGameStatus(STATUS.COUNTING);
     countDown();
-    if (gameStatus !== STATUS.PAUSED) {
-      setTimeout(initializeBoard(), (COUNT_DOWN.TIME + 1) * 1000);
-    }
-    setTimeout(
-      () => setGameStatus(STATUS.PLAYING),
-      (COUNT_DOWN.TIME + 1) * 1000
-    );
+
+    // Initialize the board when first starting the game from the setting status
+    if (gameStatus !== STATUS.PAUSED) PushBack(initializeBoard);
+
+    PushBack(() => setGameStatus(STATUS.PLAYING));
   };
 
   const pauseFunc = () => setGameStatus(STATUS.PAUSED);

@@ -4,7 +4,7 @@ import ControlPanel from "./ControlPanel";
 import Button from "../reusables/Button";
 import ACTIONS from "../../mappings/ACTIONS";
 import MODAL_ACTIONS from "../../mappings/MODAL_ACTIONS";
-import COUNT_DOWN from "../../mappings/COUNT_DOWN";
+import PushBack from "../reusables/PushBack";
 
 const GameControlDiv = ({
   playerADispatch,
@@ -27,10 +27,10 @@ const GameControlDiv = ({
     modalDispatch({ type: MODAL_ACTIONS.CHANGE_TO_COUNTDOWN });
 
     // Reset modal content to null and close modal
-    setTimeout(() => {
+    PushBack(() => {
       modalDispatch({ type: MODAL_ACTIONS.CHANGE_TO_NULL });
       modalDispatch({ type: MODAL_ACTIONS.CLOSE_MODAL });
-    }, (COUNT_DOWN.TIME + 1) * 1000);
+    });
   };
 
   const initializeBoard = () => {
