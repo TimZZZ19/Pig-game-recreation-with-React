@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from "react";
+import COUNT_DOWN from "../../mappings/COUNT_DOWN.js";
 
 const CountDown = () => {
-  const [counter, setCounter] = useState(5);
+  const [counter, setCounter] = useState(COUNT_DOWN.TIME);
   const id = useRef();
   const clear = () => {
     clearInterval(id.current);

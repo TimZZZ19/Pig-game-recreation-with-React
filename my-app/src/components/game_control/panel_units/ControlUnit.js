@@ -3,6 +3,7 @@ import styles from "./ControlUnit.module.css";
 import Button from "../../reusables/Button";
 import UnitTitle from "../../reusables/UnitTitle";
 import STATUS from "../../../mappings/STATUS";
+import COUNT_DOWN from "../../../mappings/COUNT_DOWN";
 
 const ControlUnit = ({
   countDownAndCloseModal,
@@ -16,7 +17,10 @@ const ControlUnit = ({
     setGameStatus(STATUS.COUNTING);
     countDownAndCloseModal();
     if (gameStatus !== STATUS.PAUSED) initializeBoard();
-    setTimeout(() => setGameStatus(STATUS.PLAYING), 6000);
+    setTimeout(
+      () => setGameStatus(STATUS.PLAYING),
+      (COUNT_DOWN.TIME + 1) * 1000
+    );
   };
 
   return (

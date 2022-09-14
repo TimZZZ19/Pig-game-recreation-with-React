@@ -5,6 +5,7 @@ import Button from "../reusables/Button";
 import ACTIONS from "../../mappings/ACTIONS";
 import STATUS from "../../mappings/STATUS";
 import MODAL_ACTIONS from "../../mappings/MODAL_ACTIONS";
+import COUNT_DOWN from "../../mappings/COUNT_DOWN";
 
 const GameControlDiv = ({
   playerADispatch,
@@ -28,7 +29,7 @@ const GameControlDiv = ({
     setTimeout(() => {
       modalDispatch({ type: MODAL_ACTIONS.CHANGE_TO_NULL });
       modalDispatch({ type: MODAL_ACTIONS.CLOSE_MODAL });
-    }, 6000);
+    }, (COUNT_DOWN.TIME + 1) * 1000);
   };
 
   const initializeBoard = () =>
@@ -42,7 +43,7 @@ const GameControlDiv = ({
       playerBDispatch({ type: ACTIONS.RESET_CURRENT_SCORE });
       setDiceNumber(1);
       setDiceHidden(true);
-    }, 6000);
+    }, (COUNT_DOWN.TIME + 1) * 1000);
 
   // When Pause is clicked on,
   const pauseGame = () => {
