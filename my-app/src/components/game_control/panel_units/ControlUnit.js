@@ -11,11 +11,13 @@ const ControlUnit = ({
   gameStatus,
   setGameStatus,
 }) => {
-  const startBtnText = gameStatus === STATUS.PAUSED ? "▶️ Resume" : "▶️ Start";
+  const startBtnText = gameStatus === STATUS.SETTING ? "▶️ Start" : "▶️ Resume";
   const startResumeFunc = () => {
     setGameStatus(STATUS.COUNTING);
     countDown();
-    if (gameStatus !== STATUS.PAUSED) initializeBoard();
+    if (gameStatus !== STATUS.PAUSED) {
+      setTimeout(initializeBoard(), (COUNT_DOWN.TIME + 1) * 1000);
+    }
     setTimeout(
       () => setGameStatus(STATUS.PLAYING),
       (COUNT_DOWN.TIME + 1) * 1000

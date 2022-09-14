@@ -34,17 +34,15 @@ const GameControlDiv = ({
   };
 
   const initializeBoard = () => {
-    setTimeout(() => {
-      // Initialize the board
-      playerADispatch({ type: ACTIONS.START_PLAYING });
-      playerBDispatch({ type: ACTIONS.STOP_PLAYING });
-      playerADispatch({ type: ACTIONS.RESET_ACCUMULATIVE_SCORE });
-      playerBDispatch({ type: ACTIONS.RESET_ACCUMULATIVE_SCORE });
-      playerADispatch({ type: ACTIONS.RESET_CURRENT_SCORE });
-      playerBDispatch({ type: ACTIONS.RESET_CURRENT_SCORE });
-      setDiceNumber(1);
-      setDiceHidden(true);
-    }, (COUNT_DOWN.TIME + 1) * 1000);
+    // Initialize the board
+    playerADispatch({ type: ACTIONS.START_PLAYING });
+    playerBDispatch({ type: ACTIONS.STOP_PLAYING });
+    playerADispatch({ type: ACTIONS.RESET_ACCUMULATIVE_SCORE });
+    playerBDispatch({ type: ACTIONS.RESET_ACCUMULATIVE_SCORE });
+    playerADispatch({ type: ACTIONS.RESET_CURRENT_SCORE });
+    playerBDispatch({ type: ACTIONS.RESET_CURRENT_SCORE });
+    setDiceNumber(1);
+    setDiceHidden(true);
   };
 
   return (
