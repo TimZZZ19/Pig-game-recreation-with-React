@@ -10,7 +10,6 @@ const ControlUnit = ({
   initializeBoard,
   gameStatus,
   setGameStatus,
-  pauseGame,
 }) => {
   const startBtnText = gameStatus === STATUS.PAUSED ? "▶️ Resume" : "▶️ Start";
   const startResumeFunc = () => {
@@ -22,6 +21,8 @@ const ControlUnit = ({
       (COUNT_DOWN.TIME + 1) * 1000
     );
   };
+
+  const pauseFunc = () => setGameStatus(STATUS.PAUSED);
 
   return (
     <div className={styles["control-unit"]}>
@@ -39,7 +40,7 @@ const ControlUnit = ({
         buttonContent="⏸️ Pause"
         extraStyles={{ width: "16rem", top: "9rem" }}
         secondaryClass={gameStatus !== STATUS.PLAYING && "btn--unclickable"}
-        onClick={pauseGame}
+        onClick={pauseFunc}
       />
       <Button
         buttonContent="🔄 Restart"

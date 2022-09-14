@@ -3,7 +3,6 @@ import styles from "./GameControlDiv.module.css";
 import ControlPanel from "./ControlPanel";
 import Button from "../reusables/Button";
 import ACTIONS from "../../mappings/ACTIONS";
-import STATUS from "../../mappings/STATUS";
 import MODAL_ACTIONS from "../../mappings/MODAL_ACTIONS";
 import COUNT_DOWN from "../../mappings/COUNT_DOWN";
 
@@ -18,6 +17,8 @@ const GameControlDiv = ({
   setGameStatus,
   modalDispatch,
 }) => {
+  const handleExpandButton = () => setControlPanelShown((curr) => !curr);
+
   const [controlPanelShown, setControlPanelShown] = useState(true);
 
   const countDown = () => {
@@ -45,15 +46,6 @@ const GameControlDiv = ({
       setDiceHidden(true);
     }, (COUNT_DOWN.TIME + 1) * 1000);
 
-  // When Pause is clicked on,
-  const pauseGame = () => {
-    setGameStatus(STATUS.PAUSED);
-  };
-
-  const handleExpandButton = () => {
-    setControlPanelShown((curr) => !curr);
-  };
-
   return (
     <div className={styles["game-control"]}>
       <Button
@@ -66,12 +58,11 @@ const GameControlDiv = ({
         handleExpandButton={handleExpandButton}
         countDown={countDown}
         initializeBoard={initializeBoard}
-        pauseGame={pauseGame}
         gameMode={gameMode}
         setGameMode={setGameMode}
         gameStatus={gameStatus}
         setGameStatus={setGameStatus}
-      ></ControlPanel>
+      />
     </div>
   );
 };

@@ -10,7 +10,6 @@ const ControlPanel = ({
   handleExpandButton,
   countDown,
   initializeBoard,
-  pauseGame,
   gameMode,
   setGameMode,
   gameStatus,
@@ -58,7 +57,6 @@ const ControlPanel = ({
         initializeBoard={initializeBoard}
         gameStatus={gameStatus}
         setGameStatus={setGameStatus}
-        pauseGame={pauseGame}
       />
     </div>
   );
