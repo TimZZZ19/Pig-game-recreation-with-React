@@ -20,12 +20,12 @@ const GameControlDiv = ({
 }) => {
   const [controlPanelShown, setControlPanelShown] = useState(true);
 
-  const countDownAndCloseModal = () => {
-    // Start counting down
+  const countDown = () => {
+    // Open modal and start counting down
     modalDispatch({ type: MODAL_ACTIONS.OPEN_MODAL });
     modalDispatch({ type: MODAL_ACTIONS.CHANGE_TO_COUNTDOWN });
 
-    // Close the modal and reset its content back to null
+    // Reset modal content to null and close modal
     setTimeout(() => {
       modalDispatch({ type: MODAL_ACTIONS.CHANGE_TO_NULL });
       modalDispatch({ type: MODAL_ACTIONS.CLOSE_MODAL });
@@ -64,7 +64,7 @@ const GameControlDiv = ({
       <ControlPanel
         controlPanelShown={controlPanelShown}
         handleExpandButton={handleExpandButton}
-        countDownAndCloseModal={countDownAndCloseModal}
+        countDown={countDown}
         initializeBoard={initializeBoard}
         pauseGame={pauseGame}
         gameMode={gameMode}

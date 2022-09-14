@@ -6,7 +6,7 @@ import STATUS from "../../../mappings/STATUS";
 import COUNT_DOWN from "../../../mappings/COUNT_DOWN";
 
 const ControlUnit = ({
-  countDownAndCloseModal,
+  countDown,
   initializeBoard,
   gameStatus,
   setGameStatus,
@@ -15,7 +15,7 @@ const ControlUnit = ({
   const startBtnText = gameStatus === STATUS.PAUSED ? "▶️ Resume" : "▶️ Start";
   const startResumeFunc = () => {
     setGameStatus(STATUS.COUNTING);
-    countDownAndCloseModal();
+    countDown();
     if (gameStatus !== STATUS.PAUSED) initializeBoard();
     setTimeout(
       () => setGameStatus(STATUS.PLAYING),
