@@ -19,6 +19,17 @@ const GameControlDiv = ({
   const handleExpandButton = () => setControlPanelShown((curr) => !curr);
 
   const startGame = () => {
+    if (gameMode === MODE.WARNING) return;
+    if (gameMode === MODE.UNSELECTED) {
+      setGameMode(MODE.WARNING);
+
+      setTimeout(() => {
+        setGameMode(MODE.UNSELECTED);
+      }, 1000);
+
+      return;
+    }
+
     setGameStatus(STATUS.FROZEN);
 
     // Open modal and start counting down

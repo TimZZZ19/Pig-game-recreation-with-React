@@ -10,6 +10,7 @@ const ControlPanel = ({
   handleExpandButton,
   startGame,
   gameMode,
+  setGameMode,
   gameStatus,
   pauseGame,
   openConfirm,

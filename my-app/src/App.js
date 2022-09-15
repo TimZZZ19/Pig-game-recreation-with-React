@@ -117,7 +117,7 @@ function App() {
   // States
   const [diceNumber, setDiceNumber] = useState(1);
   const [diceHidden, setDiceHidden] = useState(true);
-  const [gameMode, setGameMode] = useState(MODE.TIMER);
+  const [gameMode, setGameMode] = useState(MODE.UNSELECTED);
 
   const [playerAState, playerADispatch] = useReducer(
     playerAReducer,
