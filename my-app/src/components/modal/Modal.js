@@ -32,6 +32,9 @@ const Modal = ({
         />
       );
       break;
+    case MODAL_CONTENT.TIME_PICKER:
+      // content = <TimerPicker />;
+      break;
     case MODAL_CONTENT.NULL:
       content = null;
       break;

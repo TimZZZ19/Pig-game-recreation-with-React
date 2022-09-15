@@ -1,6 +1,6 @@
 import React from "react";
 import Timer from "./Timer";
-import FinishLine from "./FinishLine";
+import Race from "./Race";
 import MODE from "../../mappings/MODE";
 import styles from "./GameMode.module.css";
 
@@ -11,7 +11,7 @@ const GameMode = ({ gameMode }) => {
       mode = <Timer />;
       break;
     case MODE.RACE:
-      mode = <FinishLine />;
+      mode = <Race />;
       break;
     default:
       throw new Error();

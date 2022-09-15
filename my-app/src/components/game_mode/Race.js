@@ -1,7 +1,7 @@
 import React from "react";
-import styles from "./FinishLine.module.css";
+import styles from "./Race.module.css";
 
-const FinishLine = () => {
+const Race = () => {
   return (
     <div className={styles["finish-line"]}>
       <span>100</span>
@@ -9,4 +9,4 @@ const FinishLine = () => {
   );
 };
 
-export default FinishLine;
+export default Race;
