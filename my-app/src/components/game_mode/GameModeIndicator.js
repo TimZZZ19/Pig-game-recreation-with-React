@@ -2,9 +2,9 @@ import React from "react";
 import Timer from "./Timer";
 import Race from "./Race";
 import MODE from "../../mappings/MODE";
-import styles from "./GameMode.module.css";
+import styles from "./GameModeIndicator.module.css";
 
-const GameMode = ({ gameMode }) => {
+const GameModeIndicator = ({ gameMode }) => {
   let mode;
   switch (gameMode) {
     case MODE.TIMER:
@@ -20,4 +20,4 @@ const GameMode = ({ gameMode }) => {
   return <div className={styles["mode-container"]}>{mode}</div>;
 };
 
-export default GameMode;
+export default GameModeIndicator;

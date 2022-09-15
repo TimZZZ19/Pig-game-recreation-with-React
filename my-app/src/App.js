@@ -6,7 +6,7 @@ import Play from "./components/board/Play";
 import styles from "./App.module.css";
 import ACTIONS from "./mappings/ACTIONS";
 import MODE from "./mappings/MODE";
-import GameMode from "./components/game_mode/GameMode";
+import GameModeIndicator from "./components/game_mode/GameModeIndicator";
 import Modal from "./components/modal/Modal";
 import STATUS from "./mappings/STATUS";
 import MODAL_ACTIONS from "./mappings/MODAL_ACTIONS";
@@ -146,7 +146,7 @@ function App() {
 
   return (
     <div className={styles.app}>
-      <GameMode gameMode={gameMode} />
+      <GameModeIndicator gameMode={gameMode} />
       <Modal
         modalState={modalState}
         modalDispatch={modalDispatch}
