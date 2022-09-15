@@ -9,7 +9,6 @@ const ControlPanel = ({
   controlPanelShown,
   handleExpandButton,
   countDown,
-  initializeBoard,
   gameMode,
   setGameMode,
   gameStatus,
@@ -55,7 +54,6 @@ const ControlPanel = ({
 
       <ControlUnit
         countDown={countDown}
-        initializeBoard={initializeBoard}
         gameStatus={gameStatus}
         setGameStatus={setGameStatus}
         openConfirm={openConfirm}

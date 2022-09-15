@@ -5,21 +5,11 @@ import UnitTitle from "../../reusables/UnitTitle";
 import STATUS from "../../../mappings/STATUS";
 import PushBack from "../../reusables/PushBack";
 
-const ControlUnit = ({
-  countDown,
-  initializeBoard,
-  gameStatus,
-  setGameStatus,
-  openConfirm,
-}) => {
+const ControlUnit = ({ countDown, gameStatus, setGameStatus, openConfirm }) => {
   const startBtnText = gameStatus === STATUS.SETTING ? "▶️ Start" : "▶️ Resume";
   const startResumeFunc = () => {
     setGameStatus(STATUS.FROZEN);
     countDown();
-
-    // Initialize the board when first starting the game from the setting status
-    if (gameStatus !== STATUS.PAUSED) PushBack(initializeBoard);
-
     PushBack(() => setGameStatus(STATUS.PLAYING));
   };
 

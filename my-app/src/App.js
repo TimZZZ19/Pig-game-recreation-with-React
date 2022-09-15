@@ -132,10 +132,27 @@ function App() {
     modalInitialConfigs
   );
 
+  // Function for restarting the game
+  const initializeBoard = () => {
+    playerADispatch({ type: ACTIONS.START_PLAYING });
+    playerBDispatch({ type: ACTIONS.STOP_PLAYING });
+    playerADispatch({ type: ACTIONS.RESET_ACCUMULATIVE_SCORE });
+    playerBDispatch({ type: ACTIONS.RESET_ACCUMULATIVE_SCORE });
+    playerADispatch({ type: ACTIONS.RESET_CURRENT_SCORE });
+    playerBDispatch({ type: ACTIONS.RESET_CURRENT_SCORE });
+    setDiceNumber(1);
+    setDiceHidden(true);
+  };
+
   return (
     <div className={styles.app}>
       <GameMode gameMode={gameMode} />
-      <Modal modalState={modalState} />
+      <Modal
+        modalState={modalState}
+        modalDispatch={modalDispatch}
+        setGameStatus={setGameStatus}
+        initializeBoard={initializeBoard}
+      />
       <Board gameStatus={gameStatus}>
         <Player
           player={playerAState.name}
@@ -161,10 +178,6 @@ function App() {
         />
       </Board>
       <GameControlDiv
-        playerADispatch={playerADispatch}
-        playerBDispatch={playerBDispatch}
-        setDiceNumber={setDiceNumber}
-        setDiceHidden={setDiceHidden}
         gameMode={gameMode}
         setGameMode={setGameMode}
         gameStatus={gameStatus}

@@ -5,7 +5,12 @@ import MODAL_CONTENT from "../../mappings/MODAL_CONTENT";
 import Result from "./Result";
 import Confirm from "./Confirm";
 
-const Modal = ({ modalState }) => {
+const Modal = ({
+  modalState,
+  modalDispatch,
+  setGameStatus,
+  initializeBoard,
+}) => {
   const { modalOpen, modalContent } = modalState;
 
   if (!modalOpen) return null;
@@ -19,7 +24,13 @@ const Modal = ({ modalState }) => {
       content = <Result />;
       break;
     case MODAL_CONTENT.CONFIRM:
-      content = <Confirm />;
+      content = (
+        <Confirm
+          modalDispatch={modalDispatch}
+          setGameStatus={setGameStatus}
+          initializeBoard={initializeBoard}
+        />
+      );
       break;
     case MODAL_CONTENT.NULL:
       content = null;

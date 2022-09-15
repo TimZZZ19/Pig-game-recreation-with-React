@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import COUNT_DOWN from "../../mappings/COUNT_DOWN.js";
+import styles from "./CountDown.module.css";
 
 const CountDown = () => {
   const [counter, setCounter] = useState(COUNT_DOWN.TIME);
@@ -22,7 +23,7 @@ const CountDown = () => {
     }
   }, [counter]);
 
-  return <div>{counter}</div>;
+  return <p className={styles["count-down-text"]}>{counter}</p>;
 };
 
 export default CountDown;

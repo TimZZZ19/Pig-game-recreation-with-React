@@ -2,15 +2,10 @@ import { useState } from "react";
 import styles from "./GameControlDiv.module.css";
 import ControlPanel from "./ControlPanel";
 import Button from "../reusables/Button";
-import ACTIONS from "../../mappings/ACTIONS";
 import MODAL_ACTIONS from "../../mappings/MODAL_ACTIONS";
 import PushBack from "../reusables/PushBack";
 
 const GameControlDiv = ({
-  playerADispatch,
-  playerBDispatch,
-  setDiceNumber,
-  setDiceHidden,
   gameMode,
   setGameMode,
   gameStatus,
@@ -33,18 +28,6 @@ const GameControlDiv = ({
     });
   };
 
-  const initializeBoard = () => {
-    // Initialize the board
-    playerADispatch({ type: ACTIONS.START_PLAYING });
-    playerBDispatch({ type: ACTIONS.STOP_PLAYING });
-    playerADispatch({ type: ACTIONS.RESET_ACCUMULATIVE_SCORE });
-    playerBDispatch({ type: ACTIONS.RESET_ACCUMULATIVE_SCORE });
-    playerADispatch({ type: ACTIONS.RESET_CURRENT_SCORE });
-    playerBDispatch({ type: ACTIONS.RESET_CURRENT_SCORE });
-    setDiceNumber(1);
-    setDiceHidden(true);
-  };
-
   const openConfirm = () => {
     modalDispatch({ type: MODAL_ACTIONS.OPEN_MODAL });
     modalDispatch({ type: MODAL_ACTIONS.CHANGE_TO_CONFIRM });
@@ -61,7 +44,6 @@ const GameControlDiv = ({
         controlPanelShown={controlPanelShown}
         handleExpandButton={handleExpandButton}
         countDown={countDown}
-        initializeBoard={initializeBoard}
         gameMode={gameMode}
         setGameMode={setGameMode}
         gameStatus={gameStatus}
