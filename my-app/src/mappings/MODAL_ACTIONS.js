@@ -5,6 +5,7 @@ const MODAL_ACTIONS = {
   CHANGE_TO_RESULT: "change to result",
   CHANGE_TO_CONFIRM: "change to the confirmation dialogue",
   CHANGE_TO_TIME_PICKER: "change to time picker",
+  CHANGE_TO_RACE_PICKER: "change to race picker",
   CHANGE_TO_NULL: "change back to null",
 };
 

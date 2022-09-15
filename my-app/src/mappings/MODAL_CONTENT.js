@@ -3,6 +3,7 @@ const MODAL_CONTENT = {
   RESULT: "result",
   CONFIRM: "confirmation dialogue",
   TIME_PICKER: "timer picker",
+  RACE_PICKER: "race picker",
   NULL: null,
 };
 

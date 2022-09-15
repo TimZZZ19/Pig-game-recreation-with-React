@@ -52,7 +52,7 @@ const GameControlDiv = ({
 
   const openRacePicker = () => {
     modalDispatch({ type: MODAL_ACTIONS.OPEN_MODAL });
-    modalDispatch({ type: MODAL_ACTIONS.CHANGE_TO_TIME_PICKER });
+    modalDispatch({ type: MODAL_ACTIONS.CHANGE_TO_RACE_PICKER });
 
     setGameMode(MODE.RACE);
   };

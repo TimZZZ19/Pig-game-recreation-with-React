@@ -5,6 +5,7 @@ import MODAL_CONTENT from "../../mappings/MODAL_CONTENT";
 import Result from "./modal_contents/Result";
 import Confirm from "./modal_contents/Confirm";
 import TimePicker from "./modal_contents/TimePicker";
+import RacePicker from "./modal_contents/RacePicker";
 
 const Modal = ({
   modalState,
@@ -35,6 +36,9 @@ const Modal = ({
       break;
     case MODAL_CONTENT.TIME_PICKER:
       content = <TimePicker />;
+      break;
+    case MODAL_CONTENT.RACE_PICKER:
+      content = <RacePicker />;
       break;
     case MODAL_CONTENT.NULL:
       content = null;
