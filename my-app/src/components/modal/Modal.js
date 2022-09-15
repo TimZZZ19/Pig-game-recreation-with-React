@@ -1,9 +1,9 @@
 import React from "react";
 import styles from "./Modal.module.css";
-import CountDown from "./CountDown";
+import CountDown from "./modal_contents/CountDown";
 import MODAL_CONTENT from "../../mappings/MODAL_CONTENT";
-import Result from "./Result";
-import Confirm from "./Confirm";
+import Result from "./modal_contents/Result";
+import Confirm from "./modal_contents/Confirm";
 
 const Modal = ({
   modalState,

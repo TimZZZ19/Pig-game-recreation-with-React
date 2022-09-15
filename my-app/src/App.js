@@ -98,6 +98,8 @@ const modalReducer = (state, action) => {
       return { ...state, modalContent: MODAL_CONTENT.RESULT };
     case MODAL_ACTIONS.CHANGE_TO_CONFIRM:
       return { ...state, modalContent: MODAL_CONTENT.CONFIRM };
+    case MODAL_ACTIONS.CHANGE_TO_TIME_PICKER:
+      return { ...state, modalContent: MODAL_CONTENT.TIME_PICKER };
     case MODAL_ACTIONS.CHANGE_TO_NULL:
       return { ...state, modalContent: MODAL_CONTENT.NULL };
     default:

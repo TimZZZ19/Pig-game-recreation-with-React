@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import COUNT_DOWN from "../../mappings/COUNT_DOWN.js";
+import COUNT_DOWN from "../../../mappings/COUNT_DOWN";
 import styles from "./CountDown.module.css";
 
 const CountDown = () => {

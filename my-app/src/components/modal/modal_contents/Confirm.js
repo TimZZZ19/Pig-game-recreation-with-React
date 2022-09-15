@@ -1,6 +1,6 @@
-import STATUS from "../../mappings/STATUS";
-import MODAL_ACTIONS from "../../mappings/MODAL_ACTIONS";
-import Button from "../reusables/Button";
+import STATUS from "../../../mappings/STATUS";
+import MODAL_ACTIONS from "../../../mappings/MODAL_ACTIONS";
+import Button from "../../reusables/Button";
 import styles from "./Confirm.module.css";
 
 const Confirm = ({ modalDispatch, setGameStatus, initializeBoard }) => {
