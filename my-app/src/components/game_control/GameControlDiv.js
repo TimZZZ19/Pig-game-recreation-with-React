@@ -4,6 +4,8 @@ import ControlPanel from "./ControlPanel";
 import Button from "../reusables/Button";
 import MODAL_ACTIONS from "../../mappings/MODAL_ACTIONS";
 import PushBack from "../reusables/PushBack";
+import MODE from "../../mappings/MODE";
+import STATUS from "../../mappings/STATUS";
 
 const GameControlDiv = ({
   gameMode,
@@ -16,7 +18,9 @@ const GameControlDiv = ({
 
   const handleExpandButton = () => setControlPanelShown((curr) => !curr);
 
-  const countDown = () => {
+  const startGame = () => {
+    setGameStatus(STATUS.FROZEN);
+
     // Open modal and start counting down
     modalDispatch({ type: MODAL_ACTIONS.OPEN_MODAL });
     modalDispatch({ type: MODAL_ACTIONS.CHANGE_TO_COUNTDOWN });
@@ -26,11 +30,31 @@ const GameControlDiv = ({
       modalDispatch({ type: MODAL_ACTIONS.CHANGE_TO_NULL });
       modalDispatch({ type: MODAL_ACTIONS.CLOSE_MODAL });
     });
+
+    PushBack(() => setGameStatus(STATUS.PLAYING));
   };
 
+  const pauseGame = () => setGameStatus(STATUS.PAUSED);
+
   const openConfirm = () => {
+    setGameStatus(STATUS.FROZEN);
+
     modalDispatch({ type: MODAL_ACTIONS.OPEN_MODAL });
     modalDispatch({ type: MODAL_ACTIONS.CHANGE_TO_CONFIRM });
+  };
+
+  const openTimePicker = () => {
+    modalDispatch({ type: MODAL_ACTIONS.OPEN_MODAL });
+    modalDispatch({ type: MODAL_ACTIONS.CHANGE_TO_TIME_PICKER });
+
+    setGameMode(MODE.TIMER);
+  };
+
+  const openRacePicker = () => {
+    modalDispatch({ type: MODAL_ACTIONS.OPEN_MODAL });
+    modalDispatch({ type: MODAL_ACTIONS.CHANGE_TO_TIME_PICKER });
+
+    setGameMode(MODE.RACE);
   };
 
   return (
@@ -43,12 +67,13 @@ const GameControlDiv = ({
       <ControlPanel
         controlPanelShown={controlPanelShown}
         handleExpandButton={handleExpandButton}
-        countDown={countDown}
+        startGame={startGame}
         gameMode={gameMode}
-        setGameMode={setGameMode}
         gameStatus={gameStatus}
-        setGameStatus={setGameStatus}
+        pauseGame={pauseGame}
         openConfirm={openConfirm}
+        openTimePicker={openTimePicker}
+        openRacePicker={openRacePicker}
       />
     </div>
   );

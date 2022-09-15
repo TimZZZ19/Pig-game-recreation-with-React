@@ -4,6 +4,7 @@ import CountDown from "./modal_contents/CountDown";
 import MODAL_CONTENT from "../../mappings/MODAL_CONTENT";
 import Result from "./modal_contents/Result";
 import Confirm from "./modal_contents/Confirm";
+import TimePicker from "./modal_contents/TimePicker";
 
 const Modal = ({
   modalState,
@@ -33,7 +34,7 @@ const Modal = ({
       );
       break;
     case MODAL_CONTENT.TIME_PICKER:
-      // content = <TimerPicker />;
+      content = <TimePicker />;
       break;
     case MODAL_CONTENT.NULL:
       content = null;

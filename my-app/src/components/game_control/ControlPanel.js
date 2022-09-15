@@ -8,12 +8,13 @@ import STATUS from "../../mappings/STATUS";
 const ControlPanel = ({
   controlPanelShown,
   handleExpandButton,
-  countDown,
+  startGame,
   gameMode,
-  setGameMode,
   gameStatus,
-  setGameStatus,
+  pauseGame,
   openConfirm,
+  openTimePicker,
+  openRacePicker,
 }) => {
   let gameStatusText;
   switch (gameStatus) {
@@ -48,14 +49,15 @@ const ControlPanel = ({
 
       <ModeUnit
         gameMode={gameMode}
-        setGameMode={setGameMode}
         gameStatus={gameStatus}
+        openTimePicker={openTimePicker}
+        openRacePicker={openRacePicker}
       />
 
       <ControlUnit
-        countDown={countDown}
         gameStatus={gameStatus}
-        setGameStatus={setGameStatus}
+        startGame={startGame}
+        pauseGame={pauseGame}
         openConfirm={openConfirm}
       />
     </div>

@@ -3,22 +3,9 @@ import styles from "./ControlUnit.module.css";
 import Button from "../../reusables/Button";
 import UnitTitle from "../../reusables/UnitTitle";
 import STATUS from "../../../mappings/STATUS";
-import PushBack from "../../reusables/PushBack";
 
-const ControlUnit = ({ countDown, gameStatus, setGameStatus, openConfirm }) => {
+const ControlUnit = ({ gameStatus, startGame, pauseGame, openConfirm }) => {
   const startBtnText = gameStatus === STATUS.SETTING ? "▶️ Start" : "▶️ Resume";
-  const startResumeFunc = () => {
-    setGameStatus(STATUS.FROZEN);
-    countDown();
-    PushBack(() => setGameStatus(STATUS.PLAYING));
-  };
-
-  const pauseFunc = () => setGameStatus(STATUS.PAUSED);
-
-  const restartFunc = () => {
-    setGameStatus(STATUS.FROZEN);
-    openConfirm();
-  };
 
   return (
     <div className={styles["control-unit"]}>
@@ -30,19 +17,19 @@ const ControlUnit = ({ countDown, gameStatus, setGameStatus, openConfirm }) => {
           (gameStatus === STATUS.PLAYING || gameStatus === STATUS.FROZEN) &&
           "btn--unclickable"
         }
-        onClick={startResumeFunc}
+        onClick={startGame}
       />
       <Button
         buttonContent="⏸️ Pause"
         extraStyles={{ width: "16rem", top: "9rem" }}
         secondaryClass={gameStatus !== STATUS.PLAYING && "btn--unclickable"}
-        onClick={pauseFunc}
+        onClick={pauseGame}
       />
       <Button
         buttonContent="🔄 Restart"
         extraStyles={{ width: "16rem", top: "14rem" }}
         secondaryClass={gameStatus !== STATUS.PAUSED && "btn--unclickable"}
-        onClick={restartFunc}
+        onClick={openConfirm}
       />
     </div>
   );
