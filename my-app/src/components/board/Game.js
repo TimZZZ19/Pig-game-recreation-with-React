@@ -6,6 +6,7 @@ import GAME_ACTIONS from "../../mappings/GAME_ACTIONS";
 
 const Game = ({
   playerAState,
+  playerBState,
   playerADispatch,
   playerBDispatch,
   gameState,
@@ -42,7 +43,9 @@ const Game = ({
           payload: diceResult,
         });
       }
-    } else {
+    }
+
+    if (playerBState.isPlaying) {
       // if B is playing ...
       if (diceResult === 1) {
         ResetBAndSwitchToA();
@@ -71,7 +74,9 @@ const Game = ({
       // if A is active, update score and switch to B.
       playerADispatch({ type: PLAYER_ACTIONS.SET_ACCUMULATIVE_SCORE });
       ResetAAndSwitchToB();
-    } else {
+    }
+
+    if (playerBState.isPlaying) {
       // if B is active, update score and switch to A.
       playerBDispatch({ type: PLAYER_ACTIONS.SET_ACCUMULATIVE_SCORE });
       ResetBAndSwitchToA();

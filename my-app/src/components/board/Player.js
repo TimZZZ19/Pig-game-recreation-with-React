@@ -1,22 +1,22 @@
 import styles from "./Player.module.css";
 
-const Player = ({ playerStatus, player, playerScore, currScore }) => {
+const Player = ({ playerState }) => {
+  const { name, isPlaying, accumulativeScore, currentScore } = playerState;
+
   return (
     <section
-      className={`${styles["player"]} ${
-        playerStatus && styles["player--active"]
-      }`}
+      className={`${styles["player"]} ${isPlaying && styles["player--active"]}`}
     >
       <h2 className={styles["name"]} id="name--0">
-        {player}
+        {name}
       </h2>
       <p className={styles["score"]} id="score--0">
-        {playerScore}
+        {accumulativeScore}
       </p>
       <div className={styles["current"]}>
         <p className={styles["current-label"]}>Current</p>
         <p className={styles["current-score"]} id="current--0">
-          {currScore}
+          {currentScore}
         </p>
       </div>
     </section>

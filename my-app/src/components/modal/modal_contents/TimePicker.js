@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./TimePicker.module.css";
+// import styles from "./TimePicker.module.css";
 import ModalModeForm from "../../reusables/ModalModeForm";
 
 const TimePicker = ({ closeModal }) => {

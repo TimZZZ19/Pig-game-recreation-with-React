@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./RacePicker.module.css";
+// import styles from "./RacePicker.module.css";
 import ModalModeForm from "../../reusables/ModalModeForm";
 
 const RacePicker = ({ closeModal }) => {

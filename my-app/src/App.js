@@ -1,4 +1,4 @@
-import { useState, useReducer } from "react";
+import { useReducer } from "react";
 
 //components
 import Board from "./components/board/Board";
@@ -165,7 +165,7 @@ function App() {
     modalInitialConfigs
   );
 
-  // Function for restarting the game
+  // Function for initializing the game
   const initializeBoard = () => {
     playerADispatch({ type: PLAYER_ACTIONS.START_PLAYING });
     playerBDispatch({ type: PLAYER_ACTIONS.STOP_PLAYING });
@@ -175,7 +175,6 @@ function App() {
     playerBDispatch({ type: PLAYER_ACTIONS.RESET_CURRENT_SCORE });
     gameDispatch({ type: GAME_ACTIONS.HIDE_DICE });
     gameDispatch({ type: GAME_ACTIONS.SET_DICE_NUMBER, payload: 1 });
-    // gameDispatch({type:GAME_ACTIONS.})
   };
 
   return (
@@ -188,20 +187,11 @@ function App() {
         initializeBoard={initializeBoard}
       />
       <Board gameState={gameState}>
-        <Player
-          player={playerAState.name}
-          playerStatus={playerAState.isPlaying}
-          playerScore={playerAState.accumulativeScore}
-          currScore={playerAState.currentScore}
-        />
-        <Player
-          player={playerBState.name}
-          playerStatus={playerBState.isPlaying}
-          playerScore={playerBState.accumulativeScore}
-          currScore={playerBState.currentScore}
-        />
+        <Player playerState={playerAState} />
+        <Player playerState={playerBState} />
         <Game
           playerAState={playerAState}
+          playerBState={playerBState}
           playerADispatch={playerADispatch}
           playerBDispatch={playerBDispatch}
           gameState={gameState}
