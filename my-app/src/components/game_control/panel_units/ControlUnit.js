@@ -2,8 +2,8 @@ import React from "react";
 import styles from "./ControlUnit.module.css";
 import Button from "../../reusables/Button";
 import UnitTitle from "../../reusables/UnitTitle";
-import STATUS from "../../../mappings/STATUS";
-import MODE from "../../../mappings/MODE";
+import GAME_STATUS from "../../../mappings/GAME_STATUS";
+import GAME_MODE from "../../../mappings/GAME_MODE";
 
 const ControlUnit = ({
   gameMode,
@@ -13,7 +13,7 @@ const ControlUnit = ({
   openConfirm,
 }) => {
   const startBtnText =
-    gameMode === MODE.UNSELECTED || gameStatus === STATUS.SETTING
+    gameMode === GAME_MODE.UNSELECTED || gameStatus === GAME_STATUS.SETTING
       ? "▶️ Start"
       : "▶️ Resume";
 
@@ -24,7 +24,8 @@ const ControlUnit = ({
         buttonContent={`${startBtnText}`}
         extraStyles={{ width: "16rem", top: "4rem" }}
         secondaryClass={
-          (gameStatus === STATUS.PLAYING || gameStatus === STATUS.FROZEN) &&
+          (gameStatus === GAME_STATUS.PLAYING ||
+            gameStatus === GAME_STATUS.FROZEN) &&
           "btn--unclickable"
         }
         onClick={startGame}
@@ -32,13 +33,15 @@ const ControlUnit = ({
       <Button
         buttonContent="⏸️ Pause"
         extraStyles={{ width: "16rem", top: "9rem" }}
-        secondaryClass={gameStatus !== STATUS.PLAYING && "btn--unclickable"}
+        secondaryClass={
+          gameStatus !== GAME_STATUS.PLAYING && "btn--unclickable"
+        }
         onClick={pauseGame}
       />
       <Button
         buttonContent="🔄 Restart"
         extraStyles={{ width: "16rem", top: "14rem" }}
-        secondaryClass={gameStatus !== STATUS.PAUSED && "btn--unclickable"}
+        secondaryClass={gameStatus !== GAME_STATUS.PAUSED && "btn--unclickable"}
         onClick={openConfirm}
       />
     </div>

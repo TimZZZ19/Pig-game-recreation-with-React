@@ -1,4 +1,4 @@
-import STATUS from "../../../mappings/STATUS";
+import GAME_STATUS from "../../../mappings/GAME_STATUS";
 import MODAL_ACTIONS from "../../../mappings/MODAL_ACTIONS";
 import Button from "../../reusables/Button";
 import styles from "./Confirm.module.css";
@@ -10,13 +10,13 @@ const Confirm = ({ modalDispatch, setGameStatus, initializeBoard }) => {
   };
 
   const restartGame = () => {
-    setGameStatus(STATUS.SETTING);
+    setGameStatus(GAME_STATUS.SETTING);
     initializeBoard();
     closeModal();
   };
 
   const cancelRestart = () => {
-    setGameStatus(STATUS.PAUSED);
+    setGameStatus(GAME_STATUS.PAUSED);
     closeModal();
   };
 

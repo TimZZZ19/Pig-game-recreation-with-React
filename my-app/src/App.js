@@ -4,36 +4,49 @@ import GameControlDiv from "./components/game_control/GameControlDiv";
 import Player from "./components/board/Player";
 import Game from "./components/board/Game";
 import styles from "./App.module.css";
-import ACTIONS from "./mappings/ACTIONS";
-import MODE from "./mappings/MODE";
+import PLAYER_ACTIONS from "./mappings/PLAYER_ACTIONS";
+import GAME_MODE from "./mappings/GAME_MODE";
 import GameModeIndicator from "./components/game_mode/GameModeIndicator";
 import Modal from "./components/modal/Modal";
-import STATUS from "./mappings/STATUS";
+import GAME_STATUS from "./mappings/GAME_STATUS";
 import MODAL_ACTIONS from "./mappings/MODAL_ACTIONS";
 import MODAL_CONTENT from "./mappings/MODAL_CONTENT";
 
+const gameReducer = (state, action) => {
+  switch (action.type) {
+  }
+};
+const gameInitialConfigs = {
+  gameStatus: GAME_STATUS.SETTING,
+  gameMode: GAME_MODE.UNSELECTED,
+  timer: "0:00",
+  race: 0,
+  diceHidden: true,
+  diceNumber: 1,
+};
+
 const playerAReducer = (state, action) => {
   switch (action.type) {
-    case ACTIONS.START_PLAYING:
+    case PLAYER_ACTIONS.START_PLAYING:
       return { ...state, isPlaying: true };
-    case ACTIONS.STOP_PLAYING:
+    case PLAYER_ACTIONS.STOP_PLAYING:
       return { ...state, isPlaying: false };
-    case ACTIONS.SET_ACCUMULATIVE_SCORE:
+    case PLAYER_ACTIONS.SET_ACCUMULATIVE_SCORE:
       return {
         ...state,
         accumulativeScore: state.accumulativeScore + state.currentScore,
       };
-    case ACTIONS.RESET_ACCUMULATIVE_SCORE:
+    case PLAYER_ACTIONS.RESET_ACCUMULATIVE_SCORE:
       return {
         ...state,
         accumulativeScore: 0,
       };
-    case ACTIONS.SET_CURRENT_SCORE:
+    case PLAYER_ACTIONS.SET_CURRENT_SCORE:
       return {
         ...state,
         currentScore: state.currentScore + action.payload,
       };
-    case ACTIONS.RESET_CURRENT_SCORE:
+    case PLAYER_ACTIONS.RESET_CURRENT_SCORE:
       return {
         ...state,
         currentScore: 0,
@@ -51,26 +64,26 @@ const playerAInitialConfigs = {
 
 const playerBReducer = (state, action) => {
   switch (action.type) {
-    case ACTIONS.START_PLAYING:
+    case PLAYER_ACTIONS.START_PLAYING:
       return { ...state, isPlaying: true };
-    case ACTIONS.STOP_PLAYING:
+    case PLAYER_ACTIONS.STOP_PLAYING:
       return { ...state, isPlaying: false };
-    case ACTIONS.SET_ACCUMULATIVE_SCORE:
+    case PLAYER_ACTIONS.SET_ACCUMULATIVE_SCORE:
       return {
         ...state,
         accumulativeScore: state.accumulativeScore + state.currentScore,
       };
-    case ACTIONS.RESET_ACCUMULATIVE_SCORE:
+    case PLAYER_ACTIONS.RESET_ACCUMULATIVE_SCORE:
       return {
         ...state,
         accumulativeScore: 0,
       };
-    case ACTIONS.SET_CURRENT_SCORE:
+    case PLAYER_ACTIONS.SET_CURRENT_SCORE:
       return {
         ...state,
         currentScore: state.currentScore + action.payload,
       };
-    case ACTIONS.RESET_CURRENT_SCORE:
+    case PLAYER_ACTIONS.RESET_CURRENT_SCORE:
       return {
         ...state,
         currentScore: 0,
@@ -115,16 +128,16 @@ const modalInitialConfigs = {
 
 function App() {
   // States
-  const [diceNumber, setDiceNumber] = useState(1);
+  const [gameState, gameDispatch] = useReducer(gameReducer, gameInitialConfigs);
+  const [gameStatus, setGameStatus] = useState(GAME_STATUS.SETTING);
+  const [gameMode, setGameMode] = useState(GAME_MODE.UNSELECTED);
   const [diceHidden, setDiceHidden] = useState(true);
-  const [gameMode, setGameMode] = useState(MODE.UNSELECTED);
-  const [gameStatus, setGameStatus] = useState(STATUS.SETTING);
+  const [diceNumber, setDiceNumber] = useState(1);
 
   const [playerAState, playerADispatch] = useReducer(
     playerAReducer,
     playerAInitialConfigs
   );
-
   const [playerBState, playerBDispatch] = useReducer(
     playerBReducer,
     playerBInitialConfigs
@@ -137,12 +150,12 @@ function App() {
 
   // Function for restarting the game
   const initializeBoard = () => {
-    playerADispatch({ type: ACTIONS.START_PLAYING });
-    playerBDispatch({ type: ACTIONS.STOP_PLAYING });
-    playerADispatch({ type: ACTIONS.RESET_ACCUMULATIVE_SCORE });
-    playerBDispatch({ type: ACTIONS.RESET_ACCUMULATIVE_SCORE });
-    playerADispatch({ type: ACTIONS.RESET_CURRENT_SCORE });
-    playerBDispatch({ type: ACTIONS.RESET_CURRENT_SCORE });
+    playerADispatch({ type: PLAYER_ACTIONS.START_PLAYING });
+    playerBDispatch({ type: PLAYER_ACTIONS.STOP_PLAYING });
+    playerADispatch({ type: PLAYER_ACTIONS.RESET_ACCUMULATIVE_SCORE });
+    playerBDispatch({ type: PLAYER_ACTIONS.RESET_ACCUMULATIVE_SCORE });
+    playerADispatch({ type: PLAYER_ACTIONS.RESET_CURRENT_SCORE });
+    playerBDispatch({ type: PLAYER_ACTIONS.RESET_CURRENT_SCORE });
     setDiceNumber(1);
     setDiceHidden(true);
   };

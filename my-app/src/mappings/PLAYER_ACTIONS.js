@@ -1,4 +1,4 @@
-const ACTIONS = {
+const PLAYER_ACTIONS = {
   START_PLAYING: "start palying",
   STOP_PLAYING: "stop playing",
   SET_ACCUMULATIVE_SCORE: "set accumulative score",
@@ -7,4 +7,4 @@ const ACTIONS = {
   RESET_CURRENT_SCORE: "reset current score",
 };
 
-export default ACTIONS;
+export default PLAYER_ACTIONS;

@@ -3,7 +3,7 @@ import styles from "./ControlPanel.module.css";
 import Button from "../reusables/Button";
 import ModeUnit from "./panel_units/ModeUnit";
 import ControlUnit from "./panel_units/ControlUnit";
-import STATUS from "../../mappings/STATUS";
+import GAME_STATUS from "../../mappings/GAME_STATUS";
 
 const ControlPanel = ({
   controlPanelShown,
@@ -19,16 +19,16 @@ const ControlPanel = ({
 }) => {
   let gameStatusText;
   switch (gameStatus) {
-    case STATUS.PLAYING:
+    case GAME_STATUS.PLAYING:
       gameStatusText = "🟢 playing";
       break;
-    case STATUS.PAUSED:
+    case GAME_STATUS.PAUSED:
       gameStatusText = "🔴 paused";
       break;
-    case STATUS.SETTING:
+    case GAME_STATUS.SETTING:
       gameStatusText = "🟠 setting";
       break;
-    case STATUS.FROZEN:
+    case GAME_STATUS.FROZEN:
       gameStatusText = "⏹️ frozen";
       break;
     default:

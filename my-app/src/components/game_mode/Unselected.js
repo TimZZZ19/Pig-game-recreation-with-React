@@ -1,12 +1,12 @@
 import React from "react";
 import styles from "./Unselected.module.css";
-import MODE from "../../mappings/MODE";
+import GAME_MODE from "../../mappings/GAME_MODE";
 
 const Unselected = ({ gameMode }) => {
   return (
     <p
       className={`${styles["unselected-text"]} ${
-        gameMode === MODE.WARNING && styles["warning"]
+        gameMode === GAME_MODE.WARNING && styles["warning"]
       }`}
     >
       Please choose your game mode

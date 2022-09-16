@@ -1,7 +1,7 @@
 import Button from "../reusables/Button";
 import Dice from "./Dice";
-import ACTIONS from "../../mappings/ACTIONS";
-import STATUS from "../../mappings/STATUS";
+import PLAYER_ACTIONS from "../../mappings/PLAYER_ACTIONS";
+import GAME_STATUS from "../../mappings/GAME_STATUS";
 
 const Game = ({
   playerAState,
@@ -15,14 +15,14 @@ const Game = ({
 }) => {
   // Helper functions
   const ResetAAndSwitchToB = () => {
-    playerADispatch({ type: ACTIONS.RESET_CURRENT_SCORE });
-    playerADispatch({ type: ACTIONS.STOP_PLAYING });
-    playerBDispatch({ type: ACTIONS.START_PLAYING });
+    playerADispatch({ type: PLAYER_ACTIONS.RESET_CURRENT_SCORE });
+    playerADispatch({ type: PLAYER_ACTIONS.STOP_PLAYING });
+    playerBDispatch({ type: PLAYER_ACTIONS.START_PLAYING });
   };
   const ResetBAndSwitchToA = () => {
-    playerBDispatch({ type: ACTIONS.RESET_CURRENT_SCORE });
-    playerADispatch({ type: ACTIONS.START_PLAYING });
-    playerBDispatch({ type: ACTIONS.STOP_PLAYING });
+    playerBDispatch({ type: PLAYER_ACTIONS.RESET_CURRENT_SCORE });
+    playerADispatch({ type: PLAYER_ACTIONS.START_PLAYING });
+    playerBDispatch({ type: PLAYER_ACTIONS.STOP_PLAYING });
   };
   const handleDiceResult = (diceResult) => {
     // 1. Reveal dice
@@ -40,7 +40,7 @@ const Game = ({
         ResetAAndSwitchToB();
       } else {
         playerADispatch({
-          type: ACTIONS.SET_CURRENT_SCORE,
+          type: PLAYER_ACTIONS.SET_CURRENT_SCORE,
           payload: diceResult,
         });
       }
@@ -50,7 +50,7 @@ const Game = ({
         ResetBAndSwitchToA();
       } else {
         playerBDispatch({
-          type: ACTIONS.SET_CURRENT_SCORE,
+          type: PLAYER_ACTIONS.SET_CURRENT_SCORE,
           payload: diceResult,
         });
       }
@@ -71,11 +71,11 @@ const Game = ({
     setDiceHidden(true);
     if (playerAState.isPlaying) {
       // if A is active, update score and switch to B.
-      playerADispatch({ type: ACTIONS.SET_ACCUMULATIVE_SCORE });
+      playerADispatch({ type: PLAYER_ACTIONS.SET_ACCUMULATIVE_SCORE });
       ResetAAndSwitchToB();
     } else {
       // if B is active, update score and switch to A.
-      playerBDispatch({ type: ACTIONS.SET_ACCUMULATIVE_SCORE });
+      playerBDispatch({ type: PLAYER_ACTIONS.SET_ACCUMULATIVE_SCORE });
       ResetBAndSwitchToA();
     }
   };
@@ -86,13 +86,17 @@ const Game = ({
       <Button
         buttonContent={"🎲 Roll"}
         extraStyles={{ width: "11rem", top: "39.3rem" }}
-        secondaryClass={gameStatus !== STATUS.PLAYING && "btn--unclickable"}
+        secondaryClass={
+          gameStatus !== GAME_STATUS.PLAYING && "btn--unclickable"
+        }
         onClick={rollClickHandler}
       />
       <Button
         buttonContent={"📥 Hold"}
         extraStyles={{ width: "11rem", top: "46.1rem" }}
-        secondaryClass={gameStatus !== STATUS.PLAYING && "btn--unclickable"}
+        secondaryClass={
+          gameStatus !== GAME_STATUS.PLAYING && "btn--unclickable"
+        }
         onClick={holdClickHandler}
       />
     </>

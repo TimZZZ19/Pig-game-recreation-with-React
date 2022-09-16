@@ -1,9 +1,9 @@
 import React from "react";
 import styles from "./ModeUnit.module.css";
 import Button from "../../reusables/Button";
-import MODE from "../../../mappings/MODE";
+import GAME_MODE from "../../../mappings/GAME_MODE";
 import UnitTitle from "../../reusables/UnitTitle";
-import STATUS from "../../../mappings/STATUS";
+import GAME_STATUS from "../../../mappings/GAME_STATUS";
 
 const ModeUnit = ({ gameMode, gameStatus, openTimePicker, openRacePicker }) => {
   return (
@@ -12,15 +12,15 @@ const ModeUnit = ({ gameMode, gameStatus, openTimePicker, openRacePicker }) => {
       <Button
         buttonContent="⏲ Timer"
         extraStyles={{ width: "16rem", top: "4rem" }}
-        secondaryClass={gameMode === MODE.TIMER && "btn--selected"}
-        tertiaryClass={gameStatus !== STATUS.SETTING && "btn--unclickable"}
+        secondaryClass={gameMode === GAME_MODE.TIMER && "btn--selected"}
+        tertiaryClass={gameStatus !== GAME_STATUS.SETTING && "btn--unclickable"}
         onClick={openTimePicker}
       />
       <Button
         buttonContent="🏃‍♂️ Race"
         extraStyles={{ width: "16rem", top: "9rem" }}
-        secondaryClass={gameMode === MODE.RACE && "btn--selected"}
-        tertiaryClass={gameStatus !== STATUS.SETTING && "btn--unclickable"}
+        secondaryClass={gameMode === GAME_MODE.RACE && "btn--selected"}
+        tertiaryClass={gameStatus !== GAME_STATUS.SETTING && "btn--unclickable"}
         onClick={openRacePicker}
       />
     </div>

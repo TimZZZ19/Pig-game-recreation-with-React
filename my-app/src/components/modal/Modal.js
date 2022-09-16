@@ -6,7 +6,7 @@ import Result from "./modal_contents/Result";
 import Confirm from "./modal_contents/Confirm";
 import TimePicker from "./modal_contents/TimePicker";
 import RacePicker from "./modal_contents/RacePicker";
-import STATUS from "../../mappings/STATUS";
+import GAME_STATUS from "../../mappings/GAME_STATUS";
 import MODAL_ACTIONS from "../../mappings/MODAL_ACTIONS";
 
 const Modal = ({
@@ -20,7 +20,7 @@ const Modal = ({
   if (!modalOpen) return null;
 
   const closeModal = () => {
-    setGameStatus(STATUS.SETTING);
+    setGameStatus(GAME_STATUS.SETTING);
     modalDispatch({ type: MODAL_ACTIONS.CLOSE_MODAL });
   };
 

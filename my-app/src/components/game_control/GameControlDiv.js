@@ -4,8 +4,8 @@ import ControlPanel from "./ControlPanel";
 import Button from "../reusables/Button";
 import MODAL_ACTIONS from "../../mappings/MODAL_ACTIONS";
 import PushBack from "../reusables/PushBack";
-import MODE from "../../mappings/MODE";
-import STATUS from "../../mappings/STATUS";
+import GAME_MODE from "../../mappings/GAME_MODE";
+import GAME_STATUS from "../../mappings/GAME_STATUS";
 
 const GameControlDiv = ({
   gameMode,
@@ -17,19 +17,19 @@ const GameControlDiv = ({
   const [controlPanelShown, setControlPanelShown] = useState(true);
 
   const openModal = () => {
-    setGameStatus(STATUS.FROZEN);
+    setGameStatus(GAME_STATUS.FROZEN);
     modalDispatch({ type: MODAL_ACTIONS.OPEN_MODAL });
   };
 
   const handleExpandButton = () => setControlPanelShown((curr) => !curr);
 
   const startGame = () => {
-    if (gameMode === MODE.WARNING) return;
-    if (gameMode === MODE.UNSELECTED) {
-      setGameMode(MODE.WARNING);
+    if (gameMode === GAME_MODE.WARNING) return;
+    if (gameMode === GAME_MODE.UNSELECTED) {
+      setGameMode(GAME_MODE.WARNING);
 
       setTimeout(() => {
-        setGameMode(MODE.UNSELECTED);
+        setGameMode(GAME_MODE.UNSELECTED);
       }, 1000);
 
       return;
@@ -44,10 +44,10 @@ const GameControlDiv = ({
       modalDispatch({ type: MODAL_ACTIONS.CLOSE_MODAL });
     });
 
-    PushBack(() => setGameStatus(STATUS.PLAYING));
+    PushBack(() => setGameStatus(GAME_STATUS.PLAYING));
   };
 
-  const pauseGame = () => setGameStatus(STATUS.PAUSED);
+  const pauseGame = () => setGameStatus(GAME_STATUS.PAUSED);
 
   const openConfirm = () => {
     openModal();

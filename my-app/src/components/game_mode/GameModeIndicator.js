@@ -1,23 +1,23 @@
 import React from "react";
 import Timer from "./Timer";
 import Race from "./Race";
-import MODE from "../../mappings/MODE";
+import GAME_MODE from "../../mappings/GAME_MODE";
 import Unselected from "./Unselected";
 import styles from "./GameModeIndicator.module.css";
 
 const GameModeIndicator = ({ gameMode }) => {
   let mode;
   switch (gameMode) {
-    case MODE.UNSELECTED:
+    case GAME_MODE.UNSELECTED:
       mode = <Unselected gameMode={gameMode} />;
       break;
-    case MODE.WARNING:
+    case GAME_MODE.WARNING:
       mode = <Unselected gameMode={gameMode} />;
       break;
-    case MODE.TIMER:
+    case GAME_MODE.TIMER:
       mode = <Timer />;
       break;
-    case MODE.RACE:
+    case GAME_MODE.RACE:
       mode = <Race />;
       break;
     default:
@@ -27,7 +27,7 @@ const GameModeIndicator = ({ gameMode }) => {
   return (
     <div
       className={`${styles["mode-container"]} ${
-        gameMode === MODE.WARNING && styles["warning"]
+        gameMode === GAME_MODE.WARNING && styles["warning"]
       }`}
     >
       {mode}

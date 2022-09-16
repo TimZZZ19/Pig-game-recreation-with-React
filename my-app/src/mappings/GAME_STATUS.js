@@ -1,8 +1,8 @@
-const STATUS = {
+const GAME_STATUS = {
   PLAYING: "playing",
   PAUSED: "paused",
   SETTING: "setting",
   FROZEN: "frozen",
 };
 
-export default STATUS;
+export default GAME_STATUS;
