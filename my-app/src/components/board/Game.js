@@ -3,7 +3,7 @@ import Dice from "./Dice";
 import ACTIONS from "../../mappings/ACTIONS";
 import STATUS from "../../mappings/STATUS";
 
-const Play = ({
+const Game = ({
   playerAState,
   playerADispatch,
   playerBDispatch,
@@ -99,4 +99,4 @@ const Play = ({
   );
 };
 
-export default Play;
+export default Game;

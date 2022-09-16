@@ -2,7 +2,7 @@ import { useState, useReducer } from "react";
 import Board from "./components/board/Board";
 import GameControlDiv from "./components/game_control/GameControlDiv";
 import Player from "./components/board/Player";
-import Play from "./components/board/Play";
+import Game from "./components/board/Game";
 import styles from "./App.module.css";
 import ACTIONS from "./mappings/ACTIONS";
 import MODE from "./mappings/MODE";
@@ -118,6 +118,7 @@ function App() {
   const [diceNumber, setDiceNumber] = useState(1);
   const [diceHidden, setDiceHidden] = useState(true);
   const [gameMode, setGameMode] = useState(MODE.UNSELECTED);
+  const [gameStatus, setGameStatus] = useState(STATUS.SETTING);
 
   const [playerAState, playerADispatch] = useReducer(
     playerAReducer,
@@ -128,8 +129,6 @@ function App() {
     playerBReducer,
     playerBInitialConfigs
   );
-
-  const [gameStatus, setGameStatus] = useState(STATUS.SETTING);
 
   const [modalState, modalDispatch] = useReducer(
     modalReducer,
@@ -170,7 +169,7 @@ function App() {
           playerScore={playerBState.accumulativeScore}
           currScore={playerBState.currentScore}
         />
-        <Play
+        <Game
           playerAState={playerAState}
           playerADispatch={playerADispatch}
           playerBDispatch={playerBDispatch}
