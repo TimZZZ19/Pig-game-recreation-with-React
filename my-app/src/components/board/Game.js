@@ -11,7 +11,7 @@ const Game = ({
   setDiceNumber,
   diceHidden,
   setDiceHidden,
-  gameStatus,
+  gameState,
 }) => {
   // Helper functions
   const ResetAAndSwitchToB = () => {
@@ -87,7 +87,7 @@ const Game = ({
         buttonContent={"🎲 Roll"}
         extraStyles={{ width: "11rem", top: "39.3rem" }}
         secondaryClass={
-          gameStatus !== GAME_STATUS.PLAYING && "btn--unclickable"
+          gameState.gameState !== GAME_STATUS.PLAYING && "btn--unclickable"
         }
         onClick={rollClickHandler}
       />
@@ -95,7 +95,7 @@ const Game = ({
         buttonContent={"📥 Hold"}
         extraStyles={{ width: "11rem", top: "46.1rem" }}
         secondaryClass={
-          gameStatus !== GAME_STATUS.PLAYING && "btn--unclickable"
+          gameState.gameState !== GAME_STATUS.PLAYING && "btn--unclickable"
         }
         onClick={holdClickHandler}
       />

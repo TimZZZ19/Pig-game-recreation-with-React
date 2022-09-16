@@ -1,19 +1,38 @@
 import { useState, useReducer } from "react";
+
+//components
 import Board from "./components/board/Board";
 import GameControlDiv from "./components/game_control/GameControlDiv";
 import Player from "./components/board/Player";
 import Game from "./components/board/Game";
 import styles from "./App.module.css";
-import PLAYER_ACTIONS from "./mappings/PLAYER_ACTIONS";
-import GAME_MODE from "./mappings/GAME_MODE";
 import GameModeIndicator from "./components/game_mode/GameModeIndicator";
 import Modal from "./components/modal/Modal";
+
+//mappings
+import GAME_ACTIONS from "./mappings/GAME_ACTIONS";
+import PLAYER_ACTIONS from "./mappings/PLAYER_ACTIONS";
+import GAME_MODE from "./mappings/GAME_MODE";
 import GAME_STATUS from "./mappings/GAME_STATUS";
 import MODAL_ACTIONS from "./mappings/MODAL_ACTIONS";
 import MODAL_CONTENT from "./mappings/MODAL_CONTENT";
 
 const gameReducer = (state, action) => {
   switch (action.type) {
+    case GAME_ACTIONS.CHANGE_GAME_STATUS:
+      return { ...state, gameStatus: action.payload };
+    case GAME_ACTIONS.CHANGE_GAME_MODE:
+      return { ...state, gameMode: action.payload };
+    case GAME_ACTIONS.SET_TIMER:
+      return { ...state };
+    case GAME_ACTIONS.SET_RACE:
+      return { ...state };
+    case GAME_ACTIONS.HIDE_DICE:
+      return { ...state, diceHidden: true };
+    case GAME_ACTIONS.UNHIDE_DICE:
+      return { ...state, diceHidden: false };
+    default:
+      throw new Error();
   }
 };
 const gameInitialConfigs = {
@@ -129,7 +148,6 @@ const modalInitialConfigs = {
 function App() {
   // States
   const [gameState, gameDispatch] = useReducer(gameReducer, gameInitialConfigs);
-  const [gameStatus, setGameStatus] = useState(GAME_STATUS.SETTING);
   const [gameMode, setGameMode] = useState(GAME_MODE.UNSELECTED);
   const [diceHidden, setDiceHidden] = useState(true);
   const [diceNumber, setDiceNumber] = useState(1);
@@ -166,10 +184,10 @@ function App() {
       <Modal
         modalState={modalState}
         modalDispatch={modalDispatch}
-        setGameStatus={setGameStatus}
+        gameDispatch={gameDispatch}
         initializeBoard={initializeBoard}
       />
-      <Board gameStatus={gameStatus}>
+      <Board gameState={gameState}>
         <Player
           player={playerAState.name}
           playerStatus={playerAState.isPlaying}
@@ -190,14 +208,14 @@ function App() {
           setDiceNumber={setDiceNumber}
           diceHidden={diceHidden}
           setDiceHidden={setDiceHidden}
-          gameStatus={gameStatus}
+          gameState={gameState}
         />
       </Board>
       <GameControlDiv
         gameMode={gameMode}
         setGameMode={setGameMode}
-        gameStatus={gameStatus}
-        setGameStatus={setGameStatus}
+        gameState={gameState}
+        gameDispatch={gameDispatch}
         modalDispatch={modalDispatch}
       />
     </div>

@@ -10,15 +10,14 @@ const ControlPanel = ({
   handleExpandButton,
   startGame,
   gameMode,
-  setGameMode,
-  gameStatus,
+  gameState,
   pauseGame,
   openConfirm,
   openTimePicker,
   openRacePicker,
 }) => {
   let gameStatusText;
-  switch (gameStatus) {
+  switch (gameState.gameStatus) {
     case GAME_STATUS.PLAYING:
       gameStatusText = "🟢 playing";
       break;
@@ -50,14 +49,14 @@ const ControlPanel = ({
 
       <ModeUnit
         gameMode={gameMode}
-        gameStatus={gameStatus}
+        gameState={gameState}
         openTimePicker={openTimePicker}
         openRacePicker={openRacePicker}
       />
 
       <ControlUnit
         gameMode={gameMode}
-        gameStatus={gameStatus}
+        gameState={gameState}
         startGame={startGame}
         pauseGame={pauseGame}
         openConfirm={openConfirm}

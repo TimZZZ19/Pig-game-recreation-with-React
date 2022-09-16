@@ -5,7 +5,7 @@ import GAME_MODE from "../../../mappings/GAME_MODE";
 import UnitTitle from "../../reusables/UnitTitle";
 import GAME_STATUS from "../../../mappings/GAME_STATUS";
 
-const ModeUnit = ({ gameMode, gameStatus, openTimePicker, openRacePicker }) => {
+const ModeUnit = ({ gameMode, gameState, openTimePicker, openRacePicker }) => {
   return (
     <div className={styles["mode-unit"]}>
       <UnitTitle title={"game mode"} />
@@ -13,14 +13,18 @@ const ModeUnit = ({ gameMode, gameStatus, openTimePicker, openRacePicker }) => {
         buttonContent="⏲ Timer"
         extraStyles={{ width: "16rem", top: "4rem" }}
         secondaryClass={gameMode === GAME_MODE.TIMER && "btn--selected"}
-        tertiaryClass={gameStatus !== GAME_STATUS.SETTING && "btn--unclickable"}
+        tertiaryClass={
+          gameState.gameStatus !== GAME_STATUS.SETTING && "btn--unclickable"
+        }
         onClick={openTimePicker}
       />
       <Button
         buttonContent="🏃‍♂️ Race"
         extraStyles={{ width: "16rem", top: "9rem" }}
         secondaryClass={gameMode === GAME_MODE.RACE && "btn--selected"}
-        tertiaryClass={gameStatus !== GAME_STATUS.SETTING && "btn--unclickable"}
+        tertiaryClass={
+          gameState.gameStatus !== GAME_STATUS.SETTING && "btn--unclickable"
+        }
         onClick={openRacePicker}
       />
     </div>

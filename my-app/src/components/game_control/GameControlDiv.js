@@ -2,22 +2,27 @@ import { useState } from "react";
 import styles from "./GameControlDiv.module.css";
 import ControlPanel from "./ControlPanel";
 import Button from "../reusables/Button";
-import MODAL_ACTIONS from "../../mappings/MODAL_ACTIONS";
 import PushBack from "../reusables/PushBack";
+
+import GAME_ACTIONS from "../../mappings/GAME_ACTIONS";
+import MODAL_ACTIONS from "../../mappings/MODAL_ACTIONS";
 import GAME_MODE from "../../mappings/GAME_MODE";
 import GAME_STATUS from "../../mappings/GAME_STATUS";
 
 const GameControlDiv = ({
   gameMode,
   setGameMode,
-  gameStatus,
-  setGameStatus,
+  gameState,
+  gameDispatch,
   modalDispatch,
 }) => {
   const [controlPanelShown, setControlPanelShown] = useState(true);
 
   const openModal = () => {
-    setGameStatus(GAME_STATUS.FROZEN);
+    gameDispatch({
+      type: GAME_ACTIONS.CHANGE_GAME_STATUS,
+      payload: GAME_STATUS.FROZEN,
+    });
     modalDispatch({ type: MODAL_ACTIONS.OPEN_MODAL });
   };
 
@@ -44,10 +49,19 @@ const GameControlDiv = ({
       modalDispatch({ type: MODAL_ACTIONS.CLOSE_MODAL });
     });
 
-    PushBack(() => setGameStatus(GAME_STATUS.PLAYING));
+    PushBack(() =>
+      gameDispatch({
+        type: GAME_ACTIONS.CHANGE_GAME_STATUS,
+        payload: GAME_STATUS.PLAYING,
+      })
+    );
   };
 
-  const pauseGame = () => setGameStatus(GAME_STATUS.PAUSED);
+  const pauseGame = () =>
+    gameDispatch({
+      type: GAME_ACTIONS.CHANGE_GAME_STATUS,
+      payload: GAME_STATUS.PAUSED,
+    });
 
   const openConfirm = () => {
     openModal();
@@ -76,7 +90,7 @@ const GameControlDiv = ({
         handleExpandButton={handleExpandButton}
         startGame={startGame}
         gameMode={gameMode}
-        gameStatus={gameStatus}
+        gameState={gameState}
         pauseGame={pauseGame}
         openConfirm={openConfirm}
         openTimePicker={openTimePicker}

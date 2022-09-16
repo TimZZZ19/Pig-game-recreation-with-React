@@ -1,22 +1,30 @@
-import GAME_STATUS from "../../../mappings/GAME_STATUS";
-import MODAL_ACTIONS from "../../../mappings/MODAL_ACTIONS";
 import Button from "../../reusables/Button";
 import styles from "./Confirm.module.css";
 
-const Confirm = ({ modalDispatch, setGameStatus, initializeBoard }) => {
+import GAME_ACTIONS from "../../../mappings/GAME_ACTIONS";
+import GAME_STATUS from "../../../mappings/GAME_STATUS";
+import MODAL_ACTIONS from "../../../mappings/MODAL_ACTIONS";
+
+const Confirm = ({ modalDispatch, gameDispatch, initializeBoard }) => {
   const closeModal = () => {
     modalDispatch({ type: MODAL_ACTIONS.CHANGE_TO_NULL });
     modalDispatch({ type: MODAL_ACTIONS.CLOSE_MODAL });
   };
 
   const restartGame = () => {
-    setGameStatus(GAME_STATUS.SETTING);
+    gameDispatch({
+      type: GAME_ACTIONS.CHANGE_GAME_STATUS,
+      payload: GAME_STATUS.SETTING,
+    });
     initializeBoard();
     closeModal();
   };
 
   const cancelRestart = () => {
-    setGameStatus(GAME_STATUS.PAUSED);
+    gameDispatch({
+      type: GAME_ACTIONS.CHANGE_GAME_STATUS,
+      payload: GAME_STATUS.PAUSED,
+    });
     closeModal();
   };
 

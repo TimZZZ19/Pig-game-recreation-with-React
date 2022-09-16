@@ -7,13 +7,14 @@ import GAME_MODE from "../../../mappings/GAME_MODE";
 
 const ControlUnit = ({
   gameMode,
-  gameStatus,
+  gameState,
   startGame,
   pauseGame,
   openConfirm,
 }) => {
   const startBtnText =
-    gameMode === GAME_MODE.UNSELECTED || gameStatus === GAME_STATUS.SETTING
+    gameMode === GAME_MODE.UNSELECTED ||
+    gameState.gameStatus === GAME_STATUS.SETTING
       ? "▶️ Start"
       : "▶️ Resume";
 
@@ -24,8 +25,8 @@ const ControlUnit = ({
         buttonContent={`${startBtnText}`}
         extraStyles={{ width: "16rem", top: "4rem" }}
         secondaryClass={
-          (gameStatus === GAME_STATUS.PLAYING ||
-            gameStatus === GAME_STATUS.FROZEN) &&
+          (gameState.gameStatus === GAME_STATUS.PLAYING ||
+            gameState.gameStatus === GAME_STATUS.FROZEN) &&
           "btn--unclickable"
         }
         onClick={startGame}
@@ -34,14 +35,16 @@ const ControlUnit = ({
         buttonContent="⏸️ Pause"
         extraStyles={{ width: "16rem", top: "9rem" }}
         secondaryClass={
-          gameStatus !== GAME_STATUS.PLAYING && "btn--unclickable"
+          gameState.gameStatus !== GAME_STATUS.PLAYING && "btn--unclickable"
         }
         onClick={pauseGame}
       />
       <Button
         buttonContent="🔄 Restart"
         extraStyles={{ width: "16rem", top: "14rem" }}
-        secondaryClass={gameStatus !== GAME_STATUS.PAUSED && "btn--unclickable"}
+        secondaryClass={
+          gameState.gameStatus !== GAME_STATUS.PAUSED && "btn--unclickable"
+        }
         onClick={openConfirm}
       />
     </div>

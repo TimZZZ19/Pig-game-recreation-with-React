@@ -1,18 +1,20 @@
 import React from "react";
 import styles from "./Modal.module.css";
 import CountDown from "./modal_contents/CountDown";
-import MODAL_CONTENT from "../../mappings/MODAL_CONTENT";
 import Result from "./modal_contents/Result";
 import Confirm from "./modal_contents/Confirm";
 import TimePicker from "./modal_contents/TimePicker";
 import RacePicker from "./modal_contents/RacePicker";
+
+import GAME_ACTIONS from "../../mappings/GAME_ACTIONS";
+import MODAL_CONTENT from "../../mappings/MODAL_CONTENT";
 import GAME_STATUS from "../../mappings/GAME_STATUS";
 import MODAL_ACTIONS from "../../mappings/MODAL_ACTIONS";
 
 const Modal = ({
   modalState,
   modalDispatch,
-  setGameStatus,
+  gameDispatch,
   initializeBoard,
 }) => {
   const { modalOpen, modalContent } = modalState;
@@ -20,7 +22,10 @@ const Modal = ({
   if (!modalOpen) return null;
 
   const closeModal = () => {
-    setGameStatus(GAME_STATUS.SETTING);
+    gameDispatch({
+      type: GAME_ACTIONS.CHANGE_GAME_STATUS,
+      payload: GAME_STATUS.SETTING,
+    });
     modalDispatch({ type: MODAL_ACTIONS.CLOSE_MODAL });
   };
 
@@ -36,7 +41,7 @@ const Modal = ({
       content = (
         <Confirm
           modalDispatch={modalDispatch}
-          setGameStatus={setGameStatus}
+          gameDispatch={gameDispatch}
           initializeBoard={initializeBoard}
         />
       );
