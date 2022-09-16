@@ -9,13 +9,7 @@ import MODAL_ACTIONS from "../../mappings/MODAL_ACTIONS";
 import GAME_MODE from "../../mappings/GAME_MODE";
 import GAME_STATUS from "../../mappings/GAME_STATUS";
 
-const GameControlDiv = ({
-  gameMode,
-  setGameMode,
-  gameState,
-  gameDispatch,
-  modalDispatch,
-}) => {
+const GameControlDiv = ({ gameState, gameDispatch, modalDispatch }) => {
   const [controlPanelShown, setControlPanelShown] = useState(true);
 
   const openModal = () => {
@@ -29,12 +23,18 @@ const GameControlDiv = ({
   const handleExpandButton = () => setControlPanelShown((curr) => !curr);
 
   const startGame = () => {
-    if (gameMode === GAME_MODE.WARNING) return;
-    if (gameMode === GAME_MODE.UNSELECTED) {
-      setGameMode(GAME_MODE.WARNING);
+    if (gameState.gameMode === GAME_MODE.WARNING) return;
+    if (gameState.gameMode === GAME_MODE.UNSELECTED) {
+      gameDispatch({
+        type: GAME_ACTIONS.CHANGE_GAME_MODE,
+        payload: GAME_MODE.WARNING,
+      });
 
       setTimeout(() => {
-        setGameMode(GAME_MODE.UNSELECTED);
+        gameDispatch({
+          type: GAME_ACTIONS.CHANGE_GAME_MODE,
+          payload: GAME_MODE.UNSELECTED,
+        });
       }, 1000);
 
       return;
@@ -89,7 +89,6 @@ const GameControlDiv = ({
         controlPanelShown={controlPanelShown}
         handleExpandButton={handleExpandButton}
         startGame={startGame}
-        gameMode={gameMode}
         gameState={gameState}
         pauseGame={pauseGame}
         openConfirm={openConfirm}

@@ -148,7 +148,6 @@ const modalInitialConfigs = {
 function App() {
   // States
   const [gameState, gameDispatch] = useReducer(gameReducer, gameInitialConfigs);
-  const [gameMode, setGameMode] = useState(GAME_MODE.UNSELECTED);
   const [diceHidden, setDiceHidden] = useState(true);
   const [diceNumber, setDiceNumber] = useState(1);
 
@@ -180,7 +179,7 @@ function App() {
 
   return (
     <div className={styles.app}>
-      <GameModeIndicator gameMode={gameMode} />
+      <GameModeIndicator gameState={gameState} />
       <Modal
         modalState={modalState}
         modalDispatch={modalDispatch}
@@ -212,8 +211,6 @@ function App() {
         />
       </Board>
       <GameControlDiv
-        gameMode={gameMode}
-        setGameMode={setGameMode}
         gameState={gameState}
         gameDispatch={gameDispatch}
         modalDispatch={modalDispatch}

@@ -9,7 +9,6 @@ const ControlPanel = ({
   controlPanelShown,
   handleExpandButton,
   startGame,
-  gameMode,
   gameState,
   pauseGame,
   openConfirm,
@@ -48,14 +47,12 @@ const ControlPanel = ({
       />
 
       <ModeUnit
-        gameMode={gameMode}
         gameState={gameState}
         openTimePicker={openTimePicker}
         openRacePicker={openRacePicker}
       />
 
       <ControlUnit
-        gameMode={gameMode}
         gameState={gameState}
         startGame={startGame}
         pauseGame={pauseGame}

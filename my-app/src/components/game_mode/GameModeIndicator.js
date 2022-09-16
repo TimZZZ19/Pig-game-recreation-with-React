@@ -5,14 +5,14 @@ import GAME_MODE from "../../mappings/GAME_MODE";
 import Unselected from "./Unselected";
 import styles from "./GameModeIndicator.module.css";
 
-const GameModeIndicator = ({ gameMode }) => {
+const GameModeIndicator = ({ gameState }) => {
   let mode;
-  switch (gameMode) {
+  switch (gameState.gameMode) {
     case GAME_MODE.UNSELECTED:
-      mode = <Unselected gameMode={gameMode} />;
+      mode = <Unselected gameState={gameState} />;
       break;
     case GAME_MODE.WARNING:
-      mode = <Unselected gameMode={gameMode} />;
+      mode = <Unselected gameState={gameState} />;
       break;
     case GAME_MODE.TIMER:
       mode = <Timer />;
@@ -27,7 +27,7 @@ const GameModeIndicator = ({ gameMode }) => {
   return (
     <div
       className={`${styles["mode-container"]} ${
-        gameMode === GAME_MODE.WARNING && styles["warning"]
+        gameState.gameMode === GAME_MODE.WARNING && styles["warning"]
       }`}
     >
       {mode}

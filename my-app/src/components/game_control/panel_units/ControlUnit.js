@@ -5,15 +5,9 @@ import UnitTitle from "../../reusables/UnitTitle";
 import GAME_STATUS from "../../../mappings/GAME_STATUS";
 import GAME_MODE from "../../../mappings/GAME_MODE";
 
-const ControlUnit = ({
-  gameMode,
-  gameState,
-  startGame,
-  pauseGame,
-  openConfirm,
-}) => {
+const ControlUnit = ({ gameState, startGame, pauseGame, openConfirm }) => {
   const startBtnText =
-    gameMode === GAME_MODE.UNSELECTED ||
+    gameState.gameMode === GAME_MODE.UNSELECTED ||
     gameState.gameStatus === GAME_STATUS.SETTING
       ? "▶️ Start"
       : "▶️ Resume";
