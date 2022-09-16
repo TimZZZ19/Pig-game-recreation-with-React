@@ -31,6 +31,8 @@ const gameReducer = (state, action) => {
       return { ...state, diceHidden: true };
     case GAME_ACTIONS.UNHIDE_DICE:
       return { ...state, diceHidden: false };
+    case GAME_ACTIONS.SET_DICE_NUMBER:
+      return { ...state, diceNumber: action.payload };
     default:
       throw new Error();
   }
@@ -148,7 +150,6 @@ const modalInitialConfigs = {
 function App() {
   // States
   const [gameState, gameDispatch] = useReducer(gameReducer, gameInitialConfigs);
-  const [diceNumber, setDiceNumber] = useState(1);
 
   const [playerAState, playerADispatch] = useReducer(
     playerAReducer,
@@ -173,7 +174,8 @@ function App() {
     playerADispatch({ type: PLAYER_ACTIONS.RESET_CURRENT_SCORE });
     playerBDispatch({ type: PLAYER_ACTIONS.RESET_CURRENT_SCORE });
     gameDispatch({ type: GAME_ACTIONS.HIDE_DICE });
-    setDiceNumber(1);
+    gameDispatch({ type: GAME_ACTIONS.SET_DICE_NUMBER, payload: 1 });
+    // gameDispatch({type:GAME_ACTIONS.})
   };
 
   return (
@@ -202,9 +204,8 @@ function App() {
           playerAState={playerAState}
           playerADispatch={playerADispatch}
           playerBDispatch={playerBDispatch}
-          diceNumber={diceNumber}
-          setDiceNumber={setDiceNumber}
           gameState={gameState}
+          gameDispatch={gameDispatch}
         />
       </Board>
       <GameControlDiv

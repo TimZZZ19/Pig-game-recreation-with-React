@@ -8,9 +8,8 @@ const Game = ({
   playerAState,
   playerADispatch,
   playerBDispatch,
-  diceNumber,
-  setDiceNumber,
   gameState,
+  gameDispatch,
 }) => {
   // Helper functions
   const ResetAAndSwitchToB = () => {
@@ -28,7 +27,7 @@ const Game = ({
     gameState({ type: GAME_ACTIONS.UNHIDE_DICE });
 
     // 2. Update the displayed dice image according to this result.
-    setDiceNumber(diceResult);
+    gameDispatch({ type: GAME_ACTIONS.SET_DICE_NUMBER, payload: diceResult });
 
     // 3. Update the displayed current score.
 
@@ -81,7 +80,7 @@ const Game = ({
 
   return (
     <>
-      <Dice diceNumber={diceNumber} hideDice={gameState.diceHidden} />
+      <Dice diceNumber={gameState.diceNumber} hideDice={gameState.diceHidden} />
       <Button
         buttonContent={"🎲 Roll"}
         extraStyles={{ width: "11rem", top: "39.3rem" }}

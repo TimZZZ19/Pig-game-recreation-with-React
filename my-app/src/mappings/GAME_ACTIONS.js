@@ -5,5 +5,6 @@ const GAME_ACTIONS = {
   SET_RACE: "set race",
   HIDE_DICE: "hide dice",
   UNHIDE_DICE: "unhide dice",
+  SET_DICE_NUMBER: "set dice number",
 };
 export default GAME_ACTIONS;
