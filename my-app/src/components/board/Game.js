@@ -2,6 +2,7 @@ import Button from "../reusables/Button";
 import Dice from "./Dice";
 import PLAYER_ACTIONS from "../../mappings/PLAYER_ACTIONS";
 import GAME_STATUS from "../../mappings/GAME_STATUS";
+import GAME_ACTIONS from "../../mappings/GAME_ACTIONS";
 
 const Game = ({
   playerAState,
@@ -9,8 +10,6 @@ const Game = ({
   playerBDispatch,
   diceNumber,
   setDiceNumber,
-  diceHidden,
-  setDiceHidden,
   gameState,
 }) => {
   // Helper functions
@@ -26,7 +25,7 @@ const Game = ({
   };
   const handleDiceResult = (diceResult) => {
     // 1. Reveal dice
-    setDiceHidden(false);
+    gameState({ type: GAME_ACTIONS.UNHIDE_DICE });
 
     // 2. Update the displayed dice image according to this result.
     setDiceNumber(diceResult);
@@ -68,7 +67,7 @@ const Game = ({
 
   // When Hold is clicked on,
   const holdClickHandler = () => {
-    setDiceHidden(true);
+    gameState({ type: GAME_ACTIONS.HIDE_DICE });
     if (playerAState.isPlaying) {
       // if A is active, update score and switch to B.
       playerADispatch({ type: PLAYER_ACTIONS.SET_ACCUMULATIVE_SCORE });
@@ -82,7 +81,7 @@ const Game = ({
 
   return (
     <>
-      <Dice diceNumber={diceNumber} hideDice={diceHidden} />
+      <Dice diceNumber={diceNumber} hideDice={gameState.diceHidden} />
       <Button
         buttonContent={"🎲 Roll"}
         extraStyles={{ width: "11rem", top: "39.3rem" }}

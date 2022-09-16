@@ -148,7 +148,6 @@ const modalInitialConfigs = {
 function App() {
   // States
   const [gameState, gameDispatch] = useReducer(gameReducer, gameInitialConfigs);
-  const [diceHidden, setDiceHidden] = useState(true);
   const [diceNumber, setDiceNumber] = useState(1);
 
   const [playerAState, playerADispatch] = useReducer(
@@ -173,8 +172,8 @@ function App() {
     playerBDispatch({ type: PLAYER_ACTIONS.RESET_ACCUMULATIVE_SCORE });
     playerADispatch({ type: PLAYER_ACTIONS.RESET_CURRENT_SCORE });
     playerBDispatch({ type: PLAYER_ACTIONS.RESET_CURRENT_SCORE });
+    gameDispatch({ type: GAME_ACTIONS.HIDE_DICE });
     setDiceNumber(1);
-    setDiceHidden(true);
   };
 
   return (
@@ -205,8 +204,6 @@ function App() {
           playerBDispatch={playerBDispatch}
           diceNumber={diceNumber}
           setDiceNumber={setDiceNumber}
-          diceHidden={diceHidden}
-          setDiceHidden={setDiceHidden}
           gameState={gameState}
         />
       </Board>
