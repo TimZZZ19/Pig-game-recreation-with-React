@@ -56,6 +56,7 @@ const ControlPanel = ({
       />
 
       <ControlUnit
+        gameMode={gameMode}
         gameStatus={gameStatus}
         startGame={startGame}
         pauseGame={pauseGame}

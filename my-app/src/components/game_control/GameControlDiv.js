@@ -16,6 +16,11 @@ const GameControlDiv = ({
 }) => {
   const [controlPanelShown, setControlPanelShown] = useState(true);
 
+  const openModal = () => {
+    setGameStatus(STATUS.FROZEN);
+    modalDispatch({ type: MODAL_ACTIONS.OPEN_MODAL });
+  };
+
   const handleExpandButton = () => setControlPanelShown((curr) => !curr);
 
   const startGame = () => {
@@ -30,10 +35,7 @@ const GameControlDiv = ({
       return;
     }
 
-    setGameStatus(STATUS.FROZEN);
-
-    // Open modal and start counting down
-    modalDispatch({ type: MODAL_ACTIONS.OPEN_MODAL });
+    openModal();
     modalDispatch({ type: MODAL_ACTIONS.CHANGE_TO_COUNTDOWN });
 
     // Reset modal content to null and close modal
@@ -48,24 +50,18 @@ const GameControlDiv = ({
   const pauseGame = () => setGameStatus(STATUS.PAUSED);
 
   const openConfirm = () => {
-    setGameStatus(STATUS.FROZEN);
-
-    modalDispatch({ type: MODAL_ACTIONS.OPEN_MODAL });
+    openModal();
     modalDispatch({ type: MODAL_ACTIONS.CHANGE_TO_CONFIRM });
   };
 
   const openTimePicker = () => {
-    modalDispatch({ type: MODAL_ACTIONS.OPEN_MODAL });
+    openModal();
     modalDispatch({ type: MODAL_ACTIONS.CHANGE_TO_TIME_PICKER });
-
-    setGameMode(MODE.TIMER);
   };
 
   const openRacePicker = () => {
-    modalDispatch({ type: MODAL_ACTIONS.OPEN_MODAL });
+    openModal();
     modalDispatch({ type: MODAL_ACTIONS.CHANGE_TO_RACE_PICKER });
-
-    setGameMode(MODE.RACE);
   };
 
   return (

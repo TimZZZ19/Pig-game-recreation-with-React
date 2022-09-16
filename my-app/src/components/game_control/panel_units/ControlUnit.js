@@ -3,9 +3,19 @@ import styles from "./ControlUnit.module.css";
 import Button from "../../reusables/Button";
 import UnitTitle from "../../reusables/UnitTitle";
 import STATUS from "../../../mappings/STATUS";
+import MODE from "../../../mappings/MODE";
 
-const ControlUnit = ({ gameStatus, startGame, pauseGame, openConfirm }) => {
-  const startBtnText = gameStatus === STATUS.SETTING ? "▶️ Start" : "▶️ Resume";
+const ControlUnit = ({
+  gameMode,
+  gameStatus,
+  startGame,
+  pauseGame,
+  openConfirm,
+}) => {
+  const startBtnText =
+    gameMode === MODE.UNSELECTED || gameStatus === STATUS.SETTING
+      ? "▶️ Start"
+      : "▶️ Resume";
 
   return (
     <div className={styles["control-unit"]}>
