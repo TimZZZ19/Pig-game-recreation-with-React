@@ -25,8 +25,12 @@ const gameReducer = (state, action) => {
       return { ...state, gameMode: action.payload };
     case GAME_ACTIONS.SET_TIMER:
       return { ...state };
+    case GAME_ACTIONS.RESET_TIMER:
+      return { ...state, timer: "0:00" };
     case GAME_ACTIONS.SET_RACE:
       return { ...state, race: action.payload };
+    case GAME_ACTIONS.RESET_RACE:
+      return { ...state, race: 0 };
     case GAME_ACTIONS.HIDE_DICE:
       return { ...state, diceHidden: true };
     case GAME_ACTIONS.UNHIDE_DICE:
@@ -175,6 +179,13 @@ function App() {
     playerBDispatch({ type: PLAYER_ACTIONS.RESET_CURRENT_SCORE });
     gameDispatch({ type: GAME_ACTIONS.HIDE_DICE });
     gameDispatch({ type: GAME_ACTIONS.SET_DICE_NUMBER, payload: 1 });
+    gameDispatch({
+      type: GAME_ACTIONS.CHANGE_GAME_MODE,
+      payload: GAME_MODE.UNSELECTED,
+    });
+    gameDispatch({
+      type: GAME_ACTIONS.RESET_RACE,
+    });
   };
 
   return (
