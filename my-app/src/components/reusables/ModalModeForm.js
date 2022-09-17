@@ -2,7 +2,12 @@ import React from "react";
 import styles from "./ModalModeForm.module.css";
 import Button from "./Button";
 
-const ModalModeForm = ({ title, children, confirmSelection, closeModal }) => {
+const ModalModeForm = ({ title, children, setInput, closeModal }) => {
+  const confirmInput = () => {
+    setInput();
+    closeModal();
+  };
+
   return (
     <div>
       <h1 className={styles["text"]}>{title}</h1>
@@ -10,7 +15,7 @@ const ModalModeForm = ({ title, children, confirmSelection, closeModal }) => {
       <Button
         buttonContent="✔️ Confirm"
         extraStyles={{ width: "13rem", left: "37.5%", top: "19.2rem" }}
-        onClick={confirmSelection}
+        onClick={confirmInput}
       />
       <Button
         buttonContent="❌"

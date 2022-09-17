@@ -26,7 +26,7 @@ const gameReducer = (state, action) => {
     case GAME_ACTIONS.SET_TIMER:
       return { ...state };
     case GAME_ACTIONS.SET_RACE:
-      return { ...state };
+      return { ...state, race: action.payload };
     case GAME_ACTIONS.HIDE_DICE:
       return { ...state, diceHidden: true };
     case GAME_ACTIONS.UNHIDE_DICE:

@@ -47,10 +47,14 @@ const Modal = ({
       );
       break;
     case MODAL_CONTENT.TIME_PICKER:
-      content = <TimePicker closeModal={closeModal} />;
+      content = (
+        <TimePicker closeModal={closeModal} gameDispatch={gameDispatch} />
+      );
       break;
     case MODAL_CONTENT.RACE_PICKER:
-      content = <RacePicker closeModal={closeModal} />;
+      content = (
+        <RacePicker closeModal={closeModal} gameDispatch={gameDispatch} />
+      );
       break;
     case MODAL_CONTENT.NULL:
       content = null;
