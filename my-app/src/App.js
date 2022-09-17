@@ -208,6 +208,7 @@ function App() {
           playerBDispatch={playerBDispatch}
           gameState={gameState}
           gameDispatch={gameDispatch}
+          modalDispatch={modalDispatch}
         />
       </Board>
       <GameControlDiv

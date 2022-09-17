@@ -21,11 +21,12 @@ const Modal = ({
 
   if (!modalOpen) return null;
 
-  const closeModal = () => {
+  const closeModalAfterSettingGameMode = () => {
     gameDispatch({
       type: GAME_ACTIONS.CHANGE_GAME_STATUS,
       payload: GAME_STATUS.SETTING,
     });
+    modalDispatch({ type: MODAL_ACTIONS.CHANGE_TO_NULL });
     modalDispatch({ type: MODAL_ACTIONS.CLOSE_MODAL });
   };
 
@@ -48,12 +49,18 @@ const Modal = ({
       break;
     case MODAL_CONTENT.TIME_PICKER:
       content = (
-        <TimePicker closeModal={closeModal} gameDispatch={gameDispatch} />
+        <TimePicker
+          closeModal={closeModalAfterSettingGameMode}
+          gameDispatch={gameDispatch}
+        />
       );
       break;
     case MODAL_CONTENT.RACE_PICKER:
       content = (
-        <RacePicker closeModal={closeModal} gameDispatch={gameDispatch} />
+        <RacePicker
+          closeModal={closeModalAfterSettingGameMode}
+          gameDispatch={gameDispatch}
+        />
       );
       break;
     case MODAL_CONTENT.NULL:

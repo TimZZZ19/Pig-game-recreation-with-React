@@ -3,6 +3,8 @@ import Dice from "./Dice";
 import PLAYER_ACTIONS from "../../mappings/PLAYER_ACTIONS";
 import GAME_STATUS from "../../mappings/GAME_STATUS";
 import GAME_ACTIONS from "../../mappings/GAME_ACTIONS";
+import MODAL_ACTIONS from "../../mappings/MODAL_ACTIONS";
+import GAME_MODE from "../../mappings/GAME_MODE";
 
 const Game = ({
   playerAState,
@@ -11,7 +13,10 @@ const Game = ({
   playerBDispatch,
   gameState,
   gameDispatch,
+  modalDispatch,
 }) => {
+  const { diceNumber, diceHidden, gameStatus, race } = gameState;
+
   // Helper functions
   const ResetAAndSwitchToB = () => {
     playerADispatch({ type: PLAYER_ACTIONS.RESET_CURRENT_SCORE });
@@ -57,6 +62,14 @@ const Game = ({
       }
     }
   };
+  const displayWinner = () => {
+    modalDispatch({ type: MODAL_ACTIONS.OPEN_MODAL });
+    modalDispatch({ type: MODAL_ACTIONS.CHANGE_TO_RESULT });
+    gameDispatch({
+      type: GAME_ACTIONS.CHANGE_GAME_STATUS,
+      payload: GAME_STATUS.FROZEN,
+    });
+  };
 
   // When Roll is clicked on,
   const rollClickHandler = () => {
@@ -72,12 +85,22 @@ const Game = ({
     gameDispatch({ type: GAME_ACTIONS.HIDE_DICE });
     if (playerAState.isPlaying) {
       // if A is active, update score and switch to B.
+      const currentPlayerATotalScore =
+        playerAState.accumulativeScore + playerAState.currentScore;
+      if (currentPlayerATotalScore >= race) {
+        displayWinner();
+      }
       playerADispatch({ type: PLAYER_ACTIONS.SET_ACCUMULATIVE_SCORE });
       ResetAAndSwitchToB();
     }
 
     if (playerBState.isPlaying) {
       // if B is active, update score and switch to A.
+      const currentPlayerBTotalScore =
+        playerBState.accumulativeScore + playerBState.currentScore;
+      if (currentPlayerBTotalScore >= race) {
+        displayWinner();
+      }
       playerBDispatch({ type: PLAYER_ACTIONS.SET_ACCUMULATIVE_SCORE });
       ResetBAndSwitchToA();
     }
@@ -85,12 +108,12 @@ const Game = ({
 
   return (
     <>
-      <Dice diceNumber={gameState.diceNumber} hideDice={gameState.diceHidden} />
+      <Dice diceNumber={diceNumber} hideDice={diceHidden} />
       <Button
         buttonContent={"🎲 Roll"}
         extraStyles={{ width: "11rem", top: "39.3rem" }}
         secondaryClass={
-          gameState.gameStatus !== GAME_STATUS.PLAYING && "btn--unclickable"
+          gameStatus !== GAME_STATUS.PLAYING && "btn--unclickable"
         }
         onClick={rollClickHandler}
       />
@@ -98,7 +121,7 @@ const Game = ({
         buttonContent={"📥 Hold"}
         extraStyles={{ width: "11rem", top: "46.1rem" }}
         secondaryClass={
-          gameState.gameStatus !== GAME_STATUS.PLAYING && "btn--unclickable"
+          gameStatus !== GAME_STATUS.PLAYING && "btn--unclickable"
         }
         onClick={holdClickHandler}
       />

@@ -11,7 +11,6 @@ const RacePicker = ({ closeModal, gameDispatch }) => {
   const [finishLine, setFinishLine] = useState(minScore);
 
   const handleChange = (e) => {
-    console.log(finishLine);
     setFinishLine(e.target.value);
   };
 
