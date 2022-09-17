@@ -25,7 +25,7 @@ const Game = ({
   };
   const handleDiceResult = (diceResult) => {
     // 1. Reveal dice
-    gameState({ type: GAME_ACTIONS.UNHIDE_DICE });
+    gameDispatch({ type: GAME_ACTIONS.UNHIDE_DICE });
 
     // 2. Update the displayed dice image according to this result.
     gameDispatch({ type: GAME_ACTIONS.SET_DICE_NUMBER, payload: diceResult });
@@ -69,7 +69,7 @@ const Game = ({
 
   // When Hold is clicked on,
   const holdClickHandler = () => {
-    gameState({ type: GAME_ACTIONS.HIDE_DICE });
+    gameDispatch({ type: GAME_ACTIONS.HIDE_DICE });
     if (playerAState.isPlaying) {
       // if A is active, update score and switch to B.
       playerADispatch({ type: PLAYER_ACTIONS.SET_ACCUMULATIVE_SCORE });
@@ -90,7 +90,7 @@ const Game = ({
         buttonContent={"🎲 Roll"}
         extraStyles={{ width: "11rem", top: "39.3rem" }}
         secondaryClass={
-          gameState.gameState !== GAME_STATUS.PLAYING && "btn--unclickable"
+          gameState.gameStatus !== GAME_STATUS.PLAYING && "btn--unclickable"
         }
         onClick={rollClickHandler}
       />
@@ -98,7 +98,7 @@ const Game = ({
         buttonContent={"📥 Hold"}
         extraStyles={{ width: "11rem", top: "46.1rem" }}
         secondaryClass={
-          gameState.gameState !== GAME_STATUS.PLAYING && "btn--unclickable"
+          gameState.gameStatus !== GAME_STATUS.PLAYING && "btn--unclickable"
         }
         onClick={holdClickHandler}
       />
