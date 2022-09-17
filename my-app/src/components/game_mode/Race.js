@@ -1,10 +1,10 @@
 import React from "react";
 import styles from "./Race.module.css";
 
-const Race = () => {
+const Race = ({ race }) => {
   return (
     <div className={styles["finish-line"]}>
-      <span>100</span>
+      <span>{race}</span>
     </div>
   );
 };

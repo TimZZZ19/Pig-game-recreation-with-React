@@ -6,19 +6,21 @@ import Unselected from "./Unselected";
 import styles from "./GameModeIndicator.module.css";
 
 const GameModeIndicator = ({ gameState }) => {
+  const { gameMode, race } = gameState;
+
   let mode;
-  switch (gameState.gameMode) {
+  switch (gameMode) {
     case GAME_MODE.UNSELECTED:
-      mode = <Unselected gameState={gameState} />;
+      mode = <Unselected gameMode={gameMode} />;
       break;
     case GAME_MODE.WARNING:
-      mode = <Unselected gameState={gameState} />;
+      mode = <Unselected gameMode={gameMode} />;
       break;
     case GAME_MODE.TIMER:
       mode = <Timer />;
       break;
     case GAME_MODE.RACE:
-      mode = <Race />;
+      mode = <Race race={race} />;
       break;
     default:
       throw new Error();
@@ -27,7 +29,7 @@ const GameModeIndicator = ({ gameState }) => {
   return (
     <div
       className={`${styles["mode-container"]} ${
-        gameState.gameMode === GAME_MODE.WARNING && styles["warning"]
+        gameMode === GAME_MODE.WARNING && styles["warning"]
       }`}
     >
       {mode}

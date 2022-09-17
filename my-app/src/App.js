@@ -186,6 +186,7 @@ function App() {
     gameDispatch({
       type: GAME_ACTIONS.RESET_RACE,
     });
+    // COMMENT remember reset timer
   };
 
   return (
