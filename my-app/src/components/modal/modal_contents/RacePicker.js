@@ -3,6 +3,7 @@ import styles from "./RacePicker.module.css";
 import ModalModeForm from "../../reusables/ModalModeForm";
 
 import GAME_ACTIONS from "../../../mappings/GAME_ACTIONS";
+import GAME_MODE from "../../../mappings/GAME_MODE";
 
 const minScore = 30;
 
@@ -14,8 +15,13 @@ const RacePicker = ({ closeModal, gameDispatch }) => {
     setFinishLine(e.target.value);
   };
 
-  const setRace = () =>
+  const setRace = () => {
     gameDispatch({ type: GAME_ACTIONS.SET_RACE, payload: finishLine });
+    gameDispatch({
+      type: GAME_ACTIONS.CHANGE_GAME_MODE,
+      payload: GAME_MODE.RACE,
+    });
+  };
 
   return (
     <ModalModeForm
