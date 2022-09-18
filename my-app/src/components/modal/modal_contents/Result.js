@@ -1,11 +1,21 @@
 import React from "react";
+import Button from "../../reusables/Button";
+import styles from "./Result.module.css";
 
-const Result = ({ playerAState, playerBState }) => {
-  let winner;
-  if (playerAState.isWinner) winner = playerAState.name;
-  if (playerBState.isWinner) winner = playerBState.name;
+const Result = ({ playerAState, playerBState, restartGame }) => {
+  const winner = playerAState.isWinner ? playerAState.name : playerBState.name;
 
-  return <div>Result</div>;
+  return (
+    <>
+      <p className={styles["winner-text"]}>{winner}</p>
+      <p className={styles["won-text"]}>won!</p>
+      <Button
+        buttonContent="🔄 New Game"
+        extraStyles={{ width: "15rem", top: "19rem" }}
+        onClick={restartGame}
+      />
+    </>
+  );
 };
 
 export default Result;

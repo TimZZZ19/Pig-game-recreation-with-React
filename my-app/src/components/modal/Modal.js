@@ -32,6 +32,28 @@ const Modal = ({
     modalDispatch({ type: MODAL_ACTIONS.CLOSE_MODAL });
   };
 
+  const closeModal = () => {
+    modalDispatch({ type: MODAL_ACTIONS.CHANGE_TO_NULL });
+    modalDispatch({ type: MODAL_ACTIONS.CLOSE_MODAL });
+  };
+
+  const restartGame = () => {
+    gameDispatch({
+      type: GAME_ACTIONS.CHANGE_GAME_STATUS,
+      payload: GAME_STATUS.SETTING,
+    });
+    initializeBoard();
+    closeModal();
+  };
+
+  const cancelRestart = () => {
+    gameDispatch({
+      type: GAME_ACTIONS.CHANGE_GAME_STATUS,
+      payload: GAME_STATUS.PAUSED,
+    });
+    closeModal();
+  };
+
   let content;
   switch (modalContent) {
     case MODAL_CONTENT.COUNT_DOWN:
@@ -39,16 +61,16 @@ const Modal = ({
       break;
     case MODAL_CONTENT.RESULT:
       content = (
-        <Result playerAState={playerAState} playerBState={playerBState} />
+        <Result
+          playerAState={playerAState}
+          playerBState={playerBState}
+          restartGame={restartGame}
+        />
       );
       break;
     case MODAL_CONTENT.CONFIRM:
       content = (
-        <Confirm
-          modalDispatch={modalDispatch}
-          gameDispatch={gameDispatch}
-          initializeBoard={initializeBoard}
-        />
+        <Confirm restartGame={restartGame} cancelRestart={cancelRestart} />
       );
       break;
     case MODAL_CONTENT.TIME_PICKER:
