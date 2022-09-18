@@ -17,6 +17,7 @@ import GAME_STATUS from "./mappings/GAME_STATUS";
 import MODAL_ACTIONS from "./mappings/MODAL_ACTIONS";
 import MODAL_CONTENT from "./mappings/MODAL_CONTENT";
 
+// Game
 const gameReducer = (state, action) => {
   switch (action.type) {
     case GAME_ACTIONS.CHANGE_GAME_STATUS:
@@ -50,7 +51,8 @@ const gameInitialConfigs = {
   diceNumber: 1,
 };
 
-const playerAReducer = (state, action) => {
+// Player
+const playerReducer = (state, action) => {
   switch (action.type) {
     case PLAYER_ACTIONS.START_PLAYING:
       return { ...state, isPlaying: true };
@@ -76,54 +78,38 @@ const playerAReducer = (state, action) => {
         ...state,
         currentScore: 0,
       };
+    case PLAYER_ACTIONS.MARK_AS_WIINER:
+      return {
+        ...state,
+        isWinner: true,
+      };
+    case PLAYER_ACTIONS.RESET_ISWINNER_PROPERTY:
+      return {
+        ...state,
+        isWinner: false,
+      };
     default:
       throw new Error();
   }
 };
+
 const playerAInitialConfigs = {
   name: "Player 1",
   isPlaying: true,
   accumulativeScore: 0,
   currentScore: 0,
+  isWinner: false,
 };
 
-const playerBReducer = (state, action) => {
-  switch (action.type) {
-    case PLAYER_ACTIONS.START_PLAYING:
-      return { ...state, isPlaying: true };
-    case PLAYER_ACTIONS.STOP_PLAYING:
-      return { ...state, isPlaying: false };
-    case PLAYER_ACTIONS.SET_ACCUMULATIVE_SCORE:
-      return {
-        ...state,
-        accumulativeScore: state.accumulativeScore + state.currentScore,
-      };
-    case PLAYER_ACTIONS.RESET_ACCUMULATIVE_SCORE:
-      return {
-        ...state,
-        accumulativeScore: 0,
-      };
-    case PLAYER_ACTIONS.SET_CURRENT_SCORE:
-      return {
-        ...state,
-        currentScore: state.currentScore + action.payload,
-      };
-    case PLAYER_ACTIONS.RESET_CURRENT_SCORE:
-      return {
-        ...state,
-        currentScore: 0,
-      };
-    default:
-      throw new Error();
-  }
-};
 const playerBInitialConfigs = {
   name: "Player 2",
   isPlaying: false,
   accumulativeScore: 0,
   currentScore: 0,
+  isWinner: false,
 };
 
+// Modal
 const modalReducer = (state, action) => {
   switch (action.type) {
     case MODAL_ACTIONS.OPEN_MODAL:
@@ -156,11 +142,11 @@ function App() {
   const [gameState, gameDispatch] = useReducer(gameReducer, gameInitialConfigs);
 
   const [playerAState, playerADispatch] = useReducer(
-    playerAReducer,
+    playerReducer,
     playerAInitialConfigs
   );
   const [playerBState, playerBDispatch] = useReducer(
-    playerBReducer,
+    playerReducer,
     playerBInitialConfigs
   );
 
@@ -177,6 +163,8 @@ function App() {
     playerBDispatch({ type: PLAYER_ACTIONS.RESET_ACCUMULATIVE_SCORE });
     playerADispatch({ type: PLAYER_ACTIONS.RESET_CURRENT_SCORE });
     playerBDispatch({ type: PLAYER_ACTIONS.RESET_CURRENT_SCORE });
+    playerADispatch({ type: PLAYER_ACTIONS.RESET_ISWINNER_PROPERTY });
+    playerBDispatch({ type: PLAYER_ACTIONS.RESET_ISWINNER_PROPERTY });
     gameDispatch({ type: GAME_ACTIONS.HIDE_DICE });
     gameDispatch({ type: GAME_ACTIONS.SET_DICE_NUMBER, payload: 1 });
     gameDispatch({
@@ -197,6 +185,8 @@ function App() {
         modalDispatch={modalDispatch}
         gameDispatch={gameDispatch}
         initializeBoard={initializeBoard}
+        playerAState={playerAState}
+        playerBState={playerBState}
       />
       <Board gameState={gameState}>
         <Player playerState={playerAState} />

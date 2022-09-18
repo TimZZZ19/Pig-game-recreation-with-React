@@ -16,6 +16,8 @@ const Modal = ({
   modalDispatch,
   gameDispatch,
   initializeBoard,
+  playerAState,
+  playerBState,
 }) => {
   const { modalOpen, modalContent } = modalState;
 
@@ -36,7 +38,9 @@ const Modal = ({
       content = <CountDown />;
       break;
     case MODAL_CONTENT.RESULT:
-      content = <Result />;
+      content = (
+        <Result playerAState={playerAState} playerBState={playerBState} />
+      );
       break;
     case MODAL_CONTENT.CONFIRM:
       content = (

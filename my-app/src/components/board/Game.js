@@ -4,7 +4,6 @@ import PLAYER_ACTIONS from "../../mappings/PLAYER_ACTIONS";
 import GAME_STATUS from "../../mappings/GAME_STATUS";
 import GAME_ACTIONS from "../../mappings/GAME_ACTIONS";
 import MODAL_ACTIONS from "../../mappings/MODAL_ACTIONS";
-import GAME_MODE from "../../mappings/GAME_MODE";
 
 const Game = ({
   playerAState,
@@ -63,8 +62,11 @@ const Game = ({
     }
   };
   const displayWinner = () => {
+    // open modal and change to the result page
     modalDispatch({ type: MODAL_ACTIONS.OPEN_MODAL });
     modalDispatch({ type: MODAL_ACTIONS.CHANGE_TO_RESULT });
+
+    // set the game status to fronzen, so the control panel is frozen
     gameDispatch({
       type: GAME_ACTIONS.CHANGE_GAME_STATUS,
       payload: GAME_STATUS.FROZEN,
@@ -88,6 +90,7 @@ const Game = ({
       const currentPlayerATotalScore =
         playerAState.accumulativeScore + playerAState.currentScore;
       if (currentPlayerATotalScore >= race) {
+        playerADispatch({ type: PLAYER_ACTIONS.MARK_AS_WIINER });
         displayWinner();
       }
       playerADispatch({ type: PLAYER_ACTIONS.SET_ACCUMULATIVE_SCORE });
@@ -99,6 +102,7 @@ const Game = ({
       const currentPlayerBTotalScore =
         playerBState.accumulativeScore + playerBState.currentScore;
       if (currentPlayerBTotalScore >= race) {
+        playerBDispatch({ type: PLAYER_ACTIONS.MARK_AS_WIINER });
         displayWinner();
       }
       playerBDispatch({ type: PLAYER_ACTIONS.SET_ACCUMULATIVE_SCORE });

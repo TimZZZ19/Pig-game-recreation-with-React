@@ -5,6 +5,8 @@ const PLAYER_ACTIONS = {
   RESET_ACCUMULATIVE_SCORE: "reset accumulative score",
   SET_CURRENT_SCORE: "set current score",
   RESET_CURRENT_SCORE: "reset current score",
+  MARK_AS_WIINER: "mark as the winer of the game",
+  RESET_ISWINNER_PROPERTY: "reset the isWinner property",
 };
 
 export default PLAYER_ACTIONS;
