@@ -38,7 +38,7 @@ const RacePicker = ({ closeModal, gameDispatch }) => {
           value={finishLine}
           onChange={handleChange}
         ></input>
-        <p className={styles.min}>{`min: ${minScore}`}</p>
+        <p className={styles.min}>{`(min: ${minScore})`}</p>
       </div>
     </ModalModeForm>
   );

@@ -14,7 +14,7 @@ const TimePicker = ({ closeModal }) => {
             min="1"
             max="59"
           ></input>
-          <label for="min-input">Min</label>
+          <label htmlFor="min-input">Min</label>
         </div>
         <div className={styles["input"]}>
           <input
@@ -24,7 +24,7 @@ const TimePicker = ({ closeModal }) => {
             min="0"
             max="59"
           ></input>
-          <label for="sec-input">Sec</label>
+          <label htmlFor="sec-input">Sec</label>
         </div>
       </div>
     </ModalModeForm>
