@@ -15,20 +15,29 @@ const Game = ({
   gameDispatch,
   modalDispatch,
 }) => {
-  const { diceNumber, diceHidden, gameStatus, race } = gameState;
+  const { gameStatus, gameMode, timer, race, diceNumber, diceHidden } =
+    gameState;
 
-  if (gameState.gameMode === GAME_MODE.TIMER) {
-    if (gameState.gameState === GAME_STATUS.PLAYING) {
-      // if timer hasn't already started
-      // Start timer
-      // timmer ticking
-      // if timer already got started
-      // Pick up where it was left
-      // timer continues
-    }
-    if (gameState.gameState === GAME_STATUS.PAUSED) {
-      // Pause timer
-      // timer paused
+  if (gameMode === GAME_MODE.TIMER) {
+    switch (gameStatus) {
+      case GAME_STATUS.PLAYING:
+        console.log("passed the second check");
+
+        console.log(timer.time);
+
+        // if timer hasn't already started
+        // Start timer
+        // timmer ticking
+        // if timer already got started
+        // Pick up where it was left
+        // timer continues
+        break;
+      case GAME_STATUS.PAUSED:
+        // Pause timer
+        // timer paused
+        break;
+      default:
+        throw new Error();
     }
   }
 
