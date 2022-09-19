@@ -32,3 +32,11 @@ const TimePicker = ({ closeModal }) => {
 };
 
 export default TimePicker;
+
+const secondsToMinSecPadded = (time) => {
+  const minutes = "0" + Math.floor(time / 60);
+  const seconds = "0" + (time - minutes * 60);
+  return minutes.substring(-2) + ":" + seconds.substring(-2);
+};
+
+console.log(secondsToMinSecPadded(240));

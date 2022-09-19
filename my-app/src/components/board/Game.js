@@ -4,6 +4,7 @@ import PLAYER_ACTIONS from "../../mappings/PLAYER_ACTIONS";
 import GAME_STATUS from "../../mappings/GAME_STATUS";
 import GAME_ACTIONS from "../../mappings/GAME_ACTIONS";
 import MODAL_ACTIONS from "../../mappings/MODAL_ACTIONS";
+import GAME_MODE from "../../mappings/GAME_MODE";
 
 const Game = ({
   playerAState,
@@ -15,6 +16,21 @@ const Game = ({
   modalDispatch,
 }) => {
   const { diceNumber, diceHidden, gameStatus, race } = gameState;
+
+  if (gameState.gameMode === GAME_MODE.TIMER) {
+    if (gameState.gameState === GAME_STATUS.PLAYING) {
+      // if timer hasn't already started
+      // Start timer
+      // timmer ticking
+      // if timer already got started
+      // Picked where it was left
+      // timer continues
+    }
+    if (gameState.gameState === GAME_STATUS.PAUSED) {
+      // Pause timer
+      // timer paused
+    }
+  }
 
   // Helper functions
   const ResetAAndSwitchToB = () => {

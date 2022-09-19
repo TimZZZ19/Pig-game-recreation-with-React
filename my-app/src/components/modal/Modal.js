@@ -59,20 +59,6 @@ const Modal = ({
     case MODAL_CONTENT.COUNT_DOWN:
       content = <CountDown />;
       break;
-    case MODAL_CONTENT.RESULT:
-      content = (
-        <Result
-          playerAState={playerAState}
-          playerBState={playerBState}
-          restartGame={restartGame}
-        />
-      );
-      break;
-    case MODAL_CONTENT.CONFIRM:
-      content = (
-        <Confirm restartGame={restartGame} cancelRestart={cancelRestart} />
-      );
-      break;
     case MODAL_CONTENT.TIME_PICKER:
       content = (
         <TimePicker
@@ -86,6 +72,20 @@ const Modal = ({
         <RacePicker
           closeModal={closeModalAfterSettingGameMode}
           gameDispatch={gameDispatch}
+        />
+      );
+      break;
+    case MODAL_CONTENT.CONFIRM:
+      content = (
+        <Confirm restartGame={restartGame} cancelRestart={cancelRestart} />
+      );
+      break;
+    case MODAL_CONTENT.RESULT:
+      content = (
+        <Result
+          playerAState={playerAState}
+          playerBState={playerBState}
+          restartGame={restartGame}
         />
       );
       break;
