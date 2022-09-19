@@ -18,7 +18,6 @@ import MODAL_ACTIONS from "./mappings/MODAL_ACTIONS";
 import MODAL_CONTENT from "./mappings/MODAL_CONTENT";
 
 // Game
-const timerInitialConfigs = { started: false, time: 0 };
 
 const gameReducer = (state, action) => {
   switch (action.type) {
@@ -27,11 +26,9 @@ const gameReducer = (state, action) => {
     case GAME_ACTIONS.CHANGE_GAME_MODE:
       return { ...state, gameMode: action.payload };
     case GAME_ACTIONS.SET_TIMER_TIME:
-      return { ...state, timer: { ...state.timer, time: action.payload } };
-    case GAME_ACTIONS.SET_TIMER_STARTED:
-      return { ...state, timer: { ...state.timer, started: true } };
+      return { ...state, timer: action.payload };
     case GAME_ACTIONS.RESET_TIMER:
-      return { ...state, timer: { ...timerInitialConfigs } };
+      return { ...state, timer: 0 };
     case GAME_ACTIONS.SET_RACE:
       return { ...state, race: action.payload };
     case GAME_ACTIONS.RESET_RACE:
@@ -49,7 +46,7 @@ const gameReducer = (state, action) => {
 const gameInitialConfigs = {
   gameStatus: GAME_STATUS.SETTING,
   gameMode: GAME_MODE.UNSELECTED,
-  timer: { ...timerInitialConfigs },
+  timer: 0,
   race: 0,
   diceHidden: true,
   diceNumber: 1,

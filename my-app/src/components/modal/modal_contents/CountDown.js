@@ -11,7 +11,7 @@ const CountDown = () => {
 
   useEffect(() => {
     id.current = setInterval(() => {
-      setCounter((curr) => --curr);
+      setCounter((curr) => curr - 1);
     }, 1000);
     return () => clear();
   }, []);

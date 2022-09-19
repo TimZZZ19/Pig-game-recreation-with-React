@@ -1,3 +1,4 @@
+import { useRef, useEffect } from "react";
 import Button from "../reusables/Button";
 import Dice from "./Dice";
 import PLAYER_ACTIONS from "../../mappings/PLAYER_ACTIONS";
@@ -5,6 +6,29 @@ import GAME_STATUS from "../../mappings/GAME_STATUS";
 import GAME_ACTIONS from "../../mappings/GAME_ACTIONS";
 import MODAL_ACTIONS from "../../mappings/MODAL_ACTIONS";
 import GAME_MODE from "../../mappings/GAME_MODE";
+
+const GameTicking = (timer, gameStatus, gameDispatch) => {
+  const id = useRef();
+  const cleanUp = () => clearTimeout(id.current);
+
+  useEffect(() => {
+    if (gameStatus === GAME_STATUS.PAUSED) return;
+    id.current = setTimeout(() => {
+      gameDispatch({
+        type: GAME_ACTIONS.SET_TIMER_TIME,
+        payload: timer - 1,
+      });
+    }, 1000);
+    return () => cleanUp();
+  }, [timer, gameStatus, gameDispatch]);
+
+  useEffect(() => {
+    if (timer > 0) return;
+    console.log("time is up");
+    // Call modal and display result
+    cleanUp();
+  }, [timer]);
+};
 
 const Game = ({
   playerAState,
@@ -18,23 +42,15 @@ const Game = ({
   const { gameStatus, gameMode, timer, race, diceNumber, diceHidden } =
     gameState;
 
-  if (gameMode === GAME_MODE.TIMER) {
+  const { PLAYING, PAUSED, FROZEN } = GAME_STATUS;
+
+  if (gameMode === GAME_MODE.TIMER && [PLAYING, PAUSED].includes(gameStatus)) {
     switch (gameStatus) {
-      case GAME_STATUS.PLAYING:
-        console.log("passed the second check");
-
-        console.log(timer.time);
-
-        // if timer hasn't already started
-        // Start timer
-        // timmer ticking
-        // if timer already got started
-        // Pick up where it was left
-        // timer continues
+      case PLAYING:
+        GameTicking(timer, gameStatus, gameDispatch);
         break;
-      case GAME_STATUS.PAUSED:
-        // Pause timer
-        // timer paused
+      case PAUSED:
+        GameTicking(timer, gameStatus, gameDispatch);
         break;
       default:
         throw new Error();
@@ -94,7 +110,7 @@ const Game = ({
     // set the game status to fronzen, so the control panel is frozen
     gameDispatch({
       type: GAME_ACTIONS.CHANGE_GAME_STATUS,
-      payload: GAME_STATUS.FROZEN,
+      payload: FROZEN,
     });
   };
 
@@ -141,17 +157,13 @@ const Game = ({
       <Button
         buttonContent={"🎲 Roll"}
         extraStyles={{ width: "11rem", top: "39.3rem" }}
-        secondaryClass={
-          gameStatus !== GAME_STATUS.PLAYING && "btn--unclickable"
-        }
+        secondaryClass={gameStatus !== PLAYING && "btn--unclickable"}
         onClick={rollClickHandler}
       />
       <Button
         buttonContent={"📥 Hold"}
         extraStyles={{ width: "11rem", top: "46.1rem" }}
-        secondaryClass={
-          gameStatus !== GAME_STATUS.PLAYING && "btn--unclickable"
-        }
+        secondaryClass={gameStatus !== PLAYING && "btn--unclickable"}
         onClick={holdClickHandler}
       />
     </>

@@ -13,7 +13,7 @@ const convertTimeFiguresToString = (time) => {
 const GameModeIndicator = ({ gameState }) => {
   const { gameMode, timer, race } = gameState;
 
-  const formatedTime = convertTimeFiguresToString(timer.time);
+  const formatedTime = convertTimeFiguresToString(timer);
 
   let mode;
   switch (gameMode) {
