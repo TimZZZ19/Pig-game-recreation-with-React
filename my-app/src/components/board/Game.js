@@ -23,7 +23,7 @@ const Game = ({
       // Start timer
       // timmer ticking
       // if timer already got started
-      // Picked where it was left
+      // Pick up where it was left
       // timer continues
     }
     if (gameState.gameState === GAME_STATUS.PAUSED) {

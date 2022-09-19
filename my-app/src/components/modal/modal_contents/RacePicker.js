@@ -14,7 +14,7 @@ const RacePicker = ({ closeModal, gameDispatch }) => {
     setFinishLine(e.target.value);
   };
 
-  const setRace = () => {
+  const setRaceInGameState = () => {
     gameDispatch({ type: GAME_ACTIONS.SET_RACE, payload: finishLine });
     gameDispatch({
       type: GAME_ACTIONS.CHANGE_GAME_MODE,
@@ -25,7 +25,7 @@ const RacePicker = ({ closeModal, gameDispatch }) => {
   return (
     <ModalModeForm
       title={"Set a finish line"}
-      setInput={setRace}
+      setInput={setRaceInGameState}
       closeModal={closeModal}
     >
       <div className={styles["score-input"]}>
