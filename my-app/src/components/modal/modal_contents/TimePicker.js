@@ -3,15 +3,19 @@ import styles from "./TimePicker.module.css";
 import ModalModeForm from "../../reusables/ModalModeForm";
 
 import GAME_ACTIONS from "../../../mappings/GAME_ACTIONS";
+import GAME_MODE from "../../../mappings/GAME_MODE";
 
 const TimePicker = ({ closeModal, gameDispatch }) => {
   const minInput = useRef();
   const secInput = useRef();
 
   const storeTimeInGameState = () => {
-    const seconds = +minInput.current.value*60 + +secInput.current.value; 
-    gameDispatch({type:GAME_ACTIONS.SET_TIMER, payload:seconds})
-
+    const seconds = +minInput.current.value * 60 + +secInput.current.value;
+    gameDispatch({ type: GAME_ACTIONS.SET_TIMER_TIME, payload: seconds });
+    gameDispatch({
+      type: GAME_ACTIONS.CHANGE_GAME_MODE,
+      payload: GAME_MODE.TIMER,
+    });
   };
 
   return (
@@ -49,11 +53,3 @@ const TimePicker = ({ closeModal, gameDispatch }) => {
 };
 
 export default TimePicker;
-
-// const secondsToMinSecPadded = (time) => {
-//   const minutes = "0" + Math.floor(time / 60);
-//   const seconds = "0" + (time - minutes * 60);
-//   return minutes.substring(-2) + ":" + seconds.substring(-2);
-// };
-
-// console.log(secondsToMinSecPadded(240));

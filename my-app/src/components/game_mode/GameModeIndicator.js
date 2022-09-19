@@ -5,8 +5,16 @@ import GAME_MODE from "../../mappings/GAME_MODE";
 import Unselected from "./Unselected";
 import styles from "./GameModeIndicator.module.css";
 
+const convertTimeFiguresToString = (time) => {
+  const minutes = "0" + Math.floor(time / 60);
+  const seconds = "0" + (time - minutes * 60);
+  return minutes.slice(-2) + " : " + seconds.slice(-2);
+};
+
 const GameModeIndicator = ({ gameState }) => {
-  const { gameMode, race } = gameState;
+  const { gameMode, timer, race } = gameState;
+
+  const formatedTime = convertTimeFiguresToString(timer.time);
 
   let mode;
   switch (gameMode) {
@@ -17,7 +25,7 @@ const GameModeIndicator = ({ gameState }) => {
       mode = <Unselected gameMode={gameMode} />;
       break;
     case GAME_MODE.TIMER:
-      mode = <Timer />;
+      mode = <Timer timeString={formatedTime} />;
       break;
     case GAME_MODE.RACE:
       mode = <Race race={race} />;
