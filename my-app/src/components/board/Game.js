@@ -45,10 +45,6 @@ const GameTicking = (
       playerBDispatch({ type: PLAYER_ACTIONS.MARK_AS_WIINER });
     }
 
-    // draw
-    if (playerAState.accumulativeScore === playerBState.accumulativeScore) {
-    }
-
     // Get rid of the dice
     gameDispatch({ type: GAME_ACTIONS.HIDE_DICE });
 
