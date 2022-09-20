@@ -7,7 +7,16 @@ import GAME_ACTIONS from "../../mappings/GAME_ACTIONS";
 import MODAL_ACTIONS from "../../mappings/MODAL_ACTIONS";
 import GAME_MODE from "../../mappings/GAME_MODE";
 
-const GameTicking = (timer, gameStatus, gameDispatch) => {
+const GameTicking = (
+  timer,
+  gameStatus,
+  gameDispatch,
+  displayWinner,
+  playerAState,
+  playerBState,
+  playerADispatch,
+  playerBDispatch
+) => {
   const id = useRef();
   const cleanUp = () => clearTimeout(id.current);
 
@@ -24,8 +33,27 @@ const GameTicking = (timer, gameStatus, gameDispatch) => {
 
   useEffect(() => {
     if (timer > 0) return;
-    console.log("time is up");
+    // Time is up, determine the winner
+
+    // A is the winner
+    if (playerAState.accumulativeScore > playerBState.accumulativeScore) {
+      playerADispatch({ type: PLAYER_ACTIONS.MARK_AS_WIINER });
+    }
+
+    // B is the winner
+    if (playerAState.accumulativeScore < playerBState.accumulativeScore) {
+      playerBDispatch({ type: PLAYER_ACTIONS.MARK_AS_WIINER });
+    }
+
+    // draw
+    if (playerAState.accumulativeScore === playerBState.accumulativeScore) {
+    }
+
+    // Get rid of the dice
+    gameDispatch({ type: GAME_ACTIONS.HIDE_DICE });
+
     // Call modal and display result
+    displayWinner();
     cleanUp();
   }, [timer]);
 };
@@ -43,19 +71,6 @@ const Game = ({
     gameState;
 
   const { PLAYING, PAUSED, FROZEN } = GAME_STATUS;
-
-  if (gameMode === GAME_MODE.TIMER && [PLAYING, PAUSED].includes(gameStatus)) {
-    switch (gameStatus) {
-      case PLAYING:
-        GameTicking(timer, gameStatus, gameDispatch);
-        break;
-      case PAUSED:
-        GameTicking(timer, gameStatus, gameDispatch);
-        break;
-      default:
-        throw new Error();
-    }
-  }
 
   // Helper functions
   const ResetAAndSwitchToB = () => {
@@ -114,6 +129,20 @@ const Game = ({
     });
   };
 
+  // For the timer mode
+  if (gameMode === GAME_MODE.TIMER && [PLAYING, PAUSED].includes(gameStatus)) {
+    GameTicking(
+      timer,
+      gameStatus,
+      gameDispatch,
+      displayWinner,
+      playerAState,
+      playerBState,
+      playerADispatch,
+      playerBDispatch
+    );
+  }
+
   // When Roll is clicked on,
   const rollClickHandler = () => {
     const rollDice = (min, max) =>
@@ -130,7 +159,7 @@ const Game = ({
       // if A is active, update score and switch to B.
       const currentPlayerATotalScore =
         playerAState.accumulativeScore + playerAState.currentScore;
-      if (currentPlayerATotalScore >= race) {
+      if (gameMode === GAME_MODE.RACE && currentPlayerATotalScore >= race) {
         playerADispatch({ type: PLAYER_ACTIONS.MARK_AS_WIINER });
         displayWinner();
       }
@@ -142,7 +171,7 @@ const Game = ({
       // if B is active, update score and switch to A.
       const currentPlayerBTotalScore =
         playerBState.accumulativeScore + playerBState.currentScore;
-      if (currentPlayerBTotalScore >= race) {
+      if (gameMode === GAME_MODE.RACE && currentPlayerBTotalScore >= race) {
         playerBDispatch({ type: PLAYER_ACTIONS.MARK_AS_WIINER });
         displayWinner();
       }

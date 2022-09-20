@@ -192,8 +192,8 @@ function App() {
         playerBState={playerBState}
       />
       <Board gameState={gameState}>
-        <Player playerState={playerAState} />
-        <Player playerState={playerBState} />
+        <Player playerState={playerAState} gameStatus={gameState.gameStatus} />
+        <Player playerState={playerBState} gameStatus={gameState.gameStatus} />
         <Game
           playerAState={playerAState}
           playerBState={playerBState}

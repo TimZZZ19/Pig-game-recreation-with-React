@@ -9,6 +9,7 @@ const Result = ({ playerAState, playerBState, restartGame }) => {
     <>
       <p className={styles["winner-text"]}>{winner}</p>
       <p className={styles["won-text"]}>won!</p>
+      <p className={styles["trophy"]}>🏆</p>
       <Button
         buttonContent="🔄 New Game"
         extraStyles={{ width: "15rem", top: "19rem" }}

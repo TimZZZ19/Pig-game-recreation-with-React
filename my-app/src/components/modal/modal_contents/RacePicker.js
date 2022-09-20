@@ -20,6 +20,8 @@ const RacePicker = ({ closeModal, gameDispatch }) => {
       type: GAME_ACTIONS.CHANGE_GAME_MODE,
       payload: GAME_MODE.RACE,
     });
+
+    closeModal();
   };
 
   return (

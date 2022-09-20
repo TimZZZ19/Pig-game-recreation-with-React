@@ -6,27 +6,29 @@ import GAME_ACTIONS from "../../../mappings/GAME_ACTIONS";
 import GAME_MODE from "../../../mappings/GAME_MODE";
 
 const TimePicker = ({ closeModal, gameDispatch }) => {
-  const [minInput, setMinInput] = useState(1);
-  const [secInput, setSecInput] = useState(0);
+  const [minInput, setMinInput] = useState(0);
+  const [secInput, setSecInput] = useState(30);
+  const [timeInvalid, setTimeInvalid] = useState(false);
 
   const storeTimeInGameState = () => {
     const seconds = +minInput * 60 + +secInput;
-    gameDispatch({ type: GAME_ACTIONS.SET_TIMER_TIME, payload: seconds });
-    gameDispatch({
-      type: GAME_ACTIONS.CHANGE_GAME_MODE,
-      payload: GAME_MODE.TIMER,
-    });
+    if (seconds < 30) {
+      setTimeInvalid(true);
+    } else {
+      gameDispatch({ type: GAME_ACTIONS.SET_TIMER_TIME, payload: seconds });
+      gameDispatch({
+        type: GAME_ACTIONS.CHANGE_GAME_MODE,
+        payload: GAME_MODE.TIMER,
+      });
+      closeModal();
+    }
   };
 
   const handleMinInput = (e) => {
-    console.log(e.target.value);
-
     setMinInput(e.target.value);
   };
 
   const handleSecInput = (e) => {
-    console.log(e.target.value);
-
     setSecInput(e.target.value);
   };
 
@@ -42,7 +44,7 @@ const TimePicker = ({ closeModal, gameDispatch }) => {
             type="number"
             id="min-input"
             name="min-input"
-            min="1"
+            min="0"
             max="59"
             value={minInput}
             onChange={handleMinInput}
@@ -53,6 +55,7 @@ const TimePicker = ({ closeModal, gameDispatch }) => {
           <input
             type="number"
             id="sec-input"
+            className={timeInvalid && styles["invalid-time"]}
             name="sec-input"
             min="0"
             max="59"
@@ -61,6 +64,13 @@ const TimePicker = ({ closeModal, gameDispatch }) => {
           ></input>
           <label htmlFor="sec-input">Sec</label>
         </div>
+        <p
+          className={`${styles["warning-text"]} ${
+            timeInvalid && styles["invalid-warning"]
+          }`}
+        >
+          Time can't be less than 30 seconds.
+        </p>
       </div>
     </ModalModeForm>
   );
