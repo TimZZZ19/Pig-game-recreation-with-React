@@ -19,7 +19,9 @@ const Result = ({ playerAState, playerBState, restartGame }) => {
     result = (
       <>
         <p className={styles["winner-text"]}>Draw</p>
-        <p className={styles["draw-text"]}>Rematch?</p>
+        <p className={`${styles["won-text"]} ${styles["draw-text"]}`}>
+          Rematch?
+        </p>
         <p className={styles["trophy"]}>🎲</p>
       </>
     );
