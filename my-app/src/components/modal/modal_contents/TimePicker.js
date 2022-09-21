@@ -55,7 +55,7 @@ const TimePicker = ({ closeModal, gameDispatch }) => {
           <input
             type="number"
             id="sec-input"
-            className={timeInvalid && styles["invalid-time"]}
+            className={`${timeInvalid && styles["invalid-time"]}`}
             name="sec-input"
             min="0"
             max="59"

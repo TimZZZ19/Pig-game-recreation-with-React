@@ -51,7 +51,15 @@ const GameTicking = (
     // Call modal and display result
     displayWinner();
     cleanUp();
-  }, [timer]);
+  }, [
+    timer,
+    gameDispatch,
+    displayWinner,
+    playerAState,
+    playerBState,
+    playerADispatch,
+    playerBDispatch,
+  ]);
 };
 
 const Game = ({
