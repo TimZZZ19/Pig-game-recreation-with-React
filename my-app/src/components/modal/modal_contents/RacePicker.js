@@ -4,11 +4,12 @@ import ModalModeForm from "../../reusables/ModalModeForm";
 
 import GAME_ACTIONS from "../../../mappings/GAME_ACTIONS";
 import GAME_MODE from "../../../mappings/GAME_MODE";
+import RACE_SETTING from "../../../mappings/RACE_SETTING";
 
-const minScore = 10;
+const { MIN_SCORE } = RACE_SETTING;
 
 const RacePicker = ({ closeModal, gameDispatch }) => {
-  const [finishLine, setFinishLine] = useState(minScore);
+  const [finishLine, setFinishLine] = useState(MIN_SCORE);
 
   const handleChange = (e) => {
     setFinishLine(e.target.value);
@@ -36,11 +37,11 @@ const RacePicker = ({ closeModal, gameDispatch }) => {
           type="number"
           id="min-input"
           name="min-input"
-          min={`${minScore}`}
+          min={`${MIN_SCORE}`}
           value={finishLine}
           onChange={handleChange}
         ></input>
-        <p className={styles.min}>{`(min: ${minScore})`}</p>
+        <p className={styles.min}>{`(min: ${MIN_SCORE})`}</p>
       </div>
     </ModalModeForm>
   );
