@@ -149,6 +149,8 @@ const Game = ({
         playerADispatch
       );
 
+      if (isInRaceMode && playerAWins) return;
+
       switchSide(SWITCH_DIRECTION.ATOB);
     }
 
@@ -165,6 +167,8 @@ const Game = ({
         playerBWins,
         playerBDispatch
       );
+
+      if (isInRaceMode && playerBWins) return;
 
       switchSide(SWITCH_DIRECTION.BTOA);
     }
