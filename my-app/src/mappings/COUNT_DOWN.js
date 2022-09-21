@@ -1,5 +1,5 @@
 const COUNT_DOWN = {
-  TIME: 5,
+  TIME: 0,
 };
 
 export default COUNT_DOWN;
