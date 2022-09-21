@@ -1,6 +1,7 @@
-import { useRef, useEffect } from "react";
 import Button from "../reusables/Button";
 import Dice from "./Dice";
+import TimeMonitor from "./TimeMonitor";
+
 import PLAYER_ACTIONS from "../../mappings/PLAYER_ACTIONS";
 import GAME_STATUS from "../../mappings/GAME_STATUS";
 import GAME_ACTIONS from "../../mappings/GAME_ACTIONS";
@@ -10,61 +11,6 @@ import GAME_MODE from "../../mappings/GAME_MODE";
 const SWITCH_DIRECTION = {
   ATOB: "switch from A to B",
   BTOA: "switch from B to A",
-};
-
-const GameTicking = (
-  timer,
-  gameStatus,
-  gameDispatch,
-  displayWinner,
-  playerAState,
-  playerBState,
-  playerADispatch,
-  playerBDispatch
-) => {
-  const id = useRef();
-  const cleanUp = () => clearTimeout(id.current);
-
-  useEffect(() => {
-    if (gameStatus === GAME_STATUS.PAUSED) return;
-    id.current = setTimeout(() => {
-      gameDispatch({
-        type: GAME_ACTIONS.SET_TIMER_TIME,
-        payload: timer - 1,
-      });
-    }, 1000);
-    return () => cleanUp();
-  }, [timer, gameStatus, gameDispatch]);
-
-  useEffect(() => {
-    if (timer > 0) return;
-    // Time is up, determine the winner
-
-    // A is the winner
-    if (playerAState.accumulativeScore > playerBState.accumulativeScore) {
-      playerADispatch({ type: PLAYER_ACTIONS.MARK_AS_WIINER });
-    }
-
-    // B is the winner
-    if (playerAState.accumulativeScore < playerBState.accumulativeScore) {
-      playerBDispatch({ type: PLAYER_ACTIONS.MARK_AS_WIINER });
-    }
-
-    // Get rid of the dice
-    gameDispatch({ type: GAME_ACTIONS.HIDE_DICE });
-
-    // Call modal and display result
-    displayWinner();
-    cleanUp();
-  }, [
-    timer,
-    gameDispatch,
-    displayWinner,
-    playerAState,
-    playerBState,
-    playerADispatch,
-    playerBDispatch,
-  ]);
 };
 
 const Game = ({
@@ -82,9 +28,9 @@ const Game = ({
   const { PLAYING, PAUSED, FROZEN } = GAME_STATUS;
 
   let isInRaceMode = gameMode === GAME_MODE.RACE;
+  let isInTimerMode = gameMode === GAME_MODE.TIMER;
 
   // Helper functions
-
   const switchSide = (direction) => {
     switch (direction) {
       case SWITCH_DIRECTION.ATOB:
@@ -129,8 +75,8 @@ const Game = ({
   };
 
   // For the timer mode
-  if (gameMode === GAME_MODE.TIMER && [PLAYING, PAUSED].includes(gameStatus)) {
-    GameTicking(
+  if (isInTimerMode && [PLAYING, PAUSED].includes(gameStatus)) {
+    TimeMonitor(
       timer,
       gameStatus,
       gameDispatch,
@@ -145,7 +91,7 @@ const Game = ({
   // When Roll is clicked on,
   const handleRoll = () => {
     const rollDice = (min, max) => {
-      Math.floor(Math.random() * (max - min + 1) + min);
+      return Math.floor(Math.random() * (max - min + 1) + min);
     };
     const handleDiceResult = (diceResult) => {
       // 1. Reveal dice
@@ -203,7 +149,7 @@ const Game = ({
         playerADispatch
       );
 
-      if (!playerAWins) switchSide(SWITCH_DIRECTION.ATOB);
+      switchSide(SWITCH_DIRECTION.ATOB);
     }
 
     // if B is active, update score and switch to A.
@@ -220,7 +166,7 @@ const Game = ({
         playerBDispatch
       );
 
-      if (!playerBWins) switchSide(SWITCH_DIRECTION.BTOA);
+      switchSide(SWITCH_DIRECTION.BTOA);
     }
   };
 
