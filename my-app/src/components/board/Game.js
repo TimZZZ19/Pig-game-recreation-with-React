@@ -7,6 +7,11 @@ import GAME_ACTIONS from "../../mappings/GAME_ACTIONS";
 import MODAL_ACTIONS from "../../mappings/MODAL_ACTIONS";
 import GAME_MODE from "../../mappings/GAME_MODE";
 
+const SWITCH_DIRECTION = {
+  ATOB: "switch from A to B",
+  BTOA: "switch from B to A",
+};
+
 const GameTicking = (
   timer,
   gameStatus,
@@ -76,17 +81,27 @@ const Game = ({
 
   const { PLAYING, PAUSED, FROZEN } = GAME_STATUS;
 
+  let isInRaceMode = gameMode === GAME_MODE.RACE;
+
   // Helper functions
-  const ResetAAndSwitchToB = () => {
-    playerADispatch({ type: PLAYER_ACTIONS.RESET_CURRENT_SCORE });
-    playerADispatch({ type: PLAYER_ACTIONS.STOP_PLAYING });
-    playerBDispatch({ type: PLAYER_ACTIONS.START_PLAYING });
+
+  const switchSide = (direction) => {
+    switch (direction) {
+      case SWITCH_DIRECTION.ATOB:
+        playerADispatch({ type: PLAYER_ACTIONS.RESET_CURRENT_SCORE });
+        playerADispatch({ type: PLAYER_ACTIONS.STOP_PLAYING });
+        playerBDispatch({ type: PLAYER_ACTIONS.START_PLAYING });
+        break;
+      case SWITCH_DIRECTION.BTOA:
+        playerBDispatch({ type: PLAYER_ACTIONS.RESET_CURRENT_SCORE });
+        playerADispatch({ type: PLAYER_ACTIONS.START_PLAYING });
+        playerBDispatch({ type: PLAYER_ACTIONS.STOP_PLAYING });
+        break;
+      default:
+        throw new Error();
+    }
   };
-  const ResetBAndSwitchToA = () => {
-    playerBDispatch({ type: PLAYER_ACTIONS.RESET_CURRENT_SCORE });
-    playerADispatch({ type: PLAYER_ACTIONS.START_PLAYING });
-    playerBDispatch({ type: PLAYER_ACTIONS.STOP_PLAYING });
-  };
+
   const handleDiceResult = (diceResult) => {
     // 1. Reveal dice
     gameDispatch({ type: GAME_ACTIONS.UNHIDE_DICE });
@@ -100,7 +115,7 @@ const Game = ({
       // if A is playing ...
       if (diceResult === 1) {
         // Reset current score and switch turn
-        ResetAAndSwitchToB();
+        switchSide(SWITCH_DIRECTION.ATOB);
       } else {
         playerADispatch({
           type: PLAYER_ACTIONS.SET_CURRENT_SCORE,
@@ -112,7 +127,7 @@ const Game = ({
     if (playerBState.isPlaying) {
       // if B is playing ...
       if (diceResult === 1) {
-        ResetBAndSwitchToA();
+        switchSide(SWITCH_DIRECTION.BTOA);
       } else {
         playerBDispatch({
           type: PLAYER_ACTIONS.SET_CURRENT_SCORE,
@@ -132,24 +147,19 @@ const Game = ({
       payload: FROZEN,
     });
   };
-  const settleTurn = (
-    playerState,
+  const updateAccumulativeScore = (
+    turnScore,
     isInRaceMode,
-    finishLine,
-    playerDispatch,
-    actions,
-    showWinner
+    playerWins,
+    playerDispatch
   ) => {
-    const currentPlayerATotalScore =
-      playerState.accumulativeScore + playerState.currentScore;
-    const playerWins = currentPlayerATotalScore >= finishLine;
     if (isInRaceMode && playerWins) {
-      playerDispatch({ type: actions.MARK_AS_WIINER });
-      showWinner();
+      playerDispatch({ type: PLAYER_ACTIONS.MARK_AS_WIINER });
+      displayWinner();
     }
     playerDispatch({
-      type: actions.SET_ACCUMULATIVE_SCORE,
-      payload: currentPlayerATotalScore,
+      type: PLAYER_ACTIONS.SET_ACCUMULATIVE_SCORE,
+      payload: turnScore,
     });
   };
 
@@ -177,32 +187,41 @@ const Game = ({
   };
 
   // When Hold is clicked on,
-  const holdClickHandler = () => {
+  const settleTurn = () => {
     gameDispatch({ type: GAME_ACTIONS.HIDE_DICE });
+
+    // if A is active, update score and switch to B.
     if (playerAState.isPlaying) {
-      // if A is active, update score and switch to B.
-      settleTurn(
-        playerAState,
-        gameMode === GAME_MODE.RACE,
-        race,
-        playerADispatch,
-        PLAYER_ACTIONS,
-        displayWinner
+      const playerATurnScore =
+        playerAState.accumulativeScore + playerAState.currentScore;
+
+      const playerAWins = playerATurnScore >= race;
+
+      updateAccumulativeScore(
+        playerATurnScore,
+        isInRaceMode,
+        playerAWins,
+        playerADispatch
       );
-      ResetAAndSwitchToB();
+
+      if (!playerAWins) switchSide(SWITCH_DIRECTION.ATOB);
     }
 
+    // if B is active, update score and switch to A.
     if (playerBState.isPlaying) {
-      // if B is active, update score and switch to A.
-      settleTurn(
-        playerBState,
-        gameMode === GAME_MODE.RACE,
-        race,
-        playerBDispatch,
-        PLAYER_ACTIONS,
-        displayWinner
+      const playerBTurnScore =
+        playerBState.accumulativeScore + playerBState.currentScore;
+
+      const playerBWins = playerBTurnScore >= race;
+
+      updateAccumulativeScore(
+        playerBTurnScore,
+        isInRaceMode,
+        playerBWins,
+        playerBDispatch
       );
-      ResetBAndSwitchToA();
+
+      if (!playerBWins) switchSide(SWITCH_DIRECTION.BTOA);
     }
   };
 
@@ -219,7 +238,7 @@ const Game = ({
         buttonContent={"📥 Hold"}
         extraStyles={{ width: "11rem", top: "46.1rem" }}
         secondaryClass={gameStatus !== PLAYING && "btn--unclickable"}
-        onClick={holdClickHandler}
+        onClick={settleTurn}
       />
     </>
   );
