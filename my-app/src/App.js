@@ -62,7 +62,7 @@ const playerReducer = (state, action) => {
     case PLAYER_ACTIONS.SET_ACCUMULATIVE_SCORE:
       return {
         ...state,
-        accumulativeScore: state.accumulativeScore + state.currentScore,
+        accumulativeScore: action.payload,
       };
     case PLAYER_ACTIONS.RESET_ACCUMULATIVE_SCORE:
       return {

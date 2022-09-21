@@ -167,7 +167,10 @@ const Game = ({
         playerADispatch({ type: PLAYER_ACTIONS.MARK_AS_WIINER });
         displayWinner();
       }
-      playerADispatch({ type: PLAYER_ACTIONS.SET_ACCUMULATIVE_SCORE });
+      playerADispatch({
+        type: PLAYER_ACTIONS.SET_ACCUMULATIVE_SCORE,
+        payload: currentPlayerATotalScore,
+      });
       ResetAAndSwitchToB();
     }
 
@@ -179,7 +182,10 @@ const Game = ({
         playerBDispatch({ type: PLAYER_ACTIONS.MARK_AS_WIINER });
         displayWinner();
       }
-      playerBDispatch({ type: PLAYER_ACTIONS.SET_ACCUMULATIVE_SCORE });
+      playerBDispatch({
+        type: PLAYER_ACTIONS.SET_ACCUMULATIVE_SCORE,
+        payload: currentPlayerBTotalScore,
+      });
       ResetBAndSwitchToA();
     }
   };

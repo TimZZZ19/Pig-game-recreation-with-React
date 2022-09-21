@@ -5,7 +5,7 @@ import ModalModeForm from "../../reusables/ModalModeForm";
 import GAME_ACTIONS from "../../../mappings/GAME_ACTIONS";
 import GAME_MODE from "../../../mappings/GAME_MODE";
 
-const minScore = 30;
+const minScore = 10;
 
 const RacePicker = ({ closeModal, gameDispatch }) => {
   const [finishLine, setFinishLine] = useState(minScore);
