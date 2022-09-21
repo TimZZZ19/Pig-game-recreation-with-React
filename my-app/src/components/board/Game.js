@@ -7,11 +7,7 @@ import GAME_STATUS from "../../mappings/GAME_STATUS";
 import GAME_ACTIONS from "../../mappings/GAME_ACTIONS";
 import MODAL_ACTIONS from "../../mappings/MODAL_ACTIONS";
 import GAME_MODE from "../../mappings/GAME_MODE";
-
-const SWITCH_DIRECTION = {
-  ATOB: "switch from A to B",
-  BTOA: "switch from B to A",
-};
+import SWITCH_DIRECTION from "../../mappings/SWITCH_DIRECTION";
 
 const Game = ({
   playerAState,
