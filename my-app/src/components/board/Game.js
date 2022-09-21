@@ -101,41 +101,6 @@ const Game = ({
         throw new Error();
     }
   };
-
-  const handleDiceResult = (diceResult) => {
-    // 1. Reveal dice
-    gameDispatch({ type: GAME_ACTIONS.UNHIDE_DICE });
-
-    // 2. Update the displayed dice image according to this result.
-    gameDispatch({ type: GAME_ACTIONS.SET_DICE_NUMBER, payload: diceResult });
-
-    // 3. Update the displayed current score.
-
-    if (playerAState.isPlaying) {
-      // if A is playing ...
-      if (diceResult === 1) {
-        // Reset current score and switch turn
-        switchSide(SWITCH_DIRECTION.ATOB);
-      } else {
-        playerADispatch({
-          type: PLAYER_ACTIONS.SET_CURRENT_SCORE,
-          payload: diceResult,
-        });
-      }
-    }
-
-    if (playerBState.isPlaying) {
-      // if B is playing ...
-      if (diceResult === 1) {
-        switchSide(SWITCH_DIRECTION.BTOA);
-      } else {
-        playerBDispatch({
-          type: PLAYER_ACTIONS.SET_CURRENT_SCORE,
-          payload: diceResult,
-        });
-      }
-    }
-  };
   const displayWinner = () => {
     // open modal and change to the result page
     modalDispatch({ type: MODAL_ACTIONS.OPEN_MODAL });
@@ -178,12 +143,46 @@ const Game = ({
   }
 
   // When Roll is clicked on,
-  const rollClickHandler = () => {
-    const rollDice = (min, max) =>
+  const handleRoll = () => {
+    const rollDice = (min, max) => {
       Math.floor(Math.random() * (max - min + 1) + min);
+    };
+    const handleDiceResult = (diceResult) => {
+      // 1. Reveal dice
+      gameDispatch({ type: GAME_ACTIONS.UNHIDE_DICE });
 
-    const diceResult = rollDice(1, 6);
-    handleDiceResult(diceResult);
+      // 2. Update the displayed dice image according to this result.
+      gameDispatch({ type: GAME_ACTIONS.SET_DICE_NUMBER, payload: diceResult });
+
+      // 3. Update the displayed current score.
+
+      if (playerAState.isPlaying) {
+        // if A is playing ...
+        if (diceResult === 1) {
+          // Reset current score and switch turn
+          switchSide(SWITCH_DIRECTION.ATOB);
+        } else {
+          playerADispatch({
+            type: PLAYER_ACTIONS.SET_CURRENT_SCORE,
+            payload: diceResult,
+          });
+        }
+      }
+
+      if (playerBState.isPlaying) {
+        // if B is playing ...
+        if (diceResult === 1) {
+          switchSide(SWITCH_DIRECTION.BTOA);
+        } else {
+          playerBDispatch({
+            type: PLAYER_ACTIONS.SET_CURRENT_SCORE,
+            payload: diceResult,
+          });
+        }
+      }
+    };
+
+    handleDiceResult(rollDice(1, 6));
   };
 
   // When Hold is clicked on,
@@ -232,7 +231,7 @@ const Game = ({
         buttonContent={"🎲 Roll"}
         extraStyles={{ width: "11rem", top: "39.3rem" }}
         secondaryClass={gameStatus !== PLAYING && "btn--unclickable"}
-        onClick={rollClickHandler}
+        onClick={handleRoll}
       />
       <Button
         buttonContent={"📥 Hold"}
