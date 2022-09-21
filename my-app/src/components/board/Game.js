@@ -132,6 +132,26 @@ const Game = ({
       payload: FROZEN,
     });
   };
+  const settleTurn = (
+    playerState,
+    isInRaceMode,
+    finishLine,
+    playerDispatch,
+    actions,
+    showWinner
+  ) => {
+    const currentPlayerATotalScore =
+      playerState.accumulativeScore + playerState.currentScore;
+    const playerWins = currentPlayerATotalScore >= finishLine;
+    if (isInRaceMode && playerWins) {
+      playerDispatch({ type: actions.MARK_AS_WIINER });
+      showWinner();
+    }
+    playerDispatch({
+      type: actions.SET_ACCUMULATIVE_SCORE,
+      payload: currentPlayerATotalScore,
+    });
+  };
 
   // For the timer mode
   if (gameMode === GAME_MODE.TIMER && [PLAYING, PAUSED].includes(gameStatus)) {
@@ -161,31 +181,27 @@ const Game = ({
     gameDispatch({ type: GAME_ACTIONS.HIDE_DICE });
     if (playerAState.isPlaying) {
       // if A is active, update score and switch to B.
-      const currentPlayerATotalScore =
-        playerAState.accumulativeScore + playerAState.currentScore;
-      if (gameMode === GAME_MODE.RACE && currentPlayerATotalScore >= race) {
-        playerADispatch({ type: PLAYER_ACTIONS.MARK_AS_WIINER });
-        displayWinner();
-      }
-      playerADispatch({
-        type: PLAYER_ACTIONS.SET_ACCUMULATIVE_SCORE,
-        payload: currentPlayerATotalScore,
-      });
+      settleTurn(
+        playerAState,
+        gameMode === GAME_MODE.RACE,
+        race,
+        playerADispatch,
+        PLAYER_ACTIONS,
+        displayWinner
+      );
       ResetAAndSwitchToB();
     }
 
     if (playerBState.isPlaying) {
       // if B is active, update score and switch to A.
-      const currentPlayerBTotalScore =
-        playerBState.accumulativeScore + playerBState.currentScore;
-      if (gameMode === GAME_MODE.RACE && currentPlayerBTotalScore >= race) {
-        playerBDispatch({ type: PLAYER_ACTIONS.MARK_AS_WIINER });
-        displayWinner();
-      }
-      playerBDispatch({
-        type: PLAYER_ACTIONS.SET_ACCUMULATIVE_SCORE,
-        payload: currentPlayerBTotalScore,
-      });
+      settleTurn(
+        playerBState,
+        gameMode === GAME_MODE.RACE,
+        race,
+        playerBDispatch,
+        PLAYER_ACTIONS,
+        displayWinner
+      );
       ResetBAndSwitchToA();
     }
   };
