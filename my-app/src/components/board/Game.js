@@ -30,12 +30,10 @@ const Game = ({
   const switchSide = (direction) => {
     switch (direction) {
       case SWITCH_DIRECTION.ATOB:
-        playerADispatch({ type: PLAYER_ACTIONS.RESET_CURRENT_SCORE });
         playerADispatch({ type: PLAYER_ACTIONS.STOP_PLAYING });
         playerBDispatch({ type: PLAYER_ACTIONS.START_PLAYING });
         break;
       case SWITCH_DIRECTION.BTOA:
-        playerBDispatch({ type: PLAYER_ACTIONS.RESET_CURRENT_SCORE });
         playerADispatch({ type: PLAYER_ACTIONS.START_PLAYING });
         playerBDispatch({ type: PLAYER_ACTIONS.STOP_PLAYING });
         break;
@@ -86,49 +84,56 @@ const Game = ({
 
   // When Roll is clicked on,
   const handleRoll = () => {
-    const rollDice = (min, max) => {
+    // 1. Roll the dice
+    const diceResult = rollDice(1, 6);
+
+    // 2. Reveal dice and show the related image
+    showDice(diceResult);
+
+    //3. hanlde the dice result: either switch side or update current score
+    handleDiceResult(diceResult);
+
+    function rollDice(min, max) {
       return Math.floor(Math.random() * (max - min + 1) + min);
-    };
-    const handleDiceResult = (diceResult) => {
-      // 1. Reveal dice
+    }
+
+    function showDice() {
       gameDispatch({ type: GAME_ACTIONS.UNHIDE_DICE });
-
-      // 2. Update the displayed dice image according to this result.
       gameDispatch({ type: GAME_ACTIONS.SET_DICE_NUMBER, payload: diceResult });
+    }
 
-      // 3. Update the displayed current score.
-
+    function handleDiceResult(result) {
       if (playerAState.isPlaying) {
         // if A is playing ...
-        if (diceResult === 1) {
+        if (result === 1) {
           // Reset current score and switch turn
+          playerADispatch({ type: PLAYER_ACTIONS.RESET_CURRENT_SCORE });
           switchSide(SWITCH_DIRECTION.ATOB);
         } else {
           playerADispatch({
             type: PLAYER_ACTIONS.SET_CURRENT_SCORE,
-            payload: diceResult,
+            payload: result,
           });
         }
       }
 
       if (playerBState.isPlaying) {
         // if B is playing ...
-        if (diceResult === 1) {
+        if (result === 1) {
+          playerBDispatch({ type: PLAYER_ACTIONS.RESET_CURRENT_SCORE });
           switchSide(SWITCH_DIRECTION.BTOA);
         } else {
           playerBDispatch({
             type: PLAYER_ACTIONS.SET_CURRENT_SCORE,
-            payload: diceResult,
+            payload: result,
           });
         }
       }
-    };
-
-    handleDiceResult(rollDice(1, 6));
+    }
   };
 
   // When Hold is clicked on,
-  const settleTurn = () => {
+  const handleHold = () => {
     gameDispatch({ type: GAME_ACTIONS.HIDE_DICE });
 
     // if A is active, update score and switch to B.
@@ -147,6 +152,7 @@ const Game = ({
 
       if (isInRaceMode && playerAWins) return;
 
+      playerADispatch({ type: PLAYER_ACTIONS.RESET_CURRENT_SCORE });
       switchSide(SWITCH_DIRECTION.ATOB);
     }
 
@@ -166,6 +172,7 @@ const Game = ({
 
       if (isInRaceMode && playerBWins) return;
 
+      playerBDispatch({ type: PLAYER_ACTIONS.RESET_CURRENT_SCORE });
       switchSide(SWITCH_DIRECTION.BTOA);
     }
   };
@@ -183,7 +190,7 @@ const Game = ({
         buttonContent={"📥 Hold"}
         extraStyles={{ width: "11rem", top: "46.1rem" }}
         secondaryClass={gameStatus !== PLAYING && "btn--unclickable"}
-        onClick={settleTurn}
+        onClick={handleHold}
       />
     </>
   );
