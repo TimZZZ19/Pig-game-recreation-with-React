@@ -59,17 +59,17 @@ const playerReducer = (state, action) => {
       return { ...state, isPlaying: true };
     case PLAYER_ACTIONS.STOP_PLAYING:
       return { ...state, isPlaying: false };
-    case PLAYER_ACTIONS.SET_ACCUMULATIVE_SCORE:
+    case PLAYER_ACTIONS.UPDATE_ACCUMULATIVE_SCORE:
       return {
         ...state,
-        accumulativeScore: action.payload,
+        accumulativeScore: state.accumulativeScore + state.currentScore,
       };
     case PLAYER_ACTIONS.RESET_ACCUMULATIVE_SCORE:
       return {
         ...state,
         accumulativeScore: 0,
       };
-    case PLAYER_ACTIONS.SET_CURRENT_SCORE:
+    case PLAYER_ACTIONS.UPDATE_CURRENT_SCORE:
       return {
         ...state,
         currentScore: state.currentScore + action.payload,

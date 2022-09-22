@@ -26,6 +26,11 @@ const Game = ({
   let isInRaceMode = gameMode === GAME_MODE.RACE;
   let isInTimerMode = gameMode === GAME_MODE.TIMER;
 
+  if (isInRaceMode) {
+    // make a checker or a monitor using useEffect
+    // call race mode checker
+  }
+
   // Helper functions
   const switchSide = (direction) => {
     switch (direction) {
@@ -63,7 +68,7 @@ const Game = ({
       displayWinner();
     }
     playerDispatch({
-      type: PLAYER_ACTIONS.SET_ACCUMULATIVE_SCORE,
+      type: PLAYER_ACTIONS.UPDATE_ACCUMULATIVE_SCORE,
       payload: turnScore,
     });
   };
@@ -111,7 +116,7 @@ const Game = ({
           switchSide(SWITCH_DIRECTION.ATOB);
         } else {
           playerADispatch({
-            type: PLAYER_ACTIONS.SET_CURRENT_SCORE,
+            type: PLAYER_ACTIONS.UPDATE_CURRENT_SCORE,
             payload: result,
           });
         }
@@ -124,7 +129,7 @@ const Game = ({
           switchSide(SWITCH_DIRECTION.BTOA);
         } else {
           playerBDispatch({
-            type: PLAYER_ACTIONS.SET_CURRENT_SCORE,
+            type: PLAYER_ACTIONS.UPDATE_CURRENT_SCORE,
             payload: result,
           });
         }
@@ -138,40 +143,14 @@ const Game = ({
 
     // if A is active, update score and switch to B.
     if (playerAState.isPlaying) {
-      const playerATurnScore =
-        playerAState.accumulativeScore + playerAState.currentScore;
-
-      const playerAWins = playerATurnScore >= race;
-
-      updateAccumulativeScore(
-        playerATurnScore,
-        isInRaceMode,
-        playerAWins,
-        playerADispatch
-      );
-
-      if (isInRaceMode && playerAWins) return;
-
+      playerADispatch({ type: PLAYER_ACTIONS.UPDATE_ACCUMULATIVE_SCORE });
       playerADispatch({ type: PLAYER_ACTIONS.RESET_CURRENT_SCORE });
       switchSide(SWITCH_DIRECTION.ATOB);
     }
 
     // if B is active, update score and switch to A.
     if (playerBState.isPlaying) {
-      const playerBTurnScore =
-        playerBState.accumulativeScore + playerBState.currentScore;
-
-      const playerBWins = playerBTurnScore >= race;
-
-      updateAccumulativeScore(
-        playerBTurnScore,
-        isInRaceMode,
-        playerBWins,
-        playerBDispatch
-      );
-
-      if (isInRaceMode && playerBWins) return;
-
+      playerBDispatch({ type: PLAYER_ACTIONS.UPDATE_ACCUMULATIVE_SCORE });
       playerBDispatch({ type: PLAYER_ACTIONS.RESET_CURRENT_SCORE });
       switchSide(SWITCH_DIRECTION.BTOA);
     }
@@ -197,3 +176,17 @@ const Game = ({
 };
 
 export default Game;
+
+// const playerBTurnScore =
+//   playerBState.accumulativeScore + playerBState.currentScore;
+
+// const playerBWins = playerBTurnScore >= race;
+
+// updateAccumulativeScore(
+//   playerBTurnScore,
+//   isInRaceMode,
+//   playerBWins,
+//   playerBDispatch
+// );
+
+// if (isInRaceMode && playerBWins) return;
