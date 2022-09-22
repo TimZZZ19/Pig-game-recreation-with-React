@@ -23,68 +23,21 @@ const Game = ({
 
   const { PLAYING, PAUSED, FROZEN } = GAME_STATUS;
 
-  let isInRaceMode = gameMode === GAME_MODE.RACE;
-  let isInTimerMode = gameMode === GAME_MODE.TIMER;
+  const { UNSELECTED, WARNING, TIMER, RACE } = GAME_MODE;
 
-  if (isInRaceMode) {
-    // make a checker or a monitor using useEffect
-    // call race mode checker
-  }
-
-  // Helper functions
-  const switchSide = (direction) => {
-    switch (direction) {
-      case SWITCH_DIRECTION.ATOB:
-        playerADispatch({ type: PLAYER_ACTIONS.STOP_PLAYING });
-        playerBDispatch({ type: PLAYER_ACTIONS.START_PLAYING });
-        break;
-      case SWITCH_DIRECTION.BTOA:
-        playerADispatch({ type: PLAYER_ACTIONS.START_PLAYING });
-        playerBDispatch({ type: PLAYER_ACTIONS.STOP_PLAYING });
-        break;
-      default:
-        throw new Error();
-    }
-  };
-  const displayWinner = () => {
-    // open modal and change to the result page
-    modalDispatch({ type: MODAL_ACTIONS.OPEN_MODAL });
-    modalDispatch({ type: MODAL_ACTIONS.CHANGE_TO_RESULT });
-
-    // set the game status to fronzen, so the control panel is frozen
-    gameDispatch({
-      type: GAME_ACTIONS.CHANGE_GAME_STATUS,
-      payload: FROZEN,
-    });
-  };
-  const updateAccumulativeScore = (
-    turnScore,
-    isInRaceMode,
-    playerWins,
-    playerDispatch
-  ) => {
-    if (isInRaceMode && playerWins) {
-      playerDispatch({ type: PLAYER_ACTIONS.MARK_AS_WIINER });
-      displayWinner();
-    }
-    playerDispatch({
-      type: PLAYER_ACTIONS.UPDATE_ACCUMULATIVE_SCORE,
-      payload: turnScore,
-    });
-  };
-
-  // For the timer mode
-  if (isInTimerMode && [PLAYING, PAUSED].includes(gameStatus)) {
-    TimeMonitor(
-      timer,
-      gameStatus,
-      gameDispatch,
-      displayWinner,
-      playerAState,
-      playerBState,
-      playerADispatch,
-      playerBDispatch
-    );
+  // Select winner checker based upon game mode
+  switch (gameMode) {
+    case UNSELECTED:
+    case WARNING:
+      break;
+    case TIMER:
+      // Initiate the timer mode winner checker
+      break;
+    case RACE:
+      // Initiate the race mode winner checker
+      break;
+    default:
+      throw new Error();
   }
 
   // When Roll is clicked on,
@@ -173,6 +126,33 @@ const Game = ({
       />
     </>
   );
+
+  // Helper functions
+  function switchSide(direction) {
+    switch (direction) {
+      case SWITCH_DIRECTION.ATOB:
+        playerADispatch({ type: PLAYER_ACTIONS.STOP_PLAYING });
+        playerBDispatch({ type: PLAYER_ACTIONS.START_PLAYING });
+        break;
+      case SWITCH_DIRECTION.BTOA:
+        playerADispatch({ type: PLAYER_ACTIONS.START_PLAYING });
+        playerBDispatch({ type: PLAYER_ACTIONS.STOP_PLAYING });
+        break;
+      default:
+        throw new Error();
+    }
+  }
+  function displayWinner() {
+    // open modal and change to the result page
+    modalDispatch({ type: MODAL_ACTIONS.OPEN_MODAL });
+    modalDispatch({ type: MODAL_ACTIONS.CHANGE_TO_RESULT });
+
+    // set the game status to fronzen, so the control panel is frozen
+    gameDispatch({
+      type: GAME_ACTIONS.CHANGE_GAME_STATUS,
+      payload: FROZEN,
+    });
+  }
 };
 
 export default Game;
