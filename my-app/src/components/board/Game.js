@@ -1,6 +1,7 @@
 import Button from "../reusables/Button";
 import Dice from "./Dice";
-import TimeMonitor from "./TimeMonitor";
+import TimeMonitor from "../game_mode/TimeMonitor";
+import RaceMonitor from "../game_mode/RaceMonitor";
 
 import PLAYER_ACTIONS from "../../mappings/PLAYER_ACTIONS";
 import GAME_STATUS from "../../mappings/GAME_STATUS";
@@ -31,10 +32,24 @@ const Game = ({
     case WARNING:
       break;
     case TIMER:
-      // Initiate the timer mode winner checker
+      // Initiate the timer monitor
       break;
     case RACE:
-      // Initiate the race mode winner checker
+      // Initiate the race monitor
+      RaceMonitor(
+        race,
+        playerAState.accumulativeScore,
+        playerADispatch,
+        playerBDispatch,
+        displayWinner
+      );
+      RaceMonitor(
+        race,
+        playerBState.accumulativeScore,
+        playerBDispatch,
+        playerADispatch,
+        displayWinner
+      );
       break;
     default:
       throw new Error();
