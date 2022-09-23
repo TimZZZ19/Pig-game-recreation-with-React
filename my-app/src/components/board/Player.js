@@ -1,9 +1,7 @@
 import styles from "./Player.module.css";
-import GAME_STATUS from "../../mappings/GAME_STATUS";
 
 const Player = ({ playerState, gameStatus }) => {
   const { name, isPlaying, accumulativeScore, currentScore } = playerState;
-  const { PLAYING } = GAME_STATUS;
 
   return (
     <section
@@ -14,13 +12,6 @@ const Player = ({ playerState, gameStatus }) => {
       </h2>
       <p className={styles["score"]} id="score--0">
         {accumulativeScore}
-      </p>
-      <p
-        className={`${styles["pig"]} ${
-          [PLAYING].includes(gameStatus) && isPlaying && styles["pig-shown"]
-        }`}
-      >
-        🐷
       </p>
       <div className={styles["current"]}>
         <p className={styles["current-label"]}>Current</p>
