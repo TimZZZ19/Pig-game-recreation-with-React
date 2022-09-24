@@ -32,6 +32,22 @@ const Game = ({
       break;
     case TIMER:
       // Initiate the timer monitor
+      TimeMonitor(
+        gameStatus,
+        playerAState,
+        playerADispatch,
+        playerBState,
+        playerBDispatch,
+        displayWinner
+      );
+      TimeMonitor(
+        gameStatus,
+        playerBState,
+        playerBDispatch,
+        playerAState,
+        playerADispatch,
+        displayWinner
+      );
       break;
     case RACE:
       // Initiate the race monitor
