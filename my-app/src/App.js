@@ -197,7 +197,11 @@ function App() {
 
   return (
     <div className={styles.app}>
-      <GameModeIndicator gameState={gameState} />
+      <GameModeIndicator
+        gameState={gameState}
+        playerAState={playerAState}
+        playerBState={playerBState}
+      />
       <Modal
         modalState={modalState}
         modalDispatch={modalDispatch}

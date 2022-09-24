@@ -19,8 +19,7 @@ const Game = ({
   gameDispatch,
   modalDispatch,
 }) => {
-  const { gameStatus, gameMode, timer, race, diceNumber, diceHidden } =
-    gameState;
+  const { gameStatus, gameMode, race, diceNumber, diceHidden } = gameState;
 
   const { PLAYING, PAUSED, FROZEN } = GAME_STATUS;
 

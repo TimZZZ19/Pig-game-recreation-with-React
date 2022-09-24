@@ -1,33 +1,48 @@
 import React from "react";
 
 import GAME_MODE from "../../mappings/GAME_MODE";
-import Unselected from "./Unselected";
 import styles from "./GameModeIndicator.module.css";
 
-const convertTimeFiguresToString = (time) => {
-  const minutes = "0" + Math.floor(time / 60);
-  const seconds = "0" + (time - minutes * 60);
-  return minutes.slice(-2) + " : " + seconds.slice(-2);
-};
+const GameModeIndicator = ({ gameState, playerAState, playerBState }) => {
+  const { gameMode, race } = gameState;
 
-const GameModeIndicator = ({ gameState }) => {
-  const { gameMode, timer, race } = gameState;
-
-  const formatedTime = convertTimeFiguresToString(timer);
+  const formatedTime1 = convertTimeFiguresToString(playerAState.timer.time);
+  const formatedTime2 = convertTimeFiguresToString(playerBState.timer.time);
 
   let mode;
   switch (gameMode) {
     case GAME_MODE.UNSELECTED:
-      mode = <Unselected gameMode={gameMode} />;
-      break;
     case GAME_MODE.WARNING:
-      mode = <Unselected gameMode={gameMode} />;
+      mode = (
+        <p
+          className={`${styles["indicator-content"]} ${styles["initial-text"]} `}
+        >
+          {"Please choose your game mode"}
+        </p>
+      );
       break;
     case GAME_MODE.TIMER:
-      mode = formatedTime;
+      mode = (
+        <>
+          <div
+            className={`${styles["indicator-content"]} ${
+              playerAState.isPlaying && styles["current-timer"]
+            }`}
+          >
+            {formatedTime1}
+          </div>
+          <div
+            className={`${styles["indicator-content"]} ${
+              playerBState.isPlaying && styles["current-timer"]
+            }`}
+          >
+            {formatedTime2}
+          </div>
+        </>
+      );
       break;
     case GAME_MODE.RACE:
-      mode = race;
+      mode = <div className={styles["indicator-content"]}>{race}</div>;
       break;
     default:
       throw new Error();
@@ -43,5 +58,11 @@ const GameModeIndicator = ({ gameState }) => {
     </div>
   );
 };
+
+function convertTimeFiguresToString(time) {
+  const minutes = "0" + Math.floor(time / 60);
+  const seconds = "0" + (time - minutes * 60);
+  return minutes.slice(-2) + " : " + seconds.slice(-2);
+}
 
 export default GameModeIndicator;
