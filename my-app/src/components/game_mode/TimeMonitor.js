@@ -24,6 +24,8 @@ const TimeMonitor = (
       return;
     }
 
+    console.log("am I running?");
+
     id.current = setTimeout(() => {
       playerDispatch({
         type: PLAYER_ACTIONS.SET_TIME,
@@ -31,7 +33,7 @@ const TimeMonitor = (
       });
     }, 1000);
     return () => cleanUp();
-  }, [gameStatus, playerState]);
+  }, [gameStatus, playerState.isPlaying, playerState.timer.time]);
 
   // useEffect(() => {
   //   if (timer > 0) return;
