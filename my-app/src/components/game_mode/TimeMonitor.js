@@ -4,14 +4,12 @@ import GAME_ACTIONS from "../../mappings/GAME_ACTIONS";
 import PLAYER_ACTIONS from "../../mappings/PLAYER_ACTIONS";
 
 const TimeMonitor = (
-  timer,
   gameStatus,
-  gameDispatch,
-  displayWinner,
   playerAState,
   playerBState,
   playerADispatch,
-  playerBDispatch
+  playerBDispatch,
+  displayWinner
 ) => {
   const id = useRef();
   const cleanUp = () => clearTimeout(id.current);

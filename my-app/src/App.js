@@ -25,10 +25,6 @@ const gameReducer = (state, action) => {
       return { ...state, gameStatus: action.payload };
     case GAME_ACTIONS.CHANGE_GAME_MODE:
       return { ...state, gameMode: action.payload };
-    case GAME_ACTIONS.SET_TIMER_TIME:
-      return { ...state, timer: action.payload };
-    case GAME_ACTIONS.RESET_TIMER:
-      return { ...state, timer: 0 };
     case GAME_ACTIONS.SET_RACE:
       return { ...state, race: action.payload };
     case GAME_ACTIONS.RESET_RACE:
@@ -46,7 +42,6 @@ const gameReducer = (state, action) => {
 const gameInitialConfigs = {
   gameStatus: GAME_STATUS.SETTING,
   gameMode: GAME_MODE.UNSELECTED,
-  timer: 0,
   race: 0,
   diceHidden: true,
   diceNumber: 1,
@@ -89,6 +84,23 @@ const playerReducer = (state, action) => {
         ...state,
         isWinner: false,
       };
+    case PLAYER_ACTIONS.SET_TIME:
+      return {
+        ...state,
+        timer: { ...state.timer, time: action.payload },
+      };
+    case PLAYER_ACTIONS.START_TIMER:
+      return {
+        ...state,
+        timer: { ...state.timer, isPaused: false },
+      };
+    case PLAYER_ACTIONS.PAUSE_TIMER:
+      return {
+        ...state,
+        timer: { ...state.timer, isPaused: true },
+      };
+    case PLAYER_ACTIONS.RESET_TIMER:
+      return { ...state, timer: { time: 0, isPaused: true } };
     default:
       throw new Error();
   }
@@ -100,6 +112,7 @@ const playerAInitialConfigs = {
   accumulativeScore: 0,
   currentScore: 0,
   isWinner: false,
+  timer: { time: 0, isPaused: true },
 };
 
 const playerBInitialConfigs = {
@@ -108,6 +121,7 @@ const playerBInitialConfigs = {
   accumulativeScore: 0,
   currentScore: 0,
   isWinner: false,
+  timer: { time: 0, isPaused: true },
 };
 
 // Modal
@@ -159,13 +173,17 @@ function App() {
   // Function for initializing the game
   const initializeBoard = () => {
     playerADispatch({ type: PLAYER_ACTIONS.START_PLAYING });
-    playerBDispatch({ type: PLAYER_ACTIONS.STOP_PLAYING });
     playerADispatch({ type: PLAYER_ACTIONS.RESET_ACCUMULATIVE_SCORE });
-    playerBDispatch({ type: PLAYER_ACTIONS.RESET_ACCUMULATIVE_SCORE });
     playerADispatch({ type: PLAYER_ACTIONS.RESET_CURRENT_SCORE });
-    playerBDispatch({ type: PLAYER_ACTIONS.RESET_CURRENT_SCORE });
     playerADispatch({ type: PLAYER_ACTIONS.RESET_ISWINNER_PROPERTY });
+    playerADispatch({ type: PLAYER_ACTIONS.RESET_TIMER });
+
+    playerBDispatch({ type: PLAYER_ACTIONS.STOP_PLAYING });
+    playerBDispatch({ type: PLAYER_ACTIONS.RESET_ACCUMULATIVE_SCORE });
+    playerBDispatch({ type: PLAYER_ACTIONS.RESET_CURRENT_SCORE });
     playerBDispatch({ type: PLAYER_ACTIONS.RESET_ISWINNER_PROPERTY });
+    playerBDispatch({ type: PLAYER_ACTIONS.RESET_TIMER });
+
     gameDispatch({ type: GAME_ACTIONS.HIDE_DICE });
     gameDispatch({ type: GAME_ACTIONS.SET_DICE_NUMBER, payload: 1 });
     gameDispatch({
@@ -174,9 +192,6 @@ function App() {
     });
     gameDispatch({
       type: GAME_ACTIONS.RESET_RACE,
-    });
-    gameDispatch({
-      type: GAME_ACTIONS.RESET_TIMER,
     });
   };
 
@@ -190,6 +205,8 @@ function App() {
         initializeBoard={initializeBoard}
         playerAState={playerAState}
         playerBState={playerBState}
+        playerADispatch={playerADispatch}
+        playerBDispatch={playerBDispatch}
       />
       <Board gameState={gameState}>
         <Player playerState={playerAState} gameStatus={gameState.gameStatus} />

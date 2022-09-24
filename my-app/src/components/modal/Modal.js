@@ -18,6 +18,8 @@ const Modal = ({
   initializeBoard,
   playerAState,
   playerBState,
+  playerADispatch,
+  playerBDispatch,
 }) => {
   const { modalOpen, modalContent } = modalState;
 
@@ -64,6 +66,8 @@ const Modal = ({
         <TimePicker
           closeModal={closeModalAfterSettingGameMode}
           gameDispatch={gameDispatch}
+          playerADispatch={playerADispatch}
+          playerBDispatch={playerBDispatch}
         />
       );
       break;

@@ -4,18 +4,26 @@ import ModalModeForm from "../../reusables/ModalModeForm";
 
 import GAME_ACTIONS from "../../../mappings/GAME_ACTIONS";
 import GAME_MODE from "../../../mappings/GAME_MODE";
+import PLAYER_ACTIONS from "../../../mappings/PLAYER_ACTIONS";
 
-const TimePicker = ({ closeModal, gameDispatch }) => {
+const TimePicker = ({
+  closeModal,
+  gameDispatch,
+  playerADispatch,
+  playerBDispatch,
+}) => {
   const [minInput, setMinInput] = useState(0);
   const [secInput, setSecInput] = useState(30);
   const [timeInvalid, setTimeInvalid] = useState(false);
 
-  const storeTimeInGameState = () => {
+  const storeTimeInPlayerStates = () => {
     const seconds = +minInput * 60 + +secInput;
     if (seconds < 30) {
       setTimeInvalid(true);
     } else {
-      gameDispatch({ type: GAME_ACTIONS.SET_TIMER_TIME, payload: seconds });
+      // COMMENT Game mode is stored in GameState while timer is stored in PlayerState
+      playerADispatch({ type: PLAYER_ACTIONS.SET_TIME, payload: seconds });
+      playerBDispatch({ type: PLAYER_ACTIONS.SET_TIME, payload: seconds });
       gameDispatch({
         type: GAME_ACTIONS.CHANGE_GAME_MODE,
         payload: GAME_MODE.TIMER,
@@ -35,7 +43,7 @@ const TimePicker = ({ closeModal, gameDispatch }) => {
   return (
     <ModalModeForm
       title={"Set a timer"}
-      setInput={storeTimeInGameState}
+      setInput={storeTimeInPlayerStates}
       closeModal={closeModal}
     >
       <div className={styles["timer-inputs"]}>
