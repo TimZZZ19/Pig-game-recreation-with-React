@@ -6,8 +6,8 @@ import styles from "./GameModeIndicator.module.css";
 const GameModeIndicator = ({ gameState, playerAState, playerBState }) => {
   const { gameMode, race } = gameState;
 
-  const formatedTime1 = convertTimeFiguresToString(playerAState.timer.time);
-  const formatedTime2 = convertTimeFiguresToString(playerBState.timer.time);
+  const formatedTime1 = convertTimeFiguresToString(playerAState.timer);
+  const formatedTime2 = convertTimeFiguresToString(playerBState.timer);
 
   let mode;
   switch (gameMode) {

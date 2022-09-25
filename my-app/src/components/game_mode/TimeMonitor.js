@@ -24,16 +24,14 @@ const TimeMonitor = (
       return;
     }
 
-    console.log("am I running?");
-
     id.current = setTimeout(() => {
       playerDispatch({
         type: PLAYER_ACTIONS.SET_TIME,
-        payload: playerState.timer.time - 1,
+        payload: playerState.timer - 1,
       });
     }, 1000);
     return () => cleanUp();
-  }, [gameStatus, playerState.isPlaying, playerState.timer.time]);
+  }, [gameStatus, playerState.isPlaying, playerState.timer]);
 
   // useEffect(() => {
   //   if (timer > 0) return;

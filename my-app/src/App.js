@@ -87,20 +87,10 @@ const playerReducer = (state, action) => {
     case PLAYER_ACTIONS.SET_TIME:
       return {
         ...state,
-        timer: { ...state.timer, time: action.payload },
-      };
-    case PLAYER_ACTIONS.START_TIMER:
-      return {
-        ...state,
-        timer: { ...state.timer, isPaused: false },
-      };
-    case PLAYER_ACTIONS.PAUSE_TIMER:
-      return {
-        ...state,
-        timer: { ...state.timer, isPaused: true },
+        timer: action.payload,
       };
     case PLAYER_ACTIONS.RESET_TIMER:
-      return { ...state, timer: { time: 0, isPaused: true } };
+      return { ...state, timer: 0 };
     default:
       throw new Error();
   }
@@ -112,7 +102,7 @@ const playerAInitialConfigs = {
   accumulativeScore: 0,
   currentScore: 0,
   isWinner: false,
-  timer: { time: 0, isPaused: true },
+  timer: 0,
 };
 
 const playerBInitialConfigs = {
@@ -121,7 +111,7 @@ const playerBInitialConfigs = {
   accumulativeScore: 0,
   currentScore: 0,
   isWinner: false,
-  timer: { time: 0, isPaused: true },
+  timer: 0,
 };
 
 // Modal

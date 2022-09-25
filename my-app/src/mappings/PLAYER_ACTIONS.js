@@ -8,8 +8,6 @@ const PLAYER_ACTIONS = {
   MARK_AS_WIINER: "mark as the winer of the game",
   RESET_ISWINNER_PROPERTY: "reset the isWinner property",
   SET_TIME: "set the time of the timer",
-  START_TIMER: "start the timer",
-  PAUSE_TIMER: "pause the timer",
   RESET_TIMER: "reset the time of the timer",
 };
 
