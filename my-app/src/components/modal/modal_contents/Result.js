@@ -3,19 +3,10 @@ import Button from "../../reusables/Button";
 import styles from "./Result.module.css";
 
 const Result = ({ playerAState, playerBState, restartGame }) => {
-  let winner;
-  if (playerAState.isWinner) winner = playerAState.name;
-  if (playerBState.isWinner) winner = playerBState.name;
-
-  let result = (
-    <>
-      <p className={styles["winner-text"]}>{winner}</p>
-      <p className={styles["won-text"]}>won!</p>
-      <p className={styles["trophy"]}>🏆</p>
-    </>
-  );
+  let result;
 
   if (!playerAState.isWinner && !playerBState.isWinner) {
+    // Draw
     result = (
       <>
         <p className={styles["winner-text"]}>Draw</p>
@@ -23,6 +14,18 @@ const Result = ({ playerAState, playerBState, restartGame }) => {
           Rematch?
         </p>
         <p className={styles["trophy"]}>🎲</p>
+      </>
+    );
+  } else {
+    const winner = playerAState.isWinner
+      ? playerAState.name
+      : playerBState.name;
+
+    result = (
+      <>
+        <p className={styles["winner-text"]}>{winner}</p>
+        <p className={styles["won-text"]}>won!</p>
+        <p className={styles["trophy"]}>🏆</p>
       </>
     );
   }

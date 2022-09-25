@@ -1,6 +1,6 @@
 import styles from "./Player.module.css";
 
-const Player = ({ playerState, gameStatus }) => {
+const Player = ({ playerState }) => {
   const { name, isPlaying, accumulativeScore, currentScore } = playerState;
 
   return (

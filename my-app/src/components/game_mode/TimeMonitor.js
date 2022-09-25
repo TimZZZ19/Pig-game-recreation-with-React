@@ -31,6 +31,7 @@ const TimeMonitor = (
       });
     }, 1000);
     return () => cleanUp();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gameStatus, isPlaying, timer]);
 
   useEffect(() => {
@@ -39,19 +40,21 @@ const TimeMonitor = (
     // If timer is up, then we'll see if opponent's timer is also up
 
     if (opponentState.timer > 0) {
-      console.log("displayWInner");
       // if no, switch to opponent's turn
       playerDispatch({ type: PLAYER_ACTIONS.STOP_PLAYING });
       opponentDispatch({ type: PLAYER_ACTIONS.START_PLAYING });
     } else {
+      // if opponent's time is up, then game is over, the current player isn't playing anymore
+      playerDispatch({ type: PLAYER_ACTIONS.STOP_PLAYING });
+
       // if yes, determine winner
       if (accumulativeScore > opponentState.accumulativeScore) {
         playerDispatch({ type: PLAYER_ACTIONS.MARK_AS_WIINER });
       }
-
       if (accumulativeScore < opponentState.accumulativeScore) {
         opponentDispatch({ type: PLAYER_ACTIONS.MARK_AS_WIINER });
       }
+
       // Get rid of the dice
       gameDispatch({ type: GAME_ACTIONS.HIDE_DICE });
 
@@ -60,7 +63,13 @@ const TimeMonitor = (
 
       cleanUp();
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timer]);
+
+  function resetBothPlayerStatuses() {
+    opponentDispatch({ type: PLAYER_ACTIONS.STOP_PLAYING });
+  }
 };
 
 export default TimeMonitor;
