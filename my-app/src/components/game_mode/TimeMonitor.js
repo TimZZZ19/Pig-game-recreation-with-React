@@ -9,6 +9,7 @@ const TimeMonitor = (
   playerDispatch,
   opponentState,
   opponentDispatch,
+  gameDispatch,
   displayWinner
 ) => {
   const id = useRef();
@@ -16,52 +17,48 @@ const TimeMonitor = (
 
   const { SETTING, PAUSED, FROZEN } = GAME_STATUS;
 
+  const { isPlaying, timer, accumulativeScore } = playerState;
+
   useEffect(() => {
-    if (
-      [SETTING, PAUSED, FROZEN].includes(gameStatus) ||
-      !playerState.isPlaying
-    ) {
+    if ([SETTING, PAUSED, FROZEN].includes(gameStatus) || !isPlaying) {
       return;
     }
 
     id.current = setTimeout(() => {
       playerDispatch({
         type: PLAYER_ACTIONS.SET_TIME,
-        payload: playerState.timer - 1,
+        payload: timer - 1,
       });
     }, 1000);
     return () => cleanUp();
-  }, [gameStatus, playerState.isPlaying, playerState.timer]);
+  }, [gameStatus, isPlaying, timer]);
 
-  // useEffect(() => {
-  //   if (timer > 0) return;
-  //   // Time is up, determine the winner
+  useEffect(() => {
+    if (timer > 0) return;
 
-  //   // A is the winner
-  //   if (playerState.accumulativeScore > opponentState.accumulativeScore) {
-  //     playerDispatch({ type: PLAYER_ACTIONS.MARK_AS_WIINER });
-  //   }
+    // If timer is up, then we'll see if opponent's timer is also up
 
-  //   // B is the winner
-  //   if (playerState.accumulativeScore < opponentState.accumulativeScore) {
-  //     opponentDispatch({ type: PLAYER_ACTIONS.MARK_AS_WIINER });
-  //   }
+    if (opponentState.timer > 0) {
+      // if no, switch to opponent's turn
+      playerDispatch({ type: PLAYER_ACTIONS.STOP_PLAYING });
+      opponentDispatch({ type: PLAYER_ACTIONS.START_PLAYING });
+    } else {
+      // if yes, determine winner
+      if (accumulativeScore > opponentState.accumulativeScore) {
+        playerDispatch({ type: PLAYER_ACTIONS.MARK_AS_WIINER });
+      }
 
-  //   // Get rid of the dice
-  //   gameDispatch({ type: GAME_ACTIONS.HIDE_DICE });
+      if (accumulativeScore < opponentState.accumulativeScore) {
+        opponentDispatch({ type: PLAYER_ACTIONS.MARK_AS_WIINER });
+      }
+      // Get rid of the dice
+      gameDispatch({ type: GAME_ACTIONS.HIDE_DICE });
 
-  //   // Call modal and display result
-  //   displayWinner();
-  //   cleanUp();
-  // }, [
-  //   timer,
-  //   gameDispatch,
-  //   displayWinner,
-  //   playerState,
-  //   opponentState,
-  //   playerDispatch,
-  //   opponentDispatch,
-  // ]);
+      // Call modal and display result
+      displayWinner();
+      cleanUp();
+    }
+  }, [playerState, opponentState]);
 };
 
 export default TimeMonitor;

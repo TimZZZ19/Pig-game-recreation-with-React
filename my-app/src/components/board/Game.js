@@ -38,6 +38,7 @@ const Game = ({
         playerADispatch,
         playerBState,
         playerBDispatch,
+        gameDispatch,
         displayWinner
       );
       TimeMonitor(
@@ -46,6 +47,7 @@ const Game = ({
         playerBDispatch,
         playerAState,
         playerADispatch,
+        gameDispatch,
         displayWinner
       );
       break;
@@ -186,17 +188,3 @@ const Game = ({
 };
 
 export default Game;
-
-// const playerBTurnScore =
-//   playerBState.accumulativeScore + playerBState.currentScore;
-
-// const playerBWins = playerBTurnScore >= race;
-
-// updateAccumulativeScore(
-//   playerBTurnScore,
-//   isInRaceMode,
-//   playerBWins,
-//   playerBDispatch
-// );
-
-// if (isInRaceMode && playerBWins) return;
