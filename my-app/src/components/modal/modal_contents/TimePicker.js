@@ -5,6 +5,9 @@ import ModalModeForm from "../../reusables/ModalModeForm";
 import GAME_ACTIONS from "../../../mappings/GAME_ACTIONS";
 import GAME_MODE from "../../../mappings/GAME_MODE";
 import PLAYER_ACTIONS from "../../../mappings/PLAYER_ACTIONS";
+import TIMER_SETTING from "../../../mappings/TIMER_SETTING";
+
+const { MIN_TIME } = TIMER_SETTING;
 
 const TimePicker = ({
   closeModal,
@@ -13,12 +16,12 @@ const TimePicker = ({
   playerBDispatch,
 }) => {
   const [minInput, setMinInput] = useState(0);
-  const [secInput, setSecInput] = useState(30);
+  const [secInput, setSecInput] = useState(MIN_TIME);
   const [timeInvalid, setTimeInvalid] = useState(false);
 
   const storeTimeInPlayerStates = () => {
     const seconds = +minInput * 60 + +secInput;
-    if (seconds < 30) {
+    if (seconds < MIN_TIME) {
       setTimeInvalid(true);
     } else {
       // COMMENT Game mode is stored in GameState while timer is stored in PlayerState
@@ -77,7 +80,7 @@ const TimePicker = ({
             timeInvalid && styles["invalid-warning"]
           }`}
         >
-          Time can't be less than 30 seconds.
+          Time can't be less than {MIN_TIME} seconds.
         </p>
       </div>
     </ModalModeForm>

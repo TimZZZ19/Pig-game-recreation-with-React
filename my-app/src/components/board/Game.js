@@ -21,7 +21,7 @@ const Game = ({
 }) => {
   const { gameStatus, gameMode, race, diceNumber, diceHidden } = gameState;
 
-  const { PLAYING, PAUSED, FROZEN } = GAME_STATUS;
+  const { PLAYING, FROZEN } = GAME_STATUS;
 
   const { UNSELECTED, WARNING, TIMER, RACE } = GAME_MODE;
 
