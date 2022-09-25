@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Button from "../reusables/Button";
 import Dice from "./Dice";
 import TimeMonitor from "../game_mode/TimeMonitor";
@@ -153,7 +154,11 @@ const Game = ({
       <Button
         buttonContent={"📥 Hold"}
         extraStyles={{ width: "11rem", top: "46.1rem" }}
-        secondaryClass={gameStatus !== PLAYING && "btn--unclickable"}
+        secondaryClass={
+          gameStatus !== PLAYING ||
+          playerAState.timer === 0 ||
+          (playerBState.timer === 0 && "btn--unclickable")
+        }
         onClick={handleHold}
       />
     </>

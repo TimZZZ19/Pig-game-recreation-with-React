@@ -43,6 +43,7 @@ const TimeMonitor = (
       // if no, switch to opponent's turn
       playerDispatch({ type: PLAYER_ACTIONS.STOP_PLAYING });
       opponentDispatch({ type: PLAYER_ACTIONS.START_PLAYING });
+      // also disable the hold button, cause it won't be useful anymore
     } else {
       // if opponent's time is up, then game is over, the current player isn't playing anymore
       playerDispatch({ type: PLAYER_ACTIONS.STOP_PLAYING });
