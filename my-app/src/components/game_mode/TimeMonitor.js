@@ -34,11 +34,12 @@ const TimeMonitor = (
   }, [gameStatus, isPlaying, timer]);
 
   useEffect(() => {
-    if (timer > 0) return;
+    if ([SETTING, PAUSED, FROZEN].includes(gameStatus) || timer > 0) return;
 
     // If timer is up, then we'll see if opponent's timer is also up
 
     if (opponentState.timer > 0) {
+      console.log("displayWInner");
       // if no, switch to opponent's turn
       playerDispatch({ type: PLAYER_ACTIONS.STOP_PLAYING });
       opponentDispatch({ type: PLAYER_ACTIONS.START_PLAYING });
@@ -56,9 +57,10 @@ const TimeMonitor = (
 
       // Call modal and display result
       displayWinner();
+
       cleanUp();
     }
-  }, [playerState, opponentState]);
+  }, [timer]);
 };
 
 export default TimeMonitor;
