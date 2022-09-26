@@ -20,7 +20,7 @@ const GameControlDiv = ({ gameState, gameDispatch, modalDispatch }) => {
     modalDispatch({ type: MODAL_ACTIONS.OPEN_MODAL });
   };
 
-  const handleExpandButton = () => setControlPanelShown((curr) => !curr);
+  const handlePanelButton = () => setControlPanelShown((curr) => !curr);
 
   const startGame = () => {
     if (gameState.gameMode === GAME_MODE.WARNING) return;
@@ -47,6 +47,9 @@ const GameControlDiv = ({ gameState, gameDispatch, modalDispatch }) => {
     PushBack(() => {
       modalDispatch({ type: MODAL_ACTIONS.CHANGE_TO_NULL });
       modalDispatch({ type: MODAL_ACTIONS.CLOSE_MODAL });
+      setTimeout(() => {
+        handlePanelButton();
+      }, 1000);
     });
 
     PushBack(() =>
@@ -83,11 +86,11 @@ const GameControlDiv = ({ gameState, gameDispatch, modalDispatch }) => {
       <Button
         buttonContent="⏪"
         extraStyles={{ width: "4.2rem", top: "2rem", left: "80%" }}
-        onClick={handleExpandButton}
+        onClick={handlePanelButton}
       />
       <ControlPanel
         controlPanelShown={controlPanelShown}
-        handleExpandButton={handleExpandButton}
+        handlePanelButton={handlePanelButton}
         startGame={startGame}
         gameState={gameState}
         pauseGame={pauseGame}

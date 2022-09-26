@@ -7,7 +7,7 @@ import GAME_STATUS from "../../mappings/GAME_STATUS";
 
 const ControlPanel = ({
   controlPanelShown,
-  handleExpandButton,
+  handlePanelButton,
   startGame,
   gameState,
   pauseGame,
@@ -43,7 +43,7 @@ const ControlPanel = ({
       <Button
         buttonContent="⏩"
         extraStyles={{ width: "4.2rem", top: "2rem", left: "80%" }}
-        onClick={handleExpandButton}
+        onClick={handlePanelButton}
       />
 
       <ModeUnit
