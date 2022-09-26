@@ -154,11 +154,7 @@ const Game = ({
       <Button
         buttonContent={"📥 Hold"}
         extraStyles={{ width: "11rem", top: "46.1rem" }}
-        secondaryClass={
-          gameStatus !== PLAYING ||
-          playerAState.timer === 0 ||
-          (playerBState.timer === 0 && "btn--unclickable")
-        }
+        secondaryClass={gameStatus !== PLAYING && "btn--unclickable"}
         onClick={handleHold}
       />
     </>
@@ -168,12 +164,16 @@ const Game = ({
   function switchSide(direction) {
     switch (direction) {
       case SWITCH_DIRECTION.ATOB:
-        playerADispatch({ type: PLAYER_ACTIONS.STOP_PLAYING });
-        playerBDispatch({ type: PLAYER_ACTIONS.START_PLAYING });
+        if (gameMode === RACE || playerBState.timer) {
+          playerADispatch({ type: PLAYER_ACTIONS.STOP_PLAYING });
+          playerBDispatch({ type: PLAYER_ACTIONS.START_PLAYING });
+        }
         break;
       case SWITCH_DIRECTION.BTOA:
-        playerADispatch({ type: PLAYER_ACTIONS.START_PLAYING });
-        playerBDispatch({ type: PLAYER_ACTIONS.STOP_PLAYING });
+        if (gameMode === RACE || playerAState.timer) {
+          playerADispatch({ type: PLAYER_ACTIONS.START_PLAYING });
+          playerBDispatch({ type: PLAYER_ACTIONS.STOP_PLAYING });
+        }
         break;
       default:
         throw new Error();
