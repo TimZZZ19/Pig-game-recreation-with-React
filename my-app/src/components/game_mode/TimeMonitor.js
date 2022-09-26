@@ -67,10 +67,6 @@ const TimeMonitor = (
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timer]);
-
-  function resetBothPlayerStatuses() {
-    opponentDispatch({ type: PLAYER_ACTIONS.STOP_PLAYING });
-  }
 };
 
 export default TimeMonitor;

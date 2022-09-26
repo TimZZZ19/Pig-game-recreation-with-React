@@ -1,4 +1,3 @@
-import { useState } from "react";
 import styles from "./GameControlDiv.module.css";
 import ControlPanel from "./ControlPanel";
 import Button from "../reusables/Button";
@@ -9,9 +8,13 @@ import MODAL_ACTIONS from "../../mappings/MODAL_ACTIONS";
 import GAME_MODE from "../../mappings/GAME_MODE";
 import GAME_STATUS from "../../mappings/GAME_STATUS";
 
-const GameControlDiv = ({ gameState, gameDispatch, modalDispatch }) => {
-  const [controlPanelShown, setControlPanelShown] = useState(true);
-
+const GameControlDiv = ({
+  gameState,
+  gameDispatch,
+  modalDispatch,
+  controlPanelShown,
+  handlePanelButton,
+}) => {
   const openModal = () => {
     gameDispatch({
       type: GAME_ACTIONS.CHANGE_GAME_STATUS,
@@ -19,8 +22,6 @@ const GameControlDiv = ({ gameState, gameDispatch, modalDispatch }) => {
     });
     modalDispatch({ type: MODAL_ACTIONS.OPEN_MODAL });
   };
-
-  const handlePanelButton = () => setControlPanelShown((curr) => !curr);
 
   const startGame = () => {
     if (gameState.gameMode === GAME_MODE.WARNING) return;

@@ -20,6 +20,7 @@ const Modal = ({
   playerBState,
   playerADispatch,
   playerBDispatch,
+  handlePanelButton,
 }) => {
   const { modalOpen, modalContent } = modalState;
 
@@ -90,6 +91,7 @@ const Modal = ({
           playerAState={playerAState}
           playerBState={playerBState}
           restartGame={restartGame}
+          handlePanelButton={handlePanelButton}
         />
       );
       break;

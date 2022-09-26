@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useReducer, useState } from "react";
 
 //components
 import Board from "./components/board/Board";
@@ -160,6 +160,9 @@ function App() {
     modalInitialConfigs
   );
 
+  const [controlPanelShown, setControlPanelShown] = useState(true);
+  const handlePanelButton = () => setControlPanelShown((curr) => !curr);
+
   // Function for initializing the game
   const initializeBoard = () => {
     playerADispatch({ type: PLAYER_ACTIONS.START_PLAYING });
@@ -201,6 +204,7 @@ function App() {
         playerBState={playerBState}
         playerADispatch={playerADispatch}
         playerBDispatch={playerBDispatch}
+        handlePanelButton={handlePanelButton}
       />
       <Board gameState={gameState}>
         <Player playerState={playerAState} gameStatus={gameState.gameStatus} />
@@ -219,6 +223,8 @@ function App() {
         gameState={gameState}
         gameDispatch={gameDispatch}
         modalDispatch={modalDispatch}
+        controlPanelShown={controlPanelShown}
+        handlePanelButton={handlePanelButton}
       />
     </div>
   );

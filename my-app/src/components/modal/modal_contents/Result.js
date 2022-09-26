@@ -2,7 +2,12 @@ import React from "react";
 import Button from "../../reusables/Button";
 import styles from "./Result.module.css";
 
-const Result = ({ playerAState, playerBState, restartGame }) => {
+const Result = ({
+  playerAState,
+  playerBState,
+  restartGame,
+  handlePanelButton,
+}) => {
   let result;
 
   if (!playerAState.isWinner && !playerBState.isWinner) {
@@ -30,13 +35,18 @@ const Result = ({ playerAState, playerBState, restartGame }) => {
     );
   }
 
+  const newGameHandler = () => {
+    restartGame();
+    handlePanelButton();
+  };
+
   return (
     <>
       {result}
       <Button
         buttonContent="🔄 New Game"
         extraStyles={{ width: "15rem", top: "19rem" }}
-        onClick={restartGame}
+        onClick={newGameHandler}
       />
     </>
   );
