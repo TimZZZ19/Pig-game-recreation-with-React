@@ -204,6 +204,7 @@ function App() {
         playerBState={playerBState}
         playerADispatch={playerADispatch}
         playerBDispatch={playerBDispatch}
+        controlPanelShown={controlPanelShown}
         handlePanelButton={handlePanelButton}
       />
       <Board gameState={gameState}>

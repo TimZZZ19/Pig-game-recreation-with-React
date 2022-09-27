@@ -6,6 +6,7 @@ const Result = ({
   playerAState,
   playerBState,
   restartGame,
+  controlPanelShown,
   handlePanelButton,
 }) => {
   let result;
@@ -37,7 +38,7 @@ const Result = ({
 
   const newGameHandler = () => {
     restartGame();
-    handlePanelButton();
+    if (!controlPanelShown) handlePanelButton();
   };
 
   return (
