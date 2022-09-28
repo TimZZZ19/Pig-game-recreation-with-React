@@ -13,7 +13,9 @@ const GameControlDiv = ({
   gameDispatch,
   modalDispatch,
   controlPanelShown,
-  handleControlPanelSideButton,
+  toggleControlPanel,
+  rulesPanelOpen,
+  toggleRulesPanel,
 }) => {
   const openModal = () => {
     gameDispatch({
@@ -49,7 +51,8 @@ const GameControlDiv = ({
       modalDispatch({ type: MODAL_ACTIONS.CHANGE_TO_NULL });
       modalDispatch({ type: MODAL_ACTIONS.CLOSE_MODAL });
       setTimeout(() => {
-        handleControlPanelSideButton();
+        toggleControlPanel();
+        if (rulesPanelOpen) toggleRulesPanel();
       }, 1000);
     });
 
@@ -87,11 +90,11 @@ const GameControlDiv = ({
       <Button
         buttonContent="⏪"
         extraStyles={{ width: "4.2rem", top: "2rem", left: "80%" }}
-        onClick={handleControlPanelSideButton}
+        onClick={toggleControlPanel}
       />
       <ControlPanel
         controlPanelShown={controlPanelShown}
-        handleControlPanelSideButton={handleControlPanelSideButton}
+        toggleControlPanel={toggleControlPanel}
         startGame={startGame}
         gameState={gameState}
         pauseGame={pauseGame}

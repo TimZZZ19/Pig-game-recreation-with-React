@@ -8,7 +8,7 @@ import GAME_STATUS from "../../mappings/GAME_STATUS";
 
 const ControlPanel = ({
   controlPanelShown,
-  handleControlPanelSideButton,
+  toggleControlPanel,
   startGame,
   gameState,
   pauseGame,
@@ -40,7 +40,7 @@ const ControlPanel = ({
       sidePanelShown={controlPanelShown}
       controlBtnContent="⏩"
       controlBtnHorizontalLocation={{ left: "80%" }}
-      handleSidePanelBtn={handleControlPanelSideButton}
+      handleSidePanelBtn={toggleControlPanel}
     >
       <h2 className={`${styles["game-status-text"]}`}>{gameStatusText}</h2>
 

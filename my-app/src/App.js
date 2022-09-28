@@ -162,8 +162,14 @@ function App() {
   );
 
   const [controlPanelShown, setControlPanelShown] = useState(true);
-  const handleControlPanelSideButton = () =>
+  const toggleControlPanel = () => {
     setControlPanelShown((curr) => !curr);
+  };
+
+  const [rulesPanelOpen, setRulesPanelOpen] = useState(false);
+  const toggleRulesPanel = () => {
+    setRulesPanelOpen((curr) => !curr);
+  };
 
   // Function for initializing the game
   const initializeBoard = () => {
@@ -192,7 +198,10 @@ function App() {
 
   return (
     <div className={styles.app}>
-      <GameRulesDiv />
+      <GameRulesDiv
+        rulesPanelOpen={rulesPanelOpen}
+        toggleRulesPanel={toggleRulesPanel}
+      />
       <GameModeIndicator
         gameState={gameState}
         playerAState={playerAState}
@@ -208,7 +217,7 @@ function App() {
         playerADispatch={playerADispatch}
         playerBDispatch={playerBDispatch}
         controlPanelShown={controlPanelShown}
-        handleControlPanelSideButton={handleControlPanelSideButton}
+        toggleControlPanel={toggleControlPanel}
       />
       <Board gameState={gameState}>
         <Player playerState={playerAState} gameStatus={gameState.gameStatus} />
@@ -228,7 +237,9 @@ function App() {
         gameDispatch={gameDispatch}
         modalDispatch={modalDispatch}
         controlPanelShown={controlPanelShown}
-        handleControlPanelSideButton={handleControlPanelSideButton}
+        toggleControlPanel={toggleControlPanel}
+        rulesPanelOpen={rulesPanelOpen}
+        toggleRulesPanel={toggleRulesPanel}
       />
     </div>
   );
