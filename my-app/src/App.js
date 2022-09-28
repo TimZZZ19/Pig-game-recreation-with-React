@@ -162,7 +162,8 @@ function App() {
   );
 
   const [controlPanelShown, setControlPanelShown] = useState(true);
-  const handlePanelButton = () => setControlPanelShown((curr) => !curr);
+  const handleControlPanelSideButton = () =>
+    setControlPanelShown((curr) => !curr);
 
   // Function for initializing the game
   const initializeBoard = () => {
@@ -207,7 +208,7 @@ function App() {
         playerADispatch={playerADispatch}
         playerBDispatch={playerBDispatch}
         controlPanelShown={controlPanelShown}
-        handlePanelButton={handlePanelButton}
+        handleControlPanelSideButton={handleControlPanelSideButton}
       />
       <Board gameState={gameState}>
         <Player playerState={playerAState} gameStatus={gameState.gameStatus} />
@@ -227,7 +228,7 @@ function App() {
         gameDispatch={gameDispatch}
         modalDispatch={modalDispatch}
         controlPanelShown={controlPanelShown}
-        handlePanelButton={handlePanelButton}
+        handleControlPanelSideButton={handleControlPanelSideButton}
       />
     </div>
   );

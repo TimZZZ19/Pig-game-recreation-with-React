@@ -1,13 +1,14 @@
 import React from "react";
 import styles from "./ControlPanel.module.css";
-import Button from "../reusables/Button";
+import SidePanelWrapper from "../reusables/SidePanelWrapper";
+
 import ModeUnit from "./panel_units/ModeUnit";
 import ControlUnit from "./panel_units/ControlUnit";
 import GAME_STATUS from "../../mappings/GAME_STATUS";
 
 const ControlPanel = ({
   controlPanelShown,
-  handlePanelButton,
+  handleControlPanelSideButton,
   startGame,
   gameState,
   pauseGame,
@@ -34,17 +35,14 @@ const ControlPanel = ({
   }
 
   return (
-    <div
-      className={`${styles["control-panel"]} ${
-        controlPanelShown && styles["control-panel--show"]
-      }`}
+    <SidePanelWrapper
+      panelDefaultPosition={{ transform: "translateX(100%)" }}
+      sidePanelShown={controlPanelShown}
+      controlBtnContent="⏩"
+      controlBtnHorizontalLocation={{ left: "80%" }}
+      handleSidePanelBtn={handleControlPanelSideButton}
     >
       <h2 className={`${styles["game-status-text"]}`}>{gameStatusText}</h2>
-      <Button
-        buttonContent="⏩"
-        extraStyles={{ width: "4.2rem", top: "2rem", left: "80%" }}
-        onClick={handlePanelButton}
-      />
 
       <ModeUnit
         gameState={gameState}
@@ -58,7 +56,7 @@ const ControlPanel = ({
         pauseGame={pauseGame}
         openConfirm={openConfirm}
       />
-    </div>
+    </SidePanelWrapper>
   );
 };
 

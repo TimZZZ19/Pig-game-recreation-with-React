@@ -1,6 +1,7 @@
 import React from "react";
 import Button from "../reusables/Button";
 import SidePanelDiv from "../reusables/SidePanelDiv";
+import SidePanelWrapper from "../reusables/SidePanelWrapper";
 
 const GameRulesDiv = () => {
   return (
