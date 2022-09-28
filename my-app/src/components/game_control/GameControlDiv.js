@@ -1,7 +1,7 @@
 import ControlPanel from "./ControlPanel";
 import Button from "../reusables/Button";
 import PushBack from "../reusables/PushBack";
-import SidePanel from "../reusables/SidePanel";
+import SidePanelDiv from "../reusables/SidePanelDiv";
 
 import GAME_ACTIONS from "../../mappings/GAME_ACTIONS";
 import MODAL_ACTIONS from "../../mappings/MODAL_ACTIONS";
@@ -83,7 +83,7 @@ const GameControlDiv = ({
   };
 
   return (
-    <SidePanel location={{ right: "0" }}>
+    <SidePanelDiv location={{ right: "0" }}>
       <Button
         buttonContent="⏪"
         extraStyles={{ width: "4.2rem", top: "2rem", left: "80%" }}
@@ -99,7 +99,7 @@ const GameControlDiv = ({
         openTimePicker={openTimePicker}
         openRacePicker={openRacePicker}
       />
-    </SidePanel>
+    </SidePanelDiv>
   );
 };
 

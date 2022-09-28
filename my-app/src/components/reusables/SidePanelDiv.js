@@ -1,7 +1,7 @@
 import React from "react";
-import styles from "./SidePanel.module.css";
+import styles from "./SidePanelDiv.module.css";
 
-const SidePanel = ({ children, location }) => {
+const SidePanelDiv = ({ children, location }) => {
   return (
     <div className={styles["side-panel-div"]} style={location}>
       {children}
@@ -9,4 +9,4 @@ const SidePanel = ({ children, location }) => {
   );
 };
 
-export default SidePanel;
+export default SidePanelDiv;
