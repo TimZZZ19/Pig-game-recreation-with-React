@@ -1,0 +1,39 @@
+.rules-title-area {
+  position: relative;
+  top: 8rem;
+  height: 14rem;
+}
+
+.rules-text-area {
+  padding: 0 2rem;
+  font-size: 1.3rem;
+
+  position: absolute;
+  top: 11.5rem;
+}
+
+.decisions {
+  padding-left: 1.4rem;
+}
+
+.outcomes {
+  padding-left: 1.4rem;
+}
+
+.modes-title-area {
+  position: absolute;
+  top: 40rem;
+  width: 100%;
+}
+
+.game-modes-intro {
+  padding: 0 2rem;
+  font-size: 1.3rem;
+
+  position: absolute;
+  top: 43.5rem;
+}
+
+.game-modes-intro ul {
+  padding-left: 1.4rem;
+}
