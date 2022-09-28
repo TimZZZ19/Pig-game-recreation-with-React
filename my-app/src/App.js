@@ -1,6 +1,7 @@
 import { useReducer, useState } from "react";
 
 //components
+import GameRulesDiv from "./components/game_rules/GameRulesDiv";
 import Board from "./components/board/Board";
 import GameControlDiv from "./components/game_control/GameControlDiv";
 import Player from "./components/board/Player";
@@ -190,6 +191,7 @@ function App() {
 
   return (
     <div className={styles.app}>
+      <GameRulesDiv />
       <GameModeIndicator
         gameState={gameState}
         playerAState={playerAState}
