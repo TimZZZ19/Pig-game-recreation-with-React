@@ -1,5 +1,5 @@
 const RACE_SETTING = {
-  MIN_SCORE: 10,
+  MIN_SCORE: 30,
 };
 
 export default RACE_SETTING;
