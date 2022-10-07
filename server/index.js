@@ -9,7 +9,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "http:localhost:3000",
+    origin: "http://localhost:3000",
     methods: ["GET", "POST"],
   },
 });
@@ -18,4 +18,10 @@ const io = new Server(server, {
 app.use(cors);
 server.listen(3001, () => {
   console.log("Server is running");
+});
+io.on("connection", (socket) => {
+  console.log(`User ${socket.id} Connected`);
+  socket.on("send_message", (data) => {
+    console.log(data.message);
+  });
 });

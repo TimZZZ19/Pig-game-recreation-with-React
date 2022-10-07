@@ -5,6 +5,9 @@ import UnitTitle from "../../reusables/UnitTitle";
 import GAME_STATUS from "../../../mappings/GAME_STATUS";
 import GAME_MODE from "../../../mappings/GAME_MODE";
 
+import io from "socket.io-client";
+const socket = io.connect("http://localhost:3001");
+
 const ControlUnit = ({ gameState, startGame, pauseGame, openConfirm }) => {
   const startBtnText =
     gameState.gameMode === GAME_MODE.UNSELECTED ||
@@ -12,9 +15,18 @@ const ControlUnit = ({ gameState, startGame, pauseGame, openConfirm }) => {
       ? "▶️ Start"
       : "▶️ Resume";
 
+  const handleClick = () => {
+    socket.emit("send_message", { message: "hello" });
+  };
+
   return (
     <div className={styles["control-unit"]}>
       <UnitTitle title={"game control"} />
+      <Button
+        buttonContent={`test`}
+        extraStyles={{ width: "16rem", top: "24rem" }}
+        onClick={handleClick}
+      />
       <Button
         buttonContent={`${startBtnText}`}
         extraStyles={{ width: "16rem", top: "4rem" }}
