@@ -7,10 +7,12 @@ import styles from "./GameRulesDiv.module.css";
 
 const GameRulesDiv = ({ rulesPanelOpen, toggleRulesPanel }) => {
   return (
-    <SidePanelDiv location={{ width: "30rem", left: "0" }}>
+    <SidePanelDiv
+      location={{ width: "25rem", left: "0", textAlign: "justify" }}
+    >
       <Button
         buttonContent="❓"
-        extraStyles={{ width: "4.2rem", top: "2rem", left: "13%" }}
+        extraStyles={{ width: "4.2rem", top: "2rem", left: "15%" }}
         onClick={toggleRulesPanel}
       />
 

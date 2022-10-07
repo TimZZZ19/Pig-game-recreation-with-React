@@ -24,6 +24,7 @@
   position: absolute;
   top: 40rem;
   width: 100%;
+  margin-top: 4rem;
 }
 
 .game-modes-intro {
@@ -32,6 +33,7 @@
 
   position: absolute;
   top: 43.5rem;
+  margin-top: 4rem;
 }
 
 .game-modes-intro ul {
