@@ -41,7 +41,11 @@ const TimeMonitor = (
 
     if (opponentState.timer > 0) {
       // if no, switch to opponent's turn
+      console.log("switch");
+
       playerDispatch({ type: PLAYER_ACTIONS.STOP_PLAYING });
+      playerDispatch({ type: PLAYER_ACTIONS.RESET_CURRENT_SCORE });
+      gameDispatch({ type: GAME_ACTIONS.HIDE_DICE });
       opponentDispatch({ type: PLAYER_ACTIONS.START_PLAYING });
       // also disable the hold button, cause it won't be useful anymore
     } else {
