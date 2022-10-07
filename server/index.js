@@ -1,6 +1,6 @@
 //COMMENT REQUIRES
 const express = require("express");
-const http = requrie("http");
+const http = require("http");
 const { Server } = require("socket.io");
 const cors = require("cors");
 
