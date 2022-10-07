@@ -20,7 +20,7 @@ const GameRulesDiv = ({ rulesPanelOpen, toggleRulesPanel }) => {
         panelDefaultPosition={{ transform: "translateX(-100%)" }}
         sidePanelShown={rulesPanelOpen}
         controlBtnContent="⏪"
-        controlBtnHorizontalLocation={{ left: "13%" }}
+        controlBtnHorizontalLocation={{ left: "15%" }}
         handleSidePanelBtn={toggleRulesPanel}
       >
         <div className={styles["rules-title-area"]}>
