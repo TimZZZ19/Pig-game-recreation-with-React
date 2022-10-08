@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 import ControlPanel from "./ControlPanel";
 import Button from "../reusables/Button";
 import PushBack from "../reusables/PushBack";
@@ -7,6 +9,8 @@ import GAME_ACTIONS from "../../mappings/GAME_ACTIONS";
 import MODAL_ACTIONS from "../../mappings/MODAL_ACTIONS";
 import GAME_MODE from "../../mappings/GAME_MODE";
 import GAME_STATUS from "../../mappings/GAME_STATUS";
+
+import socket from "../../socket/socket";
 
 const GameControlDiv = ({
   gameState,
@@ -78,7 +82,19 @@ const GameControlDiv = ({
   const openTimePicker = () => {
     openModal();
     modalDispatch({ type: MODAL_ACTIONS.CHANGE_TO_TIME_PICKER });
+    socket.emit("send_message", { type: "change to timer picker" });
   };
+
+  useEffect(() => {
+    socket.on("receive_message", (obj) => {
+      // alert(obj.type);
+
+      openModal();
+      // modalDispatch({ type: MODAL_ACTIONS.CHANGE_TO_TIME_PICKER });
+
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    });
+  }, [socket]);
 
   const openRacePicker = () => {
     openModal();
